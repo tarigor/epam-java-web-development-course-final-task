@@ -1,0 +1,6 @@
+{
+  "redirect": {
+    "class": "com.epam.hotel.command.impl.common.PageRedirect",
+    "command": "POST"
+  }
+}

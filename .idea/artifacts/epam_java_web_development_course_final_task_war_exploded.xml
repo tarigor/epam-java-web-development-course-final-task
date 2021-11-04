@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="epam-java-web-development-course-final-task:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/epam_java_web_development_course_final_task_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="epam-java-web-development-course-final-task/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="epam-java-web-development-course-final-task" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
