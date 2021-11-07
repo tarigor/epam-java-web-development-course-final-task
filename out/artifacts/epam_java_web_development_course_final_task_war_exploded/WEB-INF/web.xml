@@ -14,9 +14,12 @@
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
+    <listener>
+        <listener-class>com.epam.hotel.controller.listener.ConnectionPoolListener</listener-class>
+    </listener>
     <filter>
         <filter-name>MenuFilter</filter-name>
-        <filter-class>com.epam.hotel.filter.MenuFilter</filter-class>
+        <filter-class>com.epam.hotel.controller.filter.MenuFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>MenuFilter</filter-name>
@@ -24,7 +27,7 @@
     </filter-mapping>
     <filter>
         <filter-name>CommandFilter</filter-name>
-        <filter-class>com.epam.hotel.filter.CommandFilter</filter-class>
+        <filter-class>com.epam.hotel.controller.filter.CommandFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CommandFilter</filter-name>

@@ -46,14 +46,14 @@
 <meta property="og:type" content="website">
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css"/>
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"/>
 
 <script type="text/javascript">
     $.noConflict();
-    jQuery( document ).ready(function( $ ){
+    jQuery(document).ready(function ($) {
 
         $('input[name="datefilter"]').daterangepicker({
             autoUpdateInput: false,
@@ -63,11 +63,11 @@
             'opens': 'center'
         });
 
-        $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+        $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
             $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
         });
 
-        $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+        $('input[name="datefilter"]').on('cancel.daterangepicker', function (ev, picker) {
             $(this).val('');
         });
 

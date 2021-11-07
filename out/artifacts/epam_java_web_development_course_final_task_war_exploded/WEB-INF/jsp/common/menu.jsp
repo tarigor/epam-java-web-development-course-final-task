@@ -39,7 +39,7 @@
 					<li class="u-nav-item"><a
 							class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
 							href="/menu/roomslist"
-<%--							href="<c:url value="/menu/roomlist.html"/>"--%>
+					<%--							href="<c:url value="/menu/roomlist.html"/>"--%>
 							style="padding: 10px;">Rooms List</a>
 					</li>
 					<li class="u-nav-item"><a
