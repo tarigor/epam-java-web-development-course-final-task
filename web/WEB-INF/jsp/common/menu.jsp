@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: igor
@@ -32,22 +33,23 @@
 				<ul class="u-nav u-spacing-20 u-unstyled u-nav-1">
 					<li class="u-nav-item"><a
 							class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-							href="${pageContext.request.contextPath}/Controller?command=viewtindex"
+							href="/menu/index"
 							style="padding: 10px;">Home</a>
 					</li>
 					<li class="u-nav-item"><a
 							class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-							href="${pageContext.request.contextPath}/Controller?command=viewroomslist"
+							href="/menu/roomslist"
+					<%--							href="<c:url value="/menu/roomlist.html"/>"--%>
 							style="padding: 10px;">Rooms List</a>
 					</li>
 					<li class="u-nav-item"><a
 							class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-							href="${pageContext.request.contextPath}/Controller?command=viewlogin"
+							href="/menu/login"
 							style="padding: 10px;">Log-in</a>
 					</li>
 					<li class="u-nav-item"><a
 							class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-							href="${pageContext.request.contextPath}/Controller?command=viewsignup"
+							href="/menu/signup"
 							style="padding: 10px;">Sign-up</a>
 					</li>
 				</ul>
@@ -58,19 +60,19 @@
 						<div class="u-menu-close"></div>
 						<ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-							                          href="${pageContext.request.contextPath}/Controller?command=viewindex"
+							                          href="/menu/index"
 							                          style="padding: 10px;">Home</a>
 							</li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-							                          href="${pageContext.request.contextPath}/Controller?command=viewroomslist"
+							                          href="/menu/roomslist"
 							                          style="padding: 10px;">Rooms List</a>
 							</li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-							                          href="${pageContext.request.contextPath}/Controller?command=viewlogin"
+							                          href="/menu/login"
 							                          style="padding: 10px;">Log-in</a>
 							</li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-							                          href="${pageContext.request.contextPath}/Controller?command=viewsignup"
+							                          href="/menu/signup"
 							                          style="padding: 10px;">Sign-up</a>
 							</li>
 						</ul>
@@ -102,17 +104,17 @@
 				<ul class="u-nav u-spacing-20 u-unstyled u-nav-3">
 					<li class="u-nav-item"><a
 							class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-							href="${pageContext.request.contextPath}/Controller?command=viewindex"
+							href="/menu/index"
 							style="padding: 10px;">Home</a>
 					</li>
 					<li class="u-nav-item"><a
 							class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-							href="${pageContext.request.contextPath}/Controller?command=roomslist"
+							href="/menu/roomslist"
 							style="padding: 10px;">Rooms List</a>
 					</li>
 					<li class="u-nav-item"><a
 							class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-							href="${pageContext.request.contextPath}/Controller?command=admincabinet"
+							href="/menu/admincabinet"
 							style="padding: 10px;">Admin Cabinet</a>
 					</li>
 					<li class="u-nav-item"><a
@@ -127,15 +129,15 @@
 						<div class="u-menu-close"></div>
 						<ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-4">
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-							                          href="${pageContext.request.contextPath}/Controller?command=viewindex"
+							                          href="/menu/index"
 							                          style="padding: 10px;">Home</a>
 							</li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-							                          href="${pageContext.request.contextPath}/Controller?command=viewroomslist"
+							                          href="/menu/roomslist"
 							                          style="padding: 10px;">Rooms List</a>
 							</li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-							                          href="${pageContext.request.contextPath}/Controller?command=viewadmincabinet"
+							                          href="/menu/admincabinet"
 							                          style="padding: 10px;">Admin Cabinet</a>
 							</li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
@@ -169,17 +171,17 @@
 				<ul class="u-nav u-spacing-20 u-unstyled u-nav-5">
 					<li class="u-nav-item"><a
 							class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-							href="${pageContext.request.contextPath}/Controller?command=viewindex"
+							href="/menu/index"
 							style="padding: 10px;">Home</a>
 					</li>
 					<li class="u-nav-item"><a
 							class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-							href="${pageContext.request.contextPath}/Controller?command=viewroomslist"
+							href="/menu/roomslist"
 							style="padding: 10px;">Rooms List</a>
 					</li>
 					<li class="u-nav-item"><a
 							class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-							href="${pageContext.request.contextPath}/Controller?command=viewclientcabinet"
+							href="/menu/clientcabinet"
 							style="padding: 10px;">Client Cabinet</a>
 					</li>
 					<li class="u-nav-item"><a
@@ -194,15 +196,15 @@
 						<div class="u-menu-close"></div>
 						<ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-6">
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-							                          href="${pageContext.request.contextPath}/Controller?command=viewindex"
+							                          href="/menu/index"
 							                          style="padding: 10px;">Home</a>
 							</li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-							                          href="${pageContext.request.contextPath}/Controller?command=viewroomslist"
+							                          href="/menu/roomslist"
 							                          style="padding: 10px;">Rooms List</a>
 							</li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-							                          href="${pageContext.request.contextPath}/Controller?command=viewclientcabinet"
+							                          href="/menu/clientcabinet"
 							                          style="padding: 10px;">Client Cabinet</a>
 							</li>
 							<li class="u-nav-item"><a class="u-button-style u-nav-link"

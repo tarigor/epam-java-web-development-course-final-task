@@ -15,6 +15,14 @@
         <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
     <filter>
+        <filter-name>MenuFilter</filter-name>
+        <filter-class>com.epam.hotel.filter.MenuFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>MenuFilter</filter-name>
+        <url-pattern>/menu/*</url-pattern>
+    </filter-mapping>
+    <filter>
         <filter-name>CommandFilter</filter-name>
         <filter-class>com.epam.hotel.filter.CommandFilter</filter-class>
     </filter>
