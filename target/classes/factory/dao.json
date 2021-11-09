@@ -1,0 +1,3 @@
+{
+  "USER_DAO": "com.epam.hotel.dao.impl.UserDAOImpl"
+}

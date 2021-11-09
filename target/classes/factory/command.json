@@ -1,0 +1,14 @@
+{
+  "login": {
+    "clazz": "com.epam.hotel.command.impl.common.LoginCommand",
+    "method": "POST"
+  },
+  "logout": {
+    "clazz": "com.epam.hotel.command.impl.common.LogoutCommand",
+    "method": "POST"
+  },
+  "user_registration": {
+    "clazz": "com.epam.hotel.command.impl.common.UserRegistrationCommand",
+    "method": "POST"
+  }
+}
