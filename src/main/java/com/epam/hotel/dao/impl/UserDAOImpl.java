@@ -5,6 +5,9 @@ import com.epam.hotel.entity.User;
 
 import java.util.List;
 
+/**
+ * The class provides the methods of the user table handling.
+ */
 public class UserDAOImpl implements UserDAO {
     @Override
     public List<User> getAllUsers() {

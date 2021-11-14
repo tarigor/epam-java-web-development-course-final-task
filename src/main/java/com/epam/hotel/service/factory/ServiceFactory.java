@@ -1,10 +1,12 @@
 package com.epam.hotel.service.factory;
 
-import com.epam.hotel.service.Service;
 import com.epam.hotel.utility.JsonFileHandler;
 
 import java.util.NoSuchElementException;
 
+/**
+ * The class provides the methods for gets services from the service factory.
+ */
 public class ServiceFactory {
     private static final ServiceFactory instance = new ServiceFactory();
     private final String SERVICE_JSON_FILE_PATH = "service.json";
@@ -18,7 +20,7 @@ public class ServiceFactory {
         return instance;
     }
 
-    public Object getService(Service service) {
+    public Object getService(ServiceType service) {
         Class clazz = null;
         Object o = null;
         try {

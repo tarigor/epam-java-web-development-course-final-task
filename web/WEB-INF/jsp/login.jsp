@@ -1,6 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true" %>
 <html style="font-size: 16px;">
 <head>
 	<title>Log In</title>
@@ -20,18 +21,39 @@
 			<link rel="stylesheet" href="css/style.css">
 			<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
 				<div class="inner">
-					<form action="">
+					<form action="${pageContext.request.contextPath}/command?name=login" method="post">
 						<h3 class="text-center">Log-in</h3>
 						<div class="form-wrapper">
-							<label for="">Login</label>
-							<input type="text" class="form-control">
+							<label for="">First Name</label>
+							<input type="text" name="userFirstName" class="form-control">
+							<c:if test="${userFirstNameValidateState}">
+								<label class="text-warning"
+								       style="font-size: xx-small">${userFirstNameValidateStateDesc}</label>
+							</c:if>
+						</div>
+						<div class="form-wrapper">
+							<label for="">Family Name</label>
+							<input type="text" name="userFamilyName" class="form-control">
+							<c:if test="${userFamilyNameValidateState}">
+								<label class="text-warning"
+								       style="font-size: xx-small">${userFamilyNameValidateStateDesc}</label>
+							</c:if>
 						</div>
 						<div class="form-wrapper">
 							<label for="">Password</label>
-							<input type="password" class="form-control">
+							<input type="password" name="userPassword" class="form-control">
+							<c:if test="${userPasswordValidateState}">
+								<label class="text-warning"
+								       style="font-size: xx-small">${userPasswordValidateStateDesc}</label>
+							</c:if>
 						</div>
 						<br>
-						<button>Log-in</button>
+						<button type="submit">Log-in</button>
+						<c:if test="${userIsMissing}">
+							<br>
+							<label class="text-warning"
+							       style="font-size: medium">${userMissingMessage}</label>
+						</c:if>
 					</form>
 				</div>
 			</div>

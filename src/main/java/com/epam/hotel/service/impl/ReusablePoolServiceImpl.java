@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+/**
+ * The class provides the methods for handling with a pool of the connections for accessing to the database.
+ */
 public class ReusablePoolServiceImpl implements ReusablePoolService {
     private final Logger logger = Logger.getLogger(ReusablePoolServiceImpl.class);
     private final Hashtable<Connection, Long> usedConnections;
@@ -30,6 +33,11 @@ public class ReusablePoolServiceImpl implements ReusablePoolService {
         logger.info("ReusablePoolImpl -> databaseConnectionService has been assigned");
     }
 
+    /**
+     * The method gets a single connection from the pool.
+     *
+     * @return an instance of the connection from the connection pool.
+     */
     @Override
     public synchronized Connection getConnection() {
         long now = System.currentTimeMillis();
@@ -63,6 +71,12 @@ public class ReusablePoolServiceImpl implements ReusablePoolService {
         return connection;
     }
 
+    /**
+     * The method checks if the connection is using now.
+     *
+     * @param connection an instance of the connection which is going to be checked for using.
+     * @return usage test result.
+     */
     private boolean checkIfConnectionIsUsing(Connection connection) {
         try {
             return (!connection.isClosed());
@@ -72,6 +86,11 @@ public class ReusablePoolServiceImpl implements ReusablePoolService {
         }
     }
 
+    /**
+     * The method releases a certain connection after usage of it.
+     *
+     * @param connection an instance of the connection which is going to be released.
+     */
     @Override
     public synchronized void releaseConnection(Connection connection) {
         usedConnections.remove(connection);

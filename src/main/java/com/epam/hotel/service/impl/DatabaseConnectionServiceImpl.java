@@ -8,6 +8,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * The class provides the methods of the database connection handling.
+ */
 public class DatabaseConnectionServiceImpl implements DatabaseConnectionService {
     public static final String DATABASE_URL = "database.url";
     public static final String DATABASE_USER = "database.user";
@@ -19,6 +22,11 @@ public class DatabaseConnectionServiceImpl implements DatabaseConnectionService 
     public DatabaseConnectionServiceImpl() {
     }
 
+    /**
+     * The method is registering of the database class.
+     *
+     * @param databaseProperties the key of the database properties file.
+     */
     public void init(Properties databaseProperties) {
         this.databaseProperties = databaseProperties;
         try {
@@ -29,6 +37,11 @@ public class DatabaseConnectionServiceImpl implements DatabaseConnectionService 
         logger.info("The database has been initialised");
     }
 
+    /**
+     * The method gets an instance of the connection to the database.
+     *
+     * @return an instance of connection to the database.
+     */
     @Override
     public Connection getConnection() {
         Connection connection = null;
@@ -37,6 +50,7 @@ public class DatabaseConnectionServiceImpl implements DatabaseConnectionService 
                     databaseProperties.getProperty(DATABASE_URL),
                     databaseProperties.getProperty(DATABASE_USER),
                     databaseProperties.getProperty(DATABASE_PASSWORD));
+            connection.setAutoCommit(false);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,6 +60,11 @@ public class DatabaseConnectionServiceImpl implements DatabaseConnectionService 
         return connection;
     }
 
+    /**
+     * The methods providing a destroying of the used connection.
+     *
+     * @param connection an instance of the connection which is going to be destroyed.
+     */
     @Override
     public void destroy(Connection connection) {
         try {

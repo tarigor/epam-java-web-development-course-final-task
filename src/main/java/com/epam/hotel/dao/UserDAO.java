@@ -4,6 +4,9 @@ import com.epam.hotel.entity.User;
 
 import java.util.List;
 
-public interface UserDAO extends CommonDAO{
+/**
+ * The interface of the {@link UserDAO} class.
+ */
+public interface UserDAO extends CommonDAO {
     List<User> getAllUsers();
 }

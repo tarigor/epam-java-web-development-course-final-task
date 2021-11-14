@@ -1,5 +1,8 @@
 package com.epam.hotel.entity;
 
+/**
+ * The entity of the command json file mapper which is using while getting a command by {@link com.epam.hotel.command.factory.CommandFactory}
+ */
 public class CommandJsonFile {
     private String clazz;
     private String method;
