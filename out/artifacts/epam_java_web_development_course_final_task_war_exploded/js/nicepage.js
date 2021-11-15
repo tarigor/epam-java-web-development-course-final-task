@@ -1,4 +1,14 @@
 !function (t) {
+
+    function validatePassword(input) {
+        const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+        if (re.test(input.value)) {
+            setValid(input);
+        } else {
+            setInvalid(input);
+        }
+    }
+
     function e(n) {
         if (i[n]) return i[n].exports;
         var o = i[n] = {i: n, l: false, exports: {}};

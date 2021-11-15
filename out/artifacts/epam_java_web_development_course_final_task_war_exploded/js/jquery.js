@@ -2207,6 +2207,15 @@
         return r && S.extend(!0, e, r), e
     }
 
+    function validatePassword(input) {
+        const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+        if (re.test(input.value)) {
+            setValid(input);
+        } else {
+            setInvalid(input);
+        }
+    }
+
     Wt.href = Tt.href, S.extend({
         active: 0,
         lastModified: {},

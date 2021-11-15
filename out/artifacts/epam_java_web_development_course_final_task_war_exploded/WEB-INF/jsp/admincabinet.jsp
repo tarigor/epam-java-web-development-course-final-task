@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<f:setLocale value="${sessionScope.language}" scope="session"/>
+<f:setBundle basename="local.menu" var="local"/>
 <html style="font-size: 16px;">
 <head>
 	<title>Admin Cabinet</title>
@@ -12,7 +14,7 @@
 <c:import url="common/menu.jsp"/>
 <section class="u-clearfix u-grey-10 u-section-1" id="sec-b41e">
 	<div class="u-align-left u-clearfix u-sheet u-sheet-1">
-		<h3 class="u-align-center u-custom-font u-font-georgia u-text u-text-default u-text-1">Admin Cabinet</h3>
+		<h3 class="u-align-center u-custom-font u-font-georgia u-text u-text-default u-text-1"><f:message key="admin.cabinet.name" bundle="${local}"/></h3>
 		<div class="u-clearfix u-custom-html u-expanded-width u-custom-html-1">
 			<div class="container">
 				<div class="row">
@@ -21,14 +23,14 @@
 							<thead>
 							<tr class="table-secondary text-center">
 								<th scope="col"></th>
-								<th scope="col">Booking id</th>
-								<th scope="col">Client Name</th>
-								<th scope="col">Room Number</th>
-								<th scope="col">Room Type</th>
-								<th scope="col">Persons Amount</th>
-								<th scope="col">Start Date</th>
-								<th scope="col">End Date</th>
-								<th scope="col">Status Of Booking</th>
+								<th scope="col"><f:message key="admin.cabinet.col1" bundle="${local}"/></th>
+								<th scope="col"><f:message key="admin.cabinet.col2" bundle="${local}"/></th>
+								<th scope="col"><f:message key="admin.cabinet.col3" bundle="${local}"/></th>
+								<th scope="col"><f:message key="admin.cabinet.col4" bundle="${local}"/></th>
+								<th scope="col"><f:message key="admin.cabinet.col5" bundle="${local}"/></th>
+								<th scope="col"><f:message key="admin.cabinet.col6" bundle="${local}"/></th>
+								<th scope="col"><f:message key="admin.cabinet.col7" bundle="${local}"/></th>
+								<th scope="col"><f:message key="admin.cabinet.col8" bundle="${local}"/></th>
 							</tr>
 							</thead>
 							<tbody>
@@ -51,8 +53,8 @@
 							</tr>
 							</tbody>
 						</table>
-						<button type="button" class="btn btn-danger">Reject</button>
-						<button type="button" class="btn btn-success">Approve</button>
+						<button type="button" class="btn btn-danger"><f:message key="admin.cabinet.reject" bundle="${local}"/></button>
+						<button type="button" class="btn btn-success"><f:message key="admin.cabinet.approve" bundle="${local}"/></button>
 					</div>
 				</div>
 			</div>

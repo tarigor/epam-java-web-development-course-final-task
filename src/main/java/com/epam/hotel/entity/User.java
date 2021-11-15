@@ -8,14 +8,16 @@ import java.util.Objects;
 public class User {
     private String firstName;
     private String lastName;
-    private byte password;
-    private String userType;
+    private UserType userType;
+    private String email;
+    private String password;
 
-    public User(String firstName, String lastName, byte password, String userType) {
+    public User(String firstName, String lastName, UserType userType, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
         this.userType = userType;
+        this.email = email;
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -34,20 +36,28 @@ public class User {
         this.lastName = lastName;
     }
 
-    public byte getPassword() {
-        return password;
-    }
-
-    public void setPassword(byte password) {
-        this.password = password;
-    }
-
-    public String getUserType() {
+    public UserType getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -55,15 +65,16 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return password == user.password &&
-                firstName.equals(user.firstName) &&
-                lastName.equals(user.lastName) &&
-                userType.equals(user.userType);
+        return Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                userType == user.userType &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, password, userType);
+        return Objects.hash(firstName, lastName, userType, email, password);
     }
 
     @Override
@@ -71,8 +82,9 @@ public class User {
         return "User{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", password=" + password +
-                ", userType='" + userType + '\'' +
+                ", userType=" + userType +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

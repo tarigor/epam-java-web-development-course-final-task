@@ -1,8 +1,11 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<f:setLocale value="${sessionScope.language}" scope="session"/>
 <f:setBundle basename="local.menu" var="local"/>
 <header class="u-clearfix u-grey-60 u-header" id="sec-d985" data-animation-name="" data-animation-duration="0"
         data-animation-delay="0" data-animation-direction="">
+	<div style="text-align: center">
+	</div>
 	<div class="u-clearfix u-sheet u-sheet-1">
 		<nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1" data-responsive-from="XL">
 			<div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px; font-weight: 700;">
@@ -57,6 +60,10 @@
 				<div class="u-grey-25 u-menu-overlay u-opacity u-opacity-70"></div>
 			</div>
 		</nav>
-		<h3 class="u-custom-font u-font-georgia u-text u-text-default u-text-white u-text-1">Hotel Grodno Inn</h3>
+			<a class="u-custom-font u-font-georgia u-text u-text-default u-text-white u-text-1" href="page?name=index"><f:message key="header.hotel.name" bundle="${local}"/></a>
+		<div style="text-align: center">
+			<a href="language?type=en_US" style="font-size: xx-small">ENG</a>
+			<a href="language?type=by_BY" style="font-size: xx-small">WRW</a>
+		</div>
 	</div>
 </header>

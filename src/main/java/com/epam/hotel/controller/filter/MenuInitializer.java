@@ -2,6 +2,7 @@ package com.epam.hotel.controller.filter;
 
 import com.epam.hotel.entity.MenuRole;
 import com.epam.hotel.entity.User;
+import com.epam.hotel.entity.UserType;
 import com.epam.hotel.menu.impl.SiteMenuServiceImpl;
 import org.apache.log4j.Logger;
 
@@ -24,9 +25,9 @@ public class MenuInitializer implements Filter {
 
         User authorizedUser = (User) request.getSession().getAttribute("authorizedUser");
         if (authorizedUser != null) {
-            if (authorizedUser.getUserType().contains("ADMIN")) {
+            if (authorizedUser.getUserType().equals(UserType.ADMIN)) {
                 request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.ADMIN_LOGGED, MenuRole.ANYONE_LOGGED));
-            } else if (authorizedUser.getUserType().contains("CLIENT")) {
+            } else if (authorizedUser.getUserType().equals(UserType.CLIENT)) {
                 request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.USER_LOGGED, MenuRole.ANYONE_LOGGED));
             }
         } else {

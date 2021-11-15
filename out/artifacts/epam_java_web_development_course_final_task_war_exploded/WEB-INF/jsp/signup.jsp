@@ -21,39 +21,53 @@
 			<link rel="stylesheet" href="css/style.css">
 			<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
 				<div class="inner">
-					<form action="">
+					<form action="command?name=USER_REGISTRATION" method="post">
 						<h3>Registration Form</h3>
 						<div class="form-group">
 							<div class="form-wrapper">
 								<label for="">First Name</label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="firstName" oninput="validateName(this)">
 							</div>
 							<div class="form-wrapper">
 								<label for="">Last Name</label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" name="lastName" oninput="validateName(this)">
 							</div>
 						</div>
 						<div class="form-wrapper">
 							<label for="">Email</label>
-							<input type="text" class="form-control">
+							<input type="text" class="form-control" name="email" oninput="validateEmail(this)">
+						</div>
+						<div class="form-wrapper">
+							<label for="">User Type</label>
+							<select id="userRole" name="userType" class="custom-select"
+							        aria-label="Default select example">
+								<option selected value="CLIENT">CLIENT</option>
+								<option value="ADMIN">Administrator</option>
+								<option value="CLIENT">Client</option>
+							</select>
 						</div>
 						<div class="form-wrapper">
 							<label for="">Password</label>
-							<input type="password" class="form-control">
+							<input type="password" class="form-control" name="password"
+							       oninput="validatePassword(this)">
 						</div>
 						<div class="form-wrapper">
 							<label for="">Confirm Password</label>
-							<input type="password" class="form-control">
+							<input type="password" class="form-control" name="passwordCheck"
+							       oninput="checkPassword(this)">
 						</div>
 						<br>
-						<button>Register Now</button>
-						<input type="hidden" value="" name="recaptchaResponse">
+						<button type="submit">Register Now</button>
 					</form>
 				</div>
 			</div><!-- This templates was made by Colorlib (https://colorlib.com) -->
 		</div>
 	</div>
 </section>
+
+<script src=<c:url value="../../js/validation.js"/>>
+</script>
+
 <c:import url="common/footer.jsp"/>
 <c:import url="common/cookies.jsp"/>
 </body>

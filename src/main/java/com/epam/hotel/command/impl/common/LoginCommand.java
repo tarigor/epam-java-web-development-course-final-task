@@ -3,6 +3,7 @@ package com.epam.hotel.command.impl.common;
 import com.epam.hotel.command.Command;
 import com.epam.hotel.command.CommonSiteActivityCommand;
 import com.epam.hotel.entity.User;
+import com.epam.hotel.entity.UserType;
 import com.epam.hotel.service.CommonSiteActivityService;
 import com.epam.hotel.service.factory.ServiceFactory;
 import com.epam.hotel.service.factory.ServiceType;
@@ -44,7 +45,7 @@ public class LoginCommand extends CommonSiteActivityCommand implements Command {
             User user = commonSiteActivityService.checkUserForExistingAndRightPasswordInputted(userFirstName, userFamilyName, password);
             if (user != null) {
                 request.getSession().setAttribute("userID", user.hashCode());
-                if (user.getUserType().contains("admin")) {
+                if (user.getUserType().equals(UserType.ADMIN)) {
                     doRedirect(request, response, ADMIN_PAGE);
                 } else {
                     doRedirect(request, response, USER_PAGE);

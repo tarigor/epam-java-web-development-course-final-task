@@ -18,6 +18,14 @@
         <listener-class>com.epam.hotel.controller.listener.ConnectionPoolListener</listener-class>
     </listener>
     <filter>
+        <filter-name>LanguageFilter</filter-name>
+        <filter-class>com.epam.hotel.controller.filter.LanguageFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LanguageFilter</filter-name>
+        <url-pattern>/language</url-pattern>
+    </filter-mapping>
+    <filter>
         <filter-name>MenuInitializer</filter-name>
         <filter-class>com.epam.hotel.controller.filter.MenuInitializer</filter-class>
     </filter>

@@ -40,6 +40,7 @@ public class MenuFilter implements Filter {
 
         String pageName = request.getParameter(NAME);
         logger.info(String.format("Redirected to %s", pageName));
+        request.getSession().setAttribute("lastpage",pageName);
         request.getRequestDispatcher(String.format("/WEB-INF/jsp/%s.jsp", pageName)).forward(servletRequest, servletResponse);
         filterChain.doFilter(servletRequest, servletResponse);
     }
