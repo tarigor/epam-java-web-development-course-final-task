@@ -19,9 +19,8 @@ public enum InputRegex {
             ((PropertiesFileServiceImpl) ServiceFactory
                     .getInstance()
                     .getService(ServiceType.PROPERTIES_FILE_SERVICE))
-                    .getProperties("local.properties")
-                    .getProperty("wrong.user.name.input")),
-
+                    .getProperties(Constants.PROPERTIES)
+                    .getProperty("validator.wrong.user.name.input")),
     /**
      * Secure Password requirements
      * <p>
@@ -31,18 +30,30 @@ public enum InputRegex {
      * Password must contain at least one special character like ! @ # & ( ).
      * Password must contain a length of at least 8 characters and a maximum of 20 characters.
      **/
-    PASSWORD("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$2",
+    PASSWORD("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!=])(?=\\S+$).{4,}$",
             ((PropertiesFileServiceImpl) ServiceFactory
                     .getInstance()
                     .getService(ServiceType.PROPERTIES_FILE_SERVICE))
-                    .getProperties("local.properties")
-                    .getProperty("wrong.user.password.input"));
+                    .getProperties(Constants.PROPERTIES)
+                    .getProperty("validator.wrong.user.password.input")),
+    EMAIL("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}",
+            ((PropertiesFileServiceImpl) ServiceFactory
+                    .getInstance()
+                    .getService(ServiceType.PROPERTIES_FILE_SERVICE))
+                    .getProperties(Constants.PROPERTIES)
+                    .getProperty("validator.wrong.user.email.input")),
+    PASSWORD_DOUBLE_CHECK("",
+            ((PropertiesFileServiceImpl) ServiceFactory
+                    .getInstance()
+                    .getService(ServiceType.PROPERTIES_FILE_SERVICE))
+                    .getProperties(Constants.PROPERTIES)
+                    .getProperty("validator.wrong.user.password.double.check.input"));
     String regexExpression;
     String description;
 
     InputRegex(String regexExpression, String description) {
         this.regexExpression = regexExpression;
-        this.description  =description;
+        this.description = description;
     }
 
     public static String getDescription(InputRegex inputRegex) {
@@ -51,5 +62,9 @@ public enum InputRegex {
 
     public Pattern getPattern(InputRegex inputRegex) {
         return Pattern.compile(inputRegex.regexExpression);
+    }
+
+    private static class Constants {
+        public static final String PROPERTIES = "local/menu.properties";
     }
 }

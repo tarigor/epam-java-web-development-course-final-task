@@ -29,6 +29,9 @@ public class CommandFilter implements Filter {
         System.out.println("i'm in filter command");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+
+
+
         String command = request.getParameter(COMMAND_NAME).toUpperCase();
         request.setAttribute(COMMAND_NAME, command);
         logger.info(String.format("The following command has been detected - /%s", command));

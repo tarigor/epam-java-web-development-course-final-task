@@ -27,15 +27,27 @@
 							<div class="form-wrapper">
 								<label for="">First Name</label>
 								<input type="text" class="form-control" name="firstName" oninput="validateName(this)">
+								<c:if test="${firstNameState}">
+									<label class="text-warning"
+									       style="font-size: xx-small">${firstNameDesc}</label>
+								</c:if>
 							</div>
 							<div class="form-wrapper">
 								<label for="">Last Name</label>
 								<input type="text" class="form-control" name="lastName" oninput="validateName(this)">
+								<c:if test="${lastNameState}">
+									<label class="text-warning"
+									       style="font-size: xx-small">${lastNameDesc}</label>
+								</c:if>
 							</div>
 						</div>
 						<div class="form-wrapper">
 							<label for="">Email</label>
 							<input type="text" class="form-control" name="email" oninput="validateEmail(this)">
+							<c:if test="${emailState}">
+								<label class="text-warning"
+								       style="font-size: xx-small">${emailDesc}</label>
+							</c:if>
 						</div>
 						<div class="form-wrapper">
 							<label for="">User Type</label>
@@ -53,9 +65,17 @@
 						</div>
 						<div class="form-wrapper">
 							<label for="">Confirm Password</label>
-							<input type="password" class="form-control" name="passwordCheck"
+							<input type="password" class="form-control" name="repeatedPassword"
 							       oninput="checkPassword(this)">
 						</div>
+						<c:if test="${passwordDoubleCheckState}">
+							<label class="text-warning"
+							       style="font-size: xx-small">${passwordDoubleCheckDesc}</label>
+						</c:if>
+						<c:if test="${passwordState}">
+							<label class="text-warning"
+							       style="font-size: xx-small">${passwordDesc}</label>
+						</c:if>
 						<br>
 						<button type="submit">Register Now</button>
 					</form>

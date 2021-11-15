@@ -19,12 +19,13 @@ public class PasswordHandler {
     private Cipher cipher;
     private SecretKey key;
 
-    public PasswordHandler(String myEncryptionKey) {
-        init(myEncryptionKey);
+    public PasswordHandler() {
+
     }
 
-    private void init(String myEncryptionKey) {
+    public PasswordHandler setEncryptionKey(int hash){
         try {
+            String myEncryptionKey = generateKey(hash);
             String myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
             byte[] arrayBytes = myEncryptionKey.getBytes(UNICODE_FORMAT);
             KeySpec ks = new DESedeKeySpec(arrayBytes);
@@ -34,6 +35,12 @@ public class PasswordHandler {
         } catch (InvalidKeySpecException | InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException | NoSuchPaddingException e) {
             e.printStackTrace();
         }
+        return this;
+    }
+
+    private String generateKey(int hash) {
+        StringBuilder key = new StringBuilder();
+        return key.append(hash).append(hash).append(hash).toString();
     }
 
     public String encryptPassword(String unencryptedString) {

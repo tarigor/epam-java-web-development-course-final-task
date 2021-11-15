@@ -24,27 +24,19 @@
 					<form action="${pageContext.request.contextPath}/command?name=login" method="post">
 						<h3 class="text-center">Log-in</h3>
 						<div class="form-wrapper">
-							<label for="">First Name</label>
-							<input type="text" name="userFirstName" class="form-control">
-							<c:if test="${userFirstNameValidateState}">
+							<label for="">Email</label>
+							<input type="text" name="email" class="form-control">
+							<c:if test="${emailState}">
 								<label class="text-warning"
-								       style="font-size: xx-small">${userFirstNameValidateStateDesc}</label>
-							</c:if>
-						</div>
-						<div class="form-wrapper">
-							<label for="">Family Name</label>
-							<input type="text" name="userFamilyName" class="form-control">
-							<c:if test="${userFamilyNameValidateState}">
-								<label class="text-warning"
-								       style="font-size: xx-small">${userFamilyNameValidateStateDesc}</label>
+								       style="font-size: xx-small">${emailDesc}</label>
 							</c:if>
 						</div>
 						<div class="form-wrapper">
 							<label for="">Password</label>
-							<input type="password" name="userPassword" class="form-control">
-							<c:if test="${userPasswordValidateState}">
+							<input type="password" name="password" class="form-control">
+							<c:if test="${passwordState}">
 								<label class="text-warning"
-								       style="font-size: xx-small">${userPasswordValidateStateDesc}</label>
+								       style="font-size: xx-small">${passwordDesc}</label>
 							</c:if>
 						</div>
 						<br>

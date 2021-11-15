@@ -32,7 +32,7 @@
 					<c:forEach items="${menuList}" var="item">
 						<li class="u-nav-item"><a
 								class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-								href="/page?name=${item.getPageCommandName()}"
+								href="/page?name=${item.getPageCommandName()}&lang=${sessionScope.language}"
 								style="padding: 10px;">
 							<f:message key="${item.getMenuItemDescription().getBundle()}" bundle="${local}"/>
 						</a>
@@ -48,7 +48,7 @@
 						<ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
 							<c:forEach items="${menuList}" var="item">
 								<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								                          href="/page?name=${item.getPageCommandName()}"
+								                          href="/page?name=${item.getPageCommandName()}&lang=${sessionScope.language}"
 								                          style="padding: 10px;">
 									<f:message key="${item.getMenuItemDescription().getBundle()}" bundle="${local}"/>
 								</a>
@@ -62,8 +62,8 @@
 		</nav>
 			<a class="u-custom-font u-font-georgia u-text u-text-default u-text-white u-text-1" href="page?name=index"><f:message key="header.hotel.name" bundle="${local}"/></a>
 		<div style="text-align: center">
-			<a href="language?type=en_US" style="font-size: xx-small">ENG</a>
-			<a href="language?type=by_BY" style="font-size: xx-small">WRW</a>
+			<a href="/page?name=${lastpage}&lang=en_US" style="font-size: xx-small">ENG</a>
+			<a href="/page?name=${lastpage}&lang=by_BY" style="font-size: xx-small">WRW</a>
 		</div>
 	</div>
 </header>
