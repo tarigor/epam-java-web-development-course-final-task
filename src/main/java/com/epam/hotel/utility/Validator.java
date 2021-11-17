@@ -4,11 +4,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class Validator {
-    private HashMap<String, String> map;
-
-    public HashMap<String, String> getMap() {
-        return map;
-    }
+    private final HashMap<String, String> map;
 
     public Validator() {
         map = new HashMap<>();
@@ -17,6 +13,10 @@ public class Validator {
     public static boolean checkInput(InputRegex inputRegex, String text) {
         Matcher matcher = inputRegex.getPattern(inputRegex).matcher(text);
         return matcher.matches();
+    }
+
+    public HashMap<String, String> getMap() {
+        return map;
     }
 
     public boolean validate(String[] paramName, String[] paramContent, InputRegex[] regex) {

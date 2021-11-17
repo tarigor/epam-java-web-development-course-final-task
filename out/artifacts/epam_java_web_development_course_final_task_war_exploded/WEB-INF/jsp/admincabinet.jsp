@@ -14,7 +14,8 @@
 <c:import url="common/menu.jsp"/>
 <section class="u-clearfix u-grey-10 u-section-1" id="sec-b41e">
 	<div class="u-align-left u-clearfix u-sheet u-sheet-1">
-		<h3 class="u-align-center u-custom-font u-font-georgia u-text u-text-default u-text-1"><f:message key="admin.cabinet.name" bundle="${local}"/></h3>
+		<h3 class="u-align-center u-custom-font u-font-georgia u-text u-text-default u-text-1"><f:message
+				key="admin.cabinet.name" bundle="${local}"/></h3>
 		<div class="u-clearfix u-custom-html u-expanded-width u-custom-html-1">
 			<div class="container">
 				<div class="row">
@@ -53,8 +54,10 @@
 							</tr>
 							</tbody>
 						</table>
-						<button type="button" class="btn btn-danger"><f:message key="admin.cabinet.reject" bundle="${local}"/></button>
-						<button type="button" class="btn btn-success"><f:message key="admin.cabinet.approve" bundle="${local}"/></button>
+						<button type="button" class="btn btn-danger"><f:message key="admin.cabinet.reject"
+						                                                        bundle="${local}"/></button>
+						<button type="button" class="btn btn-success"><f:message key="admin.cabinet.approve"
+						                                                         bundle="${local}"/></button>
 					</div>
 				</div>
 			</div>

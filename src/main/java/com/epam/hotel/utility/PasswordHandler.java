@@ -14,8 +14,8 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
 public class PasswordHandler {
-    private static final String UNICODE_FORMAT = "UTF8";
     public static final String DESEDE_ENCRYPTION_SCHEME = "DESede";
+    private static final String UNICODE_FORMAT = "UTF8";
     private Cipher cipher;
     private SecretKey key;
 
@@ -23,7 +23,7 @@ public class PasswordHandler {
 
     }
 
-    public PasswordHandler setEncryptionKey(int hash){
+    public PasswordHandler setEncryptionKey(int hash) {
         try {
             String myEncryptionKey = generateKey(hash);
             String myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;

@@ -1,5 +1,8 @@
 package com.epam.hotel.entity;
 
+import com.epam.hotel.menu.factory.MenuItemDescription;
+import com.epam.hotel.menu.factory.MenuRole;
+
 public class Menu {
     private int id;
     private String pageCommandName;

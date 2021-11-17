@@ -13,9 +13,9 @@ import java.io.IOException;
  * from the web page before servlet initialization and implements the {@link Filter} interface.
  */
 public class CommandFilter implements Filter {
-    private static final Logger logger = Logger.getLogger(CommandFilter.class);
     public static final String COMMAND_NAME = "name";
     public static final String CLASS_NAME = "className";
+    private static final Logger logger = Logger.getLogger(CommandFilter.class);
     private CommandFactory commandFactory;
 
     @Override
@@ -26,11 +26,8 @@ public class CommandFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("i'm in filter command");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-
-
 
         String command = request.getParameter(COMMAND_NAME).toUpperCase();
         request.setAttribute(COMMAND_NAME, command);

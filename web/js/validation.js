@@ -65,13 +65,14 @@ function setValid(input) {
     input.classList.remove("is-invalid");
     input.classList.add("is-valid");
 }
+
 function setInvalid(input) {
     input.classList.remove("is-valid");
     input.classList.add("is-invalid");
 }
 
 const form = document.querySelector('.form');
-form.addEventListener('submit', function(evt) {
+form.addEventListener('submit', function (evt) {
     evt.preventDefault();
     let invalidInputs = form.querySelector('.is-invalid');
     if (invalidInputs != null) {
@@ -97,7 +98,7 @@ form.addEventListener('submit', function(evt) {
 });
 
 let checkbox = document.querySelector(".form-check-input");
-checkbox.addEventListener('change', function() {
+checkbox.addEventListener('change', function () {
     if (this.checked) {
         setValid(this);
     } else {

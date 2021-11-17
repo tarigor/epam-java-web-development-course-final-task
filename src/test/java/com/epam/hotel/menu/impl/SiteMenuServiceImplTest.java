@@ -1,7 +1,7 @@
 package com.epam.hotel.menu.impl;
 
 import com.epam.hotel.entity.Menu;
-import com.epam.hotel.entity.MenuRole;
+import com.epam.hotel.menu.factory.MenuRole;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

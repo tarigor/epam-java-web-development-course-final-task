@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class JsonFileHandler<T> {
     private final Gson gson;
-    private String jsonFilePath;
+    private final String jsonFilePath;
 
     public JsonFileHandler(String jsonFilePath) {
         this.jsonFilePath = jsonFilePath;

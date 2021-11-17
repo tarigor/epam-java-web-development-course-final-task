@@ -27,6 +27,7 @@ public class DAOServiceFactory {
      * @return an instance of the certain DAO class.
      */
     public Object getDAO(DAOType dao) {
+
         Class clazz = null;
         Object object = null;
         try {

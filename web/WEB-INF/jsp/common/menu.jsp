@@ -60,10 +60,11 @@
 				<div class="u-grey-25 u-menu-overlay u-opacity u-opacity-70"></div>
 			</div>
 		</nav>
-			<a class="u-custom-font u-font-georgia u-text u-text-default u-text-white u-text-1" href="page?name=index"><f:message key="header.hotel.name" bundle="${local}"/></a>
+		<a class="u-custom-font u-font-georgia u-text u-text-default u-text-white u-text-1"
+		   href="page?name=index"><f:message key="header.hotel.name" bundle="${local}"/></a>
 		<div style="text-align: center">
-			<a href="/page?name=${lastpage}&lang=en_US" style="font-size: xx-small">ENG</a>
-			<a href="/page?name=${lastpage}&lang=by_BY" style="font-size: xx-small">WRW</a>
+			<a href="/page?name=${lastpage}&lang=en_US" style="font-size: x-small">ENG</a>
+			<a href="/page?name=${lastpage}&lang=by_BY" style="font-size: x-small">WRW</a>
 		</div>
 	</div>
 </header>

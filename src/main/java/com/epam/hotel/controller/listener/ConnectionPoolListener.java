@@ -1,8 +1,8 @@
 package com.epam.hotel.controller.listener;
 
 import com.epam.hotel.connectionmanager.connectionpool.impl.ConnectionPoolImpl;
-import com.epam.hotel.service.factory.ServiceType;
 import com.epam.hotel.service.factory.ServiceFactory;
+import com.epam.hotel.service.factory.ServiceType;
 import com.epam.hotel.service.impl.DatabaseConnectionServiceImpl;
 import com.epam.hotel.service.impl.PropertiesFileServiceImpl;
 import com.epam.hotel.service.impl.ReusablePoolServiceImpl;

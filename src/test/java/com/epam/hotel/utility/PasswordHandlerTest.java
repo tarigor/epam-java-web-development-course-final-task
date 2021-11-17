@@ -1,7 +1,6 @@
 package com.epam.hotel.utility;
 
 
-import org.apache.commons.codec.binary.Base64;
 import com.epam.hotel.entity.User;
 import com.epam.hotel.entity.UserType;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ class PasswordHandlerTest {
 
     @Test
     void encryptPassword() {
-        User user = new User("Igor", "Taren", UserType.ADMIN, "user@tut.by", "12345678");
+        User user = new User(0, "Igor", "Taren", UserType.ADMIN, "user@tut.by", "12345678");
         System.out.println("hash->" + user.hashCode());
 
         String userHash = String.valueOf(user.hashCode());
@@ -26,7 +25,7 @@ class PasswordHandlerTest {
 
     @Test
     void decryptPassword() {
-        User user = new User("Igor", "Taren", UserType.ADMIN, "user@tut.by", "12345678");
+        User user = new User(0, "Igor", "Taren", UserType.ADMIN, "user@tut.by", "12345678");
         System.out.println("hash->" + user.hashCode());
 
         PasswordHandler passwordHandler = new PasswordHandler().setEncryptionKey(1111111111);

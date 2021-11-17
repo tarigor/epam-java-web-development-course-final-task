@@ -6,18 +6,31 @@ import java.util.Objects;
  * The entity of user table.
  */
 public class User {
+    private long userID;
     private String firstName;
     private String lastName;
     private UserType userType;
     private String email;
     private String password;
 
-    public User(String firstName, String lastName, UserType userType, String email, String password) {
+    public User() {
+    }
+
+    public User(long userID, String firstName, String lastName, UserType userType, String email, String password) {
+        this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userType = userType;
         this.email = email;
         this.password = password;
+    }
+
+    public long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(long userID) {
+        this.userID = userID;
     }
 
     public String getFirstName() {
@@ -65,22 +78,24 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(firstName, user.firstName) &&
+        return userID == user.userID &&
+                Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 userType == user.userType &&
-                Objects.equals(email, user.email) &&
+                email.equals(user.email) &&
                 Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, userType, email, password);
+        return Math.abs(Objects.hash(email));
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "firstName='" + firstName + '\'' +
+                "userID=" + userID +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userType=" + userType +
                 ", email='" + email + '\'' +

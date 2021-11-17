@@ -1,5 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 
 <fmt:setLocale value="en_US"/>
-<fmt:setBundle basename="local.menu" var="local" />
+<fmt:setBundle basename="local.menu" var="local"/>
 

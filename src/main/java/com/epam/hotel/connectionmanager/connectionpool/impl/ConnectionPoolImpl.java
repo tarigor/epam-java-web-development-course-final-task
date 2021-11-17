@@ -46,7 +46,7 @@ public class ConnectionPoolImpl implements ConnectionPool {
      * @return a connection instance.
      */
     @Override
-    public Connection getConnection() {
+    public Connection getConnectionFromPool() {
         return reusablePoolService.getConnection();
     }
 

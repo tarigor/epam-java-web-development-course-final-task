@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Controller extends HttpServlet {
-    private static final Logger logger = Logger.getLogger(Controller.class);
     public static final String COMMAND_NAME = "name";
+    private static final Logger logger = Logger.getLogger(Controller.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +26,6 @@ public class Controller extends HttpServlet {
 
     private void doHandling(HttpServletRequest req, HttpServletResponse resp) {
 //        String command = req.getParameter(COMMAND).toUpperCase();
-        System.out.println("i'm in controller");
         String command = (String) req.getAttribute(COMMAND_NAME);
         logger.info(String.format("the following command detected - /%s", command));
         Class commandClass = CommandFactory.getInstance().getCommand(command);

@@ -1,6 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<f:setLocale value="${sessionScope.language}" scope="session"/>
+<f:setBundle basename="local.menu" var="local"/>
+
 <html style="font-size: 16px;">
 <head>
 	<title>Sign Up</title>
@@ -78,6 +82,12 @@
 						</c:if>
 						<br>
 						<button type="submit">Register Now</button>
+						<br>
+						<br>
+						<c:if test="${newUserFault}">
+							<label class="text-warning" style="text-align: center;font-size: medium">
+								<f:message key="signup.user.fault" bundle="${local}"/></label>
+						</c:if>
 					</form>
 				</div>
 			</div><!-- This templates was made by Colorlib (https://colorlib.com) -->

@@ -1,10 +1,10 @@
 package com.epam.hotel.menu.impl;
 
 import com.epam.hotel.entity.Menu;
-import com.epam.hotel.entity.MenuItemDescription;
-import com.epam.hotel.entity.MenuRole;
 import com.epam.hotel.menu.SiteMenuService;
 import com.epam.hotel.menu.factory.MenuFactory;
+import com.epam.hotel.menu.factory.MenuItemDescription;
+import com.epam.hotel.menu.factory.MenuRole;
 import com.epam.hotel.service.factory.ServiceFactory;
 import com.epam.hotel.service.factory.ServiceType;
 import com.epam.hotel.service.impl.PropertiesFileServiceImpl;
@@ -16,9 +16,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SiteMenuServiceImpl implements SiteMenuService {
-    private HashMap<String, Menu> menuList = new HashMap<>();
-    private PropertiesFileServiceImpl propertiesFileService =
+    private final PropertiesFileServiceImpl propertiesFileService =
             (PropertiesFileServiceImpl) ServiceFactory.getInstance().getService(ServiceType.PROPERTIES_FILE_SERVICE);
+    private HashMap<String, Menu> menuList = new HashMap<>();
 
     public SiteMenuServiceImpl() {
         init(menuList);

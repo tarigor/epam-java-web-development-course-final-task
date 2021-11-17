@@ -1,4 +1,4 @@
-package com.epam.hotel.entity;
+package com.epam.hotel.menu.factory;
 
 public enum MenuRole {
     COMMON,

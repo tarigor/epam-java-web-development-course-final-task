@@ -55,7 +55,8 @@ public class ReusablePoolServiceImpl implements ReusablePoolService {
                     if (checkIfConnectionIsUsing(connection)) {
                         freeConnections.remove(connection);
                         usedConnections.put(connection, now);
-                        return (connection);
+                        logger.info(String.format("Amount of the connections in a Pool of the Connections -> %d", usedConnections.size()));
+                        return connection;
                     } else {
                         // object failed validation
                         freeConnections.remove(connection);
