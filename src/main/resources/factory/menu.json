@@ -35,10 +35,10 @@
     "menuItemDescription": "ADMIN_CABINET",
     "menuRole": "ADMIN_LOGGED"
   },
-  "LOGOFF": {
+  "LOGOUT": {
     "id": "9",
-    "pageCommandName": "logoff",
-    "menuItemDescription": "LOGOFF",
+    "pageCommandName": "logout",
+    "menuItemDescription": "LOGOUT",
     "menuRole": "ANYONE_LOGGED"
   }
 }

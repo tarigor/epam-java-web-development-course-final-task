@@ -5,6 +5,9 @@ public enum UserType {
     CLIENT("Client");
     String userDescription;
 
+    UserType() {
+    }
+
     UserType(String userDescription) {
         this.userDescription = userDescription;
     }

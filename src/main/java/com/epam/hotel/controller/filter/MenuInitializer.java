@@ -25,11 +25,12 @@ public class MenuInitializer implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        User authorizedUser = (User) request.getSession().getAttribute("authorizedUser");
-        if (authorizedUser != null) {
-            if (authorizedUser.getUserType().equals(UserType.ADMIN)) {
+        User loggedUser = (User) request.getSession().getAttribute("user");
+        if (loggedUser != null) {
+            UserType userRole = loggedUser.getUserType();
+            if (userRole.equals(UserType.ADMIN)) {
                 request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.ADMIN_LOGGED, MenuRole.ANYONE_LOGGED));
-            } else if (authorizedUser.getUserType().equals(UserType.CLIENT)) {
+            } else if (userRole.equals(UserType.CLIENT)) {
                 request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.USER_LOGGED, MenuRole.ANYONE_LOGGED));
             }
         } else {

@@ -4,6 +4,7 @@ import com.epam.hotel.dao.BaseDao;
 import com.epam.hotel.dao.UserDAO;
 import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.entity.User;
+import com.epam.hotel.entity.UserType;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,7 +76,26 @@ public class UserDAOImpl extends BaseDao implements UserDAO {
     }
 
     @Override
-    public User get(int id) {
+    public User get(int userHashCode) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_USER_BY_ID);
+            preparedStatement.setLong(1, userHashCode);
+            preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.getResultSet();
+
+            if (resultSet.next()) {
+                User user = new User();
+                user.setUserID(resultSet.getLong(1));
+                user.setFirstName(resultSet.getString(2));
+                user.setLastName(resultSet.getString(3));
+                user.setUserType(UserType.valueOf(resultSet.getString(4)));
+                user.setEmail(resultSet.getString(5));
+                user.setPassword(resultSet.getString(6));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

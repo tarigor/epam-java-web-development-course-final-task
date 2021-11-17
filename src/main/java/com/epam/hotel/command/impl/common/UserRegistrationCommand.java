@@ -1,19 +1,14 @@
 package com.epam.hotel.command.impl.common;
 
+import com.epam.hotel.command.BaseCommand;
 import com.epam.hotel.command.Command;
-import com.epam.hotel.command.CommonSiteActivityCommand;
 import com.epam.hotel.entity.User;
 import com.epam.hotel.entity.UserType;
-import com.epam.hotel.service.CommonSiteActivityService;
-import com.epam.hotel.service.factory.ServiceFactory;
-import com.epam.hotel.service.factory.ServiceType;
-import com.epam.hotel.service.impl.CommonSiteActivityServiceImpl;
 import com.epam.hotel.utility.InputRegex;
 import com.epam.hotel.utility.PasswordHandler;
 import com.epam.hotel.utility.Validator;
 import org.apache.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -25,13 +20,11 @@ import java.util.Objects;
 /**
  * The class provides an implementation of the new user registration command.
  */
-public class UserRegistrationCommand extends CommonSiteActivityCommand implements Command {
+public class UserRegistrationCommand extends BaseCommand implements Command {
     private static final Logger logger = Logger.getLogger(UserRegistrationCommand.class);
     private static final String REGISTRATION_PAGE = "signup";
     private static final String LOGIN_PAGE = "login";
     private final PasswordHandler passwordHandler = new PasswordHandler();
-    private final CommonSiteActivityService commonSiteActivityService =
-            (CommonSiteActivityServiceImpl) ServiceFactory.getInstance().getService(ServiceType.COMMON_SITE_ACTIVITY_SERVICE);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException {
@@ -86,15 +79,6 @@ public class UserRegistrationCommand extends CommonSiteActivityCommand implement
         );
     }
 
-    private void doRedirect(HttpServletRequest request, HttpServletResponse response, String pageName) throws IOException {
-        try {
-            request.getSession().setAttribute("lastpage", pageName);
-            request.getRequestDispatcher(String.format("WEB-INF/jsp/%s.jsp", pageName)).forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
-    }
-
     private User buildUserFromPage(HttpServletRequest request) {
         return new User(
                 Math.abs(request.getParameter("email").hashCode()),
@@ -103,7 +87,7 @@ public class UserRegistrationCommand extends CommonSiteActivityCommand implement
                 UserType.valueOf(request.getParameter("userType")),
                 request.getParameter("email"),
                 passwordHandler
-                        .setEncryptionKey(Objects.hash(request.getParameter("firstName"), request.getParameter("lastName"), request.getParameter("email")))
+                        .setEncryptionKey(Objects.hash(request.getParameter("email")))
                         .encryptPassword(request.getParameter("password")));
     }
 }

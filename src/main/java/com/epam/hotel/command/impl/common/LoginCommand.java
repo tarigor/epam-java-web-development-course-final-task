@@ -1,45 +1,35 @@
 package com.epam.hotel.command.impl.common;
 
+import com.epam.hotel.command.BaseCommand;
 import com.epam.hotel.command.Command;
-import com.epam.hotel.command.CommonSiteActivityCommand;
 import com.epam.hotel.entity.User;
 import com.epam.hotel.entity.UserType;
-import com.epam.hotel.service.CommonSiteActivityService;
-import com.epam.hotel.service.factory.ServiceFactory;
-import com.epam.hotel.service.factory.ServiceType;
-import com.epam.hotel.service.impl.CommonSiteActivityServiceImpl;
-import com.epam.hotel.service.impl.PropertiesFileServiceImpl;
+import com.epam.hotel.menu.factory.MenuRole;
+import com.epam.hotel.menu.impl.SiteMenuServiceImpl;
 import com.epam.hotel.utility.InputRegex;
+import com.epam.hotel.utility.PasswordHandler;
 import com.epam.hotel.utility.Validator;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.rmi.ServerException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * The class provides an implementation of the Login command.
  */
-public class LoginCommand extends CommonSiteActivityCommand implements Command {
-    private static final String PASSWORD = "userPassword";
-    private static final String USER_FIRST_NAME = "userFirstName";
-    private static final String USER_FAMILY_NAME = "userFamilyName";
-    private static final String LOGIN_PAGE = "WEB-INF/jsp/login.jsp";
-    private static final String ADMIN_PAGE = "WEB-INF/jsp/admincabinet.jsp";
-    private static final String USER_PAGE = "WEB-INF/jsp/clientcabinet.jsp";
-    private final CommonSiteActivityService commonSiteActivityService =
-            (CommonSiteActivityServiceImpl) ServiceFactory.getInstance().getService(ServiceType.COMMON_SITE_ACTIVITY_SERVICE);
-    private final PropertiesFileServiceImpl propertiesFileService =
-            (PropertiesFileServiceImpl) ServiceFactory.getInstance().getService(ServiceType.PROPERTIES_FILE_SERVICE);
+public class LoginCommand extends BaseCommand implements Command {
+    private static final String LOGIN_PAGE = "login";
+    private static final String ADMIN_PAGE = "admincabinet";
+    private static final String USER_PAGE = "clientcabinet";
+    private final PasswordHandler passwordHandler = new PasswordHandler();
+    private SiteMenuServiceImpl siteMenuService = new SiteMenuServiceImpl();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException {
-        String userFirstName = request.getParameter(USER_FIRST_NAME);
-        String userFamilyName = request.getParameter(USER_FAMILY_NAME);
-        String password = request.getParameter(PASSWORD);
 
         Validator validator = new Validator();
         boolean validateResult = validator.validate(
@@ -54,14 +44,17 @@ public class LoginCommand extends CommonSiteActivityCommand implements Command {
                         InputRegex.PASSWORD}
         );
 
-        if (validateResult) {
-//            User user = commonSiteActivityService.checkUserForExistingAndRightPasswordInputted(userFirstName, userFamilyName, password);
-            User user = new User();
-            if (user != null) {
-                request.getSession().setAttribute("userID", user.hashCode());
-                if (user.getUserType().equals(UserType.ADMIN)) {
+//        if (validateResult) {
+        if (true) {
+            User userWhileLogin = buildUserLoginCredentials(request);
+            User loggedUser = commonSiteActivityService.checkUserForExistingAndRightPasswordInputted(userWhileLogin);
+            if (loggedUser != null) {
+                request.getSession().setAttribute("user", loggedUser);
+                if (loggedUser.getUserType().equals(UserType.ADMIN)) {
+                    request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.ADMIN_LOGGED, MenuRole.ANYONE_LOGGED));
                     doRedirect(request, response, ADMIN_PAGE);
                 } else {
+                    request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.USER_LOGGED, MenuRole.ANYONE_LOGGED));
                     doRedirect(request, response, USER_PAGE);
                 }
             } else {
@@ -79,11 +72,15 @@ public class LoginCommand extends CommonSiteActivityCommand implements Command {
         }
     }
 
-    private void doRedirect(HttpServletRequest request, HttpServletResponse response, String page) throws IOException {
-        try {
-            request.getRequestDispatcher(page).forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
+    private User buildUserLoginCredentials(HttpServletRequest request) {
+        return new User(
+                0,
+                "",
+                "",
+                UserType.valueOf("CLIENT"),
+                request.getParameter("email"),
+                passwordHandler
+                        .setEncryptionKey(Objects.hash(request.getParameter("email")))
+                        .encryptPassword(request.getParameter("password")));
     }
 }

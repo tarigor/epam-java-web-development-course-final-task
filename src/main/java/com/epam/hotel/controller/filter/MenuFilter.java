@@ -1,6 +1,6 @@
 package com.epam.hotel.controller.filter;
 
-import com.epam.hotel.command.CommonSiteActivityCommand;
+import com.epam.hotel.command.BaseCommand;
 import com.epam.hotel.menu.impl.SiteMenuServiceImpl;
 import org.apache.log4j.Logger;
 
@@ -14,7 +14,7 @@ import java.util.Map;
  * The class provides the methods of handling request filtering in depends on navigation command receiving
  * from the menu of the web page before servlet initialization and implements the {@link Filter} interface.
  */
-public class MenuFilter extends CommonSiteActivityCommand implements Filter {
+public class MenuFilter extends BaseCommand implements Filter {
     public static final String NAME = "name";
     public static final String DEFAULT_LANGUAGE = "en_US";
     private static Logger logger = Logger.getLogger(MenuFilter.class);
@@ -50,10 +50,11 @@ public class MenuFilter extends CommonSiteActivityCommand implements Filter {
         logger.info(String.format("Redirected to %s", pageName));
         request.getSession().setAttribute("lastpage", pageName);
         request.getRequestDispatcher(String.format("/WEB-INF/jsp/%s.jsp", pageName)).forward(request, response);
+        attributesMap.clear();
     }
 
     @Override
     public void destroy() {
-        attributesMap.clear();
+
     }
 }

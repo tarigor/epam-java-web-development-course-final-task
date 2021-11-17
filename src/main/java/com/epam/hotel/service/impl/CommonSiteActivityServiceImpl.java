@@ -20,7 +20,17 @@ public class CommonSiteActivityServiceImpl implements CommonSiteActivityService 
 
     @Override
     public User checkUserForExistingAndRightPasswordInputted(User user) {
-        return null;
+        System.out.println("userID trying to log -> " + user.hashCode());
+        User userFromDB = transaction.createConnection().performTransaction(() -> userDAO.get(user.hashCode()));
+        System.out.println("user get from DB -> " + user.toString());
+        if (user.getEmail().equals(userFromDB.getEmail()) &&
+                user.getPassword().equals(userFromDB.getPassword())) {
+            System.out.println("user are correct");
+            return userFromDB;
+        } else {
+            return null;
+        }
+
     }
 
     @Override
