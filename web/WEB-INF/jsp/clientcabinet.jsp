@@ -1,6 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<f:setLocale value="${sessionScope.language}" scope="session"/>
+<f:setBundle basename="local.menu" var="local"/>
+
 <html style="font-size: 16px;">
 <head>
 	<title>Client Cabinet</title>
@@ -10,53 +14,51 @@
 </head>
 <body class="u-body">
 <c:import url="common/menu.jsp"/>
-<section class="u-clearfix u-grey-10 u-section-1" id="sec-b41e">
+<section class="u-clearfix u-image u-section-1" id="sec-b41e" data-image-width="1280" data-image-height="839">
 	<div class="u-align-left u-clearfix u-sheet u-sheet-1">
-		<h3 class="u-align-center u-custom-font u-font-georgia u-text u-text-default u-text-1">Client Cabinet</h3>
-		<div class="u-clearfix u-custom-html u-expanded-width u-custom-html-1">
-			<div class="container">
-				<div class="row">
-					<div class="col-15">
-						<table class="table table-bordered">
-							<thead>
-							<tr class="table-secondary text-center">
-								<th scope="col"></th>
-								<th scope="col">Booking id</th>
-								<th scope="col">Client Name</th>
-								<th scope="col">Room Number</th>
-								<th scope="col">Room Type</th>
-								<th scope="col">Persons Amount</th>
-								<th scope="col">Start Date</th>
-								<th scope="col">End Date</th>
-								<th scope="col">Status Of Booking</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr class="table-light text-center">
-								<td>
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" class="custom-control-input" id="customCheck1"
-										       checked="">
-										<label class="custom-control-label" for="customCheck1"></label>
-									</div>
-								</td>
-								<th scope="col">1</th>
-								<th scope="col">Igor Taren</th>
-								<th scope="col">1</th>
-								<th scope="col">Single</th>
-								<th scope="col">1</th>
-								<th scope="col">2021-10-01</th>
-								<th scope="col">2021-10-10</th>
-								<th scope="col">requested</th>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
+		<br>
+		<h3 class="u-align-center u-custom-font u-font-georgia u-text u-text-default u-text-1" style="color: white">
+			<f:message
+					key="client.cabinet.page.name" bundle="${local}"/></h3>
+		<br>
+		<table class="u-align-center  table table-bordered"
+		       style="margin-left: auto;margin-right: auto;text-align: center">
+			<thead>
+			<tr class="table-secondary text-center">
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col1" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col2" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col3" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col4" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col5" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col6" bundle="${local}"/></th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<c:forEach items="${clientOrders}" var="clientOrder">
+				<tr class="table-light text-center ">
+					<th scope="col" style="text-align: center">${clientOrder.getRoomID()}</th>
+					<th scope="col" style="text-align: center">${clientOrder.getRoomClass()}</th>
+					<th scope="col" style="text-align: center">${clientOrder.getPersonsAmount()}</th>
+					<th scope="col" style="text-align: center">${clientOrder.getCheckInDate()}</th>
+					<th scope="col" style="text-align: center">${clientOrder.getCheckOutDate()}</th>
+					<th scope="col" style="text-align: center">${clientOrder.getOrderStatus()}</th>
+					<th style="text-align: center">
+						<a>
+							<c:if test="${clientOrder.isCanBeCanceled()}">
+								<a href="<c:url value="command?name=remove_room_from_booking&orderID=${clientOrder.getOrderID()}&roomID=${clientOrder.getRoomID()}"/>">
+									<f:message key="client.cabinet.cancel" bundle="${local}"/>
+								</a>
+							</c:if>
+						</a>
+					</th>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </section>
+
 <c:import url="common/footer.jsp"/>
 <c:import url="common/cookies.jsp"/>
 </body>

@@ -4,5 +4,8 @@ public enum CommandType {
     LOGIN,
     LOGOUT,
     USER_REGISTRATION,
-    LOGOFF;
+    LOGOFF,
+    REMOVE_ROOM_FROM_BOOKING,
+    BOOKING,
+    BOOK;
 }

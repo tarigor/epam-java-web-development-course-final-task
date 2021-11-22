@@ -49,6 +49,11 @@ public class UserDAOImpl extends BaseDao implements UserDAO {
         return null;
     }
 
+    @Override
+    public List get(User user) {
+        return null;
+    }
+
 
     @Override
     public int insert(User user) throws DaoException {

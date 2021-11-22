@@ -1,3 +1,5 @@
 {
-  "USER_DAO": "com.epam.hotel.dao.impl.UserDAOImpl"
+  "USER_DAO": "com.epam.hotel.dao.impl.UserDAOImpl",
+  "CLIENT_ORDER_DAO": "com.epam.hotel.dao.impl.ClientOrderDAOImpl",
+  "ROOM_DAO": "com.epam.hotel.dao.impl.RoomDAOImpl"
 }

@@ -1,43 +1,43 @@
 {
   "MAIN": {
     "id": "1",
-    "pageCommandName": "index",
+    "command": "/page?name=index",
     "menuItemDescription": "MAIN",
     "menuRole": "COMMON"
   },
   "ROOMS_LIST": {
     "id": "2",
-    "pageCommandName": "roomslist",
+    "command": "/page?name=roomslist",
     "menuItemDescription": "ROOMS_LIST",
     "menuRole": "COMMON"
   },
   "LOG_IN": {
     "id": "3",
-    "pageCommandName": "login",
+    "command": "/page?name=login",
     "menuItemDescription": "LOG_IN",
     "menuRole": "ANYONE_NOT_LOGGED"
   },
   "SIGN_UP": {
     "id": "4",
-    "pageCommandName": "signup",
+    "command": "/page?name=signup",
     "menuItemDescription": "SIGN_UP",
     "menuRole": "ANYONE_NOT_LOGGED"
   },
   "CLIENT_CABINET": {
     "id": "3",
-    "pageCommandName": "clientcabinet",
+    "command": "/page?name=clientcabinet",
     "menuItemDescription": "CLIENT_CABINET",
     "menuRole": "USER_LOGGED"
   },
   "ADMIN_CABINET": {
     "id": "3",
-    "pageCommandName": "admincabinet",
+    "command": "/command?name=admincabinet",
     "menuItemDescription": "ADMIN_CABINET",
     "menuRole": "ADMIN_LOGGED"
   },
   "LOGOUT": {
     "id": "9",
-    "pageCommandName": "logout",
+    "command": "/command?name=logout",
     "menuItemDescription": "LOGOUT",
     "menuRole": "ANYONE_LOGGED"
   }

@@ -2,6 +2,8 @@ package com.epam.hotel.dao;
 
 import com.epam.hotel.dao.exception.DaoException;
 
+import java.util.List;
+
 /**
  * The class provides the set of the methods which are common for the all DAO classes.
  *
@@ -17,4 +19,6 @@ public interface CommonDAO<T> {
     T get(int id);
 
     T get(String string);
+
+    List get(T t) throws DaoException;
 }

@@ -31,24 +31,12 @@
 				<ul class="u-nav u-spacing-20 u-unstyled u-nav-1">
 					<c:forEach items="${menuList}" var="item">
 						<li class="u-nav-item">
-							<c:choose>
-								<c:when test="${item.getPageCommandName().equals('logout')}">
-									<a class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-									   href="/command?name=LOGOUT&lang=${sessionScope.language}"
-									   style="padding: 10px;">
-										<f:message key="${item.getMenuItemDescription().getBundle()}"
-										           bundle="${local}"/>
-									</a>
-								</c:when>
-								<c:otherwise>
-									<a class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-									   href="/page?name=${item.getPageCommandName()}&lang=${sessionScope.language}"
-									   style="padding: 10px;">
-										<f:message key="${item.getMenuItemDescription().getBundle()}"
-										           bundle="${local}"/>
-									</a>
-								</c:otherwise>
-							</c:choose>
+							<a class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
+							   href="${item.getCommand()}&lang=${sessionScope.language}"
+							   style="padding: 10px;">
+								<f:message key="${item.getMenuItemDescription().getBundle()}"
+								           bundle="${local}"/>
+							</a>
 						</li>
 					</c:forEach>
 				</ul>
@@ -61,24 +49,12 @@
 						<ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
 							<c:forEach items="${menuList}" var="item">
 								<li class="u-nav-item">
-									<c:choose>
-										<c:when test="${item.getPageCommandName().equals('logout')}">
-											<a class="u-button-style u-nav-link"
-											   href="/command?name=LOGOUT&lang=${sessionScope.language}"
-											   style="padding: 10px;">
-												<f:message key="${item.getMenuItemDescription().getBundle()}"
-												           bundle="${local}"/>
-											</a>
-										</c:when>
-										<c:otherwise>
-											<a class="u-button-style u-nav-link"
-											   href="/page?name=${item.getPageCommandName()}&lang=${sessionScope.language}"
-											   style="padding: 10px;">
-												<f:message key="${item.getMenuItemDescription().getBundle()}"
-												           bundle="${local}"/>
-											</a>
-										</c:otherwise>
-									</c:choose>
+									<a class="u-button-style u-nav-link"
+									   href="${item.getCommand()}&lang=${sessionScope.language}"
+									   style="padding: 10px;">
+										<f:message key="${item.getMenuItemDescription().getBundle()}"
+										           bundle="${local}"/>
+									</a>
 								</li>
 							</c:forEach>
 						</ul>

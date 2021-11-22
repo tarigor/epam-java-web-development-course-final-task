@@ -18,6 +18,8 @@
 			<div class="container">
 				<div class="row text-center">
 					<div class="col-12">
+						<h6>Available rooms for date from ${dateFrom} to ${dateTo}</h6>
+						<form method="post" action="command?name=book">
 						<table class="table table-image" align="center">
 							<thead>
 							<tr style="text-align:center">
@@ -34,12 +36,11 @@
 									<div class="d-flex justify-content-center mt-100 row">
 										<div class="col-md-10">
 											<select id="choices-multiple-remove-button"
-											        placeholder="select a room number" multiple="">
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
+											        placeholder="select a room number" multiple="" name="singleRoomsSelected">
+												<c:forEach items="${singleRooms}"
+												           var="roomID">
+													<option value=${roomID}>${roomID}</option>
+												</c:forEach>
 											</select>
 										</div>
 									</div>
@@ -51,7 +52,7 @@
 								<td>Single Room</td>
 								<td>42.2</td>
 								<td>
-									<button type="button" class="btn btn-dark">Book</button>
+									<button type="submit" class="btn btn-dark">Book</button>
 								</td>
 							</tr>
 							<tr>
@@ -59,12 +60,11 @@
 									<div class="d-flex justify-content-center mt-100 row">
 										<div class="col-md-10">
 											<select id="choices-multiple-remove-button"
-											        placeholder="select a room number" multiple="">
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
+											        placeholder="select a room number" multiple="" name="doubleRoomsSelected">
+												<c:forEach items="${doubleRooms}"
+												           var="roomID">
+													<option value="${roomID}">${roomID}</option>
+												</c:forEach>
 											</select>
 										</div>
 									</div>
@@ -84,12 +84,11 @@
 									<div class="d-flex justify-content-center mt-100 row">
 										<div class="col-md-10">
 											<select id="choices-multiple-remove-button"
-											        placeholder="select a room number" multiple="">
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
+											        placeholder="select a room number" multiple="" name="suiteRoomsSelected">
+												<c:forEach items="${suiteRooms}"
+												           var="roomID">
+													<option value="${roomID}">${roomID}</option>
+												</c:forEach>
 											</select>
 										</div>
 									</div>
@@ -109,12 +108,11 @@
 									<div class="d-flex justify-content-center mt-100 row">
 										<div class="col-md-10">
 											<select id="choices-multiple-remove-button"
-											        placeholder="select a room number" multiple="">
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
+											        placeholder="select a room number" multiple="" name="deluxeRoomsSelected">
+												<c:forEach items="${deluxeRooms}"
+												           var="roomID">
+													<option value="${roomID}">${roomID}</option>
+												</c:forEach>
 											</select>
 										</div>
 									</div>
@@ -131,6 +129,7 @@
 							</tr>
 							</tbody>
 						</table>
+						</form>
 					</div>
 				</div>
 			</div>

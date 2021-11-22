@@ -10,5 +10,17 @@
   "USER_REGISTRATION": {
     "clazz": "com.epam.hotel.command.impl.common.UserRegistrationCommand",
     "method": "POST"
+  },
+  "REMOVE_ROOM_FROM_BOOKING": {
+    "clazz": "com.epam.hotel.command.impl.common.RemoveRoomFromBooking",
+    "method": "POST"
+  },
+  "BOOKING": {
+    "clazz": "com.epam.hotel.command.impl.common.BookingCommand",
+    "method": "POST"
+  },
+  "BOOK": {
+    "clazz": "com.epam.hotel.command.impl.common.BookCommand",
+    "method": "POST"
   }
 }

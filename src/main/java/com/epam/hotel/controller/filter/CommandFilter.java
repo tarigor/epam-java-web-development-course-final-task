@@ -32,6 +32,7 @@ public class CommandFilter implements Filter {
         String command = request.getParameter(COMMAND_NAME).toUpperCase();
         request.setAttribute(COMMAND_NAME, command);
         logger.info(String.format("The following command has been detected - /%s", command));
+
         filterChain.doFilter(request, response);
     }
 

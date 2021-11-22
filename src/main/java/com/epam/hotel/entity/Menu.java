@@ -5,13 +5,13 @@ import com.epam.hotel.menu.factory.MenuRole;
 
 public class Menu {
     private int id;
-    private String pageCommandName;
+    private String command;
     private MenuItemDescription menuItemDescription;
     private MenuRole menuRole;
 
-    public Menu(int id, String pageCommandName, MenuItemDescription menuItemDescription, MenuRole menuRole) {
+    public Menu(int id, String command, MenuItemDescription menuItemDescription, MenuRole menuRole) {
         this.id = id;
-        this.pageCommandName = pageCommandName;
+        this.command = command;
         this.menuItemDescription = menuItemDescription;
         this.menuRole = menuRole;
     }
@@ -24,12 +24,12 @@ public class Menu {
         this.id = id;
     }
 
-    public String getPageCommandName() {
-        return pageCommandName;
+    public String getCommand() {
+        return command;
     }
 
-    public void setPageCommandName(String pageCommandName) {
-        this.pageCommandName = pageCommandName;
+    public void setCommand(String command) {
+        this.command = command;
     }
 
     public MenuItemDescription getMenuItemDescription() {
@@ -52,7 +52,7 @@ public class Menu {
     public String toString() {
         return "Menu{" +
                 "id=" + id +
-                ", pageCommandName='" + pageCommandName + '\'' +
+                ", pageCommandName='" + command + '\'' +
                 ", menuItemDescription=" + menuItemDescription +
                 ", menuRole=" + menuRole +
                 '}';

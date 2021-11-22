@@ -53,4 +53,29 @@ public class TransactionImpl extends BaseDao implements Transaction {
         }
         return resultType;
     }
+
+    public void performTransaction(Runnable callableDatabaseActionTask) {
+        try {
+            localConnectionThread.set(connection);
+            callableDatabaseActionTask.run();
+            connection.commit();
+        } catch (Exception e) {
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        } finally {
+            if (connection != null) {
+                try {
+                    connectionPool.releaseConnection(connection);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                localConnectionThread.remove();
+            }
+        }
+    }
 }

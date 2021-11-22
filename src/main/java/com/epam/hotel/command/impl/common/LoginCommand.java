@@ -28,6 +28,12 @@ public class LoginCommand extends BaseCommand implements Command {
     private final PasswordHandler passwordHandler = new PasswordHandler();
     private SiteMenuServiceImpl siteMenuService = new SiteMenuServiceImpl();
 
+    /**
+     * @param request
+     * @param response
+     * @throws ServerException
+     * @throws IOException
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException {
 
@@ -49,11 +55,12 @@ public class LoginCommand extends BaseCommand implements Command {
             User userWhileLogin = buildUserLoginCredentials(request);
             User loggedUser = commonSiteActivityService.checkUserForExistingAndRightPasswordInputted(userWhileLogin);
             if (loggedUser != null) {
-                request.getSession().setAttribute("user", loggedUser);
                 if (loggedUser.getUserType().equals(UserType.ADMIN)) {
                     request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.ADMIN_LOGGED, MenuRole.ANYONE_LOGGED));
                     doRedirect(request, response, ADMIN_PAGE);
                 } else {
+                    request.getSession().setAttribute("user", loggedUser);
+                    request.getSession().setAttribute("clientOrders", clientService.getClientOrders(loggedUser));
                     request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.USER_LOGGED, MenuRole.ANYONE_LOGGED));
                     doRedirect(request, response, USER_PAGE);
                 }
