@@ -28,6 +28,12 @@
 			<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
 				<div class="inner">
 					<form action="${pageContext.request.contextPath}/command?name=login" method="post">
+						<input type="hidden" name="singleRoomsSelected" value="${singleRoomsSelected}">
+						<input type="hidden" name="diybleRoomsSelected" value="${doubleRoomsSelected}">
+						<input type="hidden" name="suiteRoomsSelected" value="${suiteRoomsSelected}">
+						<input type="hidden" name="deluxeRoomsSelected" value="${deluxeRoomsSelected}">
+						<input type="hidden" name="dateFrom" value="${dateFrom}">
+						<input type="hidden" name="dateTo" value="${dateTo}">
 						<h3 class="text-center">Log-in</h3>
 						<c:if test="${registrationCompleted}">
 							<label style="text-align: center;font-size: medium;color: #62C584"><f:message
