@@ -1,6 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<f:setLocale value="${sessionScope.language}" scope="session"/>
+<f:setBundle basename="local.menu" var="local"/>
+
 <html style="font-size: 16px;">
 <head>
 	<title>Rooms List</title>
@@ -10,7 +14,7 @@
 </head>
 <body class="u-body">
 <c:import url="common/menu.jsp"/>
-<section class="skrollable u-clearfix u-section-1" id="sec-5a0b">
+<section class="u-clearfix u-image u-section-1" id="sec-3a70" data-image-width="1280" data-image-height="700">
 	<div class="u-clearfix u-sheet u-sheet-1">
 		<div class="u-clearfix u-custom-html u-expanded-width u-preserve-proportions u-custom-html-1">
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
@@ -18,7 +22,21 @@
 			<div class="container">
 				<div class="row text-center">
 					<div class="col-12">
-						<h6>Available rooms for date from ${dateFrom} to ${dateTo}</h6>
+						<a>
+							<f:message key="roomslist.header.message.part1" bundle="${local}"/>
+							<c:choose>
+								<c:when test="${user==null}">
+									<f:message key="roomslist.header.message.guest" bundle="${local}"/>,
+								</c:when>
+								<c:otherwise>
+									${user.getFirstName()},
+								</c:otherwise>
+							</c:choose>
+							<f:message key="roomslist.header.message.part2" bundle="${local}"/>
+							${dateFrom}
+							<f:message key="roomslist.header.message.part3" bundle="${local}"/>
+							${dateTo}
+						</a>
 						<form method="post" action="command?name=book">
 							<input type="hidden" name="dateFrom" value="${dateFrom}">
 							<input type="hidden" name="dateTo" value="${dateTo}">
@@ -49,9 +67,10 @@
 											</div>
 										</div>
 									</th>
-									<td class="w-25">
+									<%--									<td class="w-25">--%>
+									<td>
 										<img src="https://www.travelline.ru/resource/images/rt/3652/637321324083617504-c802f669-089d-466d-a31c-d7cd2ba5afe8"
-										     class="img-fluid img-thumbnail" alt="image">
+										     class="img-fluid img-thumbnail" alt="image" style="height:100px;">
 									</td>
 									<td>Single Room</td>
 									<td>42.2</td>
@@ -79,9 +98,10 @@
 											</div>
 										</div>
 									</th>
-									<td class="w-25">
+									<%--									<td class="w-25">--%>
+									<td>
 										<img src="https://www.travelline.ru/resource/images/rt/19641/637321325354036836-a772be13-ef6f-474d-be09-5fd8af3b7b30"
-										     class="img-fluid img-thumbnail" alt="image">
+										     class="img-fluid img-thumbnail" alt="image" style="height:100px;">
 									</td>
 									<td>Double Room</td>
 									<td>72.3</td>
@@ -109,9 +129,10 @@
 											</div>
 										</div>
 									</th>
-									<td class="w-25">
+									<%--									<td class="w-25">--%>
+									<td>
 										<img src="https://www.travelline.ru/resource/images/rt/3650/637321325650296040-d8c427ef-b9ba-4699-a059-8e2fdbff6c44"
-										     class="img-fluid img-thumbnail" alt="image">
+										     class="img-fluid img-thumbnail" alt="image" style="height:100px;">
 									</td>
 									<td>Studio</td>
 									<td>92.5</td>
@@ -139,9 +160,10 @@
 											</div>
 										</div>
 									</th>
-									<td class="w-25">
+									<%--									<td class="w-25">--%>
+									<td>
 										<img src="https://www.travelline.ru/resource/images/rt/3649/637321325955926799-0183cc73-13c0-4933-9df3-7a910272a833"
-										     class="img-fluid img-thumbnail" alt="image">
+										     class="img-fluid img-thumbnail" alt="image" style="height:100px;">
 									</td>
 									<td>Deluxe</td>
 									<td>121.1</td>
@@ -156,11 +178,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="u-clearfix u-custom-html u-custom-html-2"></div>
-		<div class="u-clearfix u-custom-html u-custom-html-3"></div>
+<%--		<div class="u-clearfix u-custom-html u-custom-html-2"></div>--%>
+<%--		<div class="u-clearfix u-custom-html u-custom-html-3"></div>--%>
 	</div>
 </section>
 <c:import url="common/footer.jsp"/>
-<c:import url="common/cookies.jsp"/>
+<%--<c:import url="common/cookies.jsp"/>--%>
 </body>
 </html>

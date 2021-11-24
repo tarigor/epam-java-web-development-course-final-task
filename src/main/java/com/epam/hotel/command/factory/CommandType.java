@@ -6,6 +6,6 @@ public enum CommandType {
     USER_REGISTRATION,
     LOGOFF,
     REMOVE_ROOM_FROM_BOOKING,
-    BOOKING,
+    CHECK_FREE_ROOM,
     BOOK;
 }

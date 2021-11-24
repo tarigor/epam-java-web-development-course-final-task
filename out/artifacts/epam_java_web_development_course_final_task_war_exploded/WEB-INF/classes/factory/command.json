@@ -15,8 +15,8 @@
     "clazz": "com.epam.hotel.command.impl.common.RemoveRoomFromBooking",
     "method": "POST"
   },
-  "BOOKING": {
-    "clazz": "com.epam.hotel.command.impl.common.BookingCommand",
+  "CHECK_FREE_ROOM": {
+    "clazz": "com.epam.hotel.command.impl.common.CheckFreeRoomCommand",
     "method": "POST"
   },
   "BOOK": {

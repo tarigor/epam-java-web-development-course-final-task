@@ -29,8 +29,9 @@ public class MenuFilter extends BaseCommand implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
+        //for keeping content while language change and page reload
         if (attributesMap.size() != 0) {
-            for (Map.Entry<String, Boolean> entry : attributesMap.entrySet()) {
+            for (Map.Entry<String, Object> entry : attributesMap.entrySet()) {
                 request.setAttribute(entry.getKey(), entry.getValue());
             }
         }
@@ -43,14 +44,13 @@ public class MenuFilter extends BaseCommand implements Filter {
         }
 
         String pageName = request.getParameter(NAME);
-        if (pageName == null) {
+        if (pageName.equals("")) {
             pageName = "index";
         }
 
         logger.info(String.format("Redirected to %s", pageName));
         request.getSession().setAttribute("lastpage", pageName);
         request.getRequestDispatcher(String.format("/WEB-INF/jsp/%s.jsp", pageName)).forward(request, response);
-        attributesMap.clear();
     }
 
     @Override

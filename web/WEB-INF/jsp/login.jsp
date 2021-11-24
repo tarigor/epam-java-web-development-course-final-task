@@ -28,12 +28,15 @@
 			<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
 				<div class="inner">
 					<form action="${pageContext.request.contextPath}/command?name=login" method="post">
-						<input type="hidden" name="singleRoomsSelected" value="${singleRoomsSelected}">
-						<input type="hidden" name="diybleRoomsSelected" value="${doubleRoomsSelected}">
-						<input type="hidden" name="suiteRoomsSelected" value="${suiteRoomsSelected}">
-						<input type="hidden" name="deluxeRoomsSelected" value="${deluxeRoomsSelected}">
-						<input type="hidden" name="dateFrom" value="${dateFrom}">
-						<input type="hidden" name="dateTo" value="${dateTo}">
+						<c:if test="${loginAndCompleteBooking}">
+							<input type="hidden" name="loginAndCompleteBooking" value="${loginAndCompleteBooking}">
+							<input type="hidden" name="singleRoomsSelected" value="${singleRoomsSelected}">
+							<input type="hidden" name="doubleRoomsSelected" value="${doubleRoomsSelected}">
+							<input type="hidden" name="suiteRoomsSelected" value="${suiteRoomsSelected}">
+							<input type="hidden" name="deluxeRoomsSelected" value="${deluxeRoomsSelected}">
+							<input type="hidden" name="dateFrom" value="${dateFrom}">
+							<input type="hidden" name="dateTo" value="${dateTo}">
+						</c:if>
 						<h3 class="text-center">Log-in</h3>
 						<c:if test="${registrationCompleted}">
 							<label style="text-align: center;font-size: medium;color: #62C584"><f:message
@@ -57,11 +60,21 @@
 							</c:if>
 						</div>
 						<br>
-						<button type="submit">Log-in</button>
+						<button type="submit">
+							<c:choose>
+								<c:when test="${loginAndCompleteBooking}">
+									<f:message key="login.login.and.booking" bundle="${local}"/>
+								</c:when>
+								<c:otherwise>
+									<f:message key="login.login" bundle="${local}"/>
+								</c:otherwise>
+							</c:choose>
+						</button>
+						
 						<c:if test="${userIsMissing}">
 							<br>
 							<label class="text-warning"
-							       style="font-size: medium">${userMissingMessage}</label>
+							       style="font-size: medium"><f:message key="${errorType}" bundle="${local}"/></label>
 						</c:if>
 					</form>
 				</div>
@@ -70,6 +83,6 @@
 	</div>
 </section>
 <c:import url="common/footer.jsp"/>
-<c:import url="common/cookies.jsp"/>
+<%--<c:import url="common/cookies.jsp"/>--%>
 </body>
 </html>

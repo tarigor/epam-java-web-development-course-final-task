@@ -3,6 +3,7 @@ package com.epam.hotel.command.impl.common;
 import com.epam.hotel.command.BaseCommand;
 import com.epam.hotel.command.Command;
 import com.epam.hotel.entity.User;
+import com.epam.hotel.entity.UserLoginError;
 import com.epam.hotel.entity.UserType;
 import com.epam.hotel.menu.factory.MenuRole;
 import com.epam.hotel.menu.impl.SiteMenuServiceImpl;
@@ -25,6 +26,7 @@ public class LoginCommand extends BaseCommand implements Command {
     private static final String LOGIN_PAGE = "login";
     private static final String ADMIN_PAGE = "admincabinet";
     private static final String USER_PAGE = "clientcabinet";
+    private static final String ROOMS_LIST_PAGE = "roomslist";
     private final PasswordHandler passwordHandler = new PasswordHandler();
     private SiteMenuServiceImpl siteMenuService = new SiteMenuServiceImpl();
 
@@ -62,11 +64,20 @@ public class LoginCommand extends BaseCommand implements Command {
                     request.getSession().setAttribute("user", loggedUser);
                     request.getSession().setAttribute("clientOrders", clientService.getClientOrders(loggedUser));
                     request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.USER_LOGGED, MenuRole.ANYONE_LOGGED));
-                    doRedirect(request, response, USER_PAGE);
+
+                    //handling a case when booking action happened without user logged
+                    boolean loginAndCompleteBooking = Boolean.parseBoolean(request.getParameter("loginAndCompleteBooking"));
+                    if (loginAndCompleteBooking) {
+                        String dateFrom = request.getParameter("dateFrom");
+                        String dateTo = request.getParameter("dateTo");
+                        response.sendRedirect(String.format("command?name=check_free_room&dateFrom=%s&dateTo=%s", dateFrom, dateTo));
+                    } else {
+                        doRedirect(request, response, USER_PAGE);
+                    }
                 }
             } else {
                 request.setAttribute("userIsMissing", true);
-                request.setAttribute("userMissingMessage", propertiesFileService.getProperties("local/menu.properties").getProperty("user.missing"));
+                request.setAttribute("errorType", UserLoginError.getType());
                 doRedirect(request, response, LOGIN_PAGE);
             }
         } else {

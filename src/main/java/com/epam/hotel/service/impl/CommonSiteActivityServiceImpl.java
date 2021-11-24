@@ -4,6 +4,7 @@ import com.epam.hotel.dao.factory.DAOServiceFactory;
 import com.epam.hotel.dao.factory.DAOType;
 import com.epam.hotel.dao.impl.UserDAOImpl;
 import com.epam.hotel.entity.User;
+import com.epam.hotel.entity.UserLoginError;
 import com.epam.hotel.service.BaseService;
 import com.epam.hotel.service.CommonSiteActivityService;
 
@@ -21,15 +22,22 @@ public class CommonSiteActivityServiceImpl extends BaseService implements Common
     public User checkUserForExistingAndRightPasswordInputted(User user) {
         System.out.println("userID trying to log -> " + user.hashCode());
         User userFromDB = transaction.createConnection().performTransaction(() -> userDAO.get(user.hashCode()));
-        System.out.println("user get from DB -> " + user.toString());
-        if (user.getEmail().equals(userFromDB.getEmail()) &&
-                user.getPassword().equals(userFromDB.getPassword())) {
-            System.out.println("user are correct");
-            return userFromDB;
+
+        if (userFromDB != null) {
+            if (user.getEmail().equals(userFromDB.getEmail()) &&
+                    user.getPassword().equals(userFromDB.getPassword())) {
+                System.out.println("user are correct");
+                return userFromDB;
+            } else {
+                System.out.println("the password is not correct");
+                UserLoginError.setType("login.wrong.password");
+                return null;
+            }
         } else {
+            System.out.println("there is no such a user");
+            UserLoginError.setType("login.no.such.user");
             return null;
         }
-
     }
 
     @Override

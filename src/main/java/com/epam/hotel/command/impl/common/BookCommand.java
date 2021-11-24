@@ -21,25 +21,15 @@ public class BookCommand extends BaseCommand implements Command {
         String dateFrom = request.getParameter("dateFrom");
         String dateTo = request.getParameter("dateTo");
 
-        System.out.println("dateFrom->" + dateFrom + " " + "dateTo->" + dateTo);
-
         User user = (User) request.getSession().getAttribute("user");
-
+        //processing when no one user is logged
         if (user == null) {
-            request.setAttribute("singleRoomsSelected", singleRoomsSelected);
-            request.setAttribute("doubleRoomsSelected", doubleRoomsSelected);
-            request.setAttribute("suiteRoomsSelected", suiteRoomsSelected);
-            request.setAttribute("deluxeRoomsSelected", deluxeRoomsSelected);
             request.setAttribute("dateFrom", dateFrom);
             request.setAttribute("dateTo", dateTo);
             request.setAttribute("loginAndCompleteBooking", true);
             doRedirect(request, response, LOGIN_PAGE);
         } else {
             System.out.println("user->" + user.toString());
-        }
-
-        for (String s : singleRoomsSelected) {
-            System.out.println("->" + s);
         }
     }
 }

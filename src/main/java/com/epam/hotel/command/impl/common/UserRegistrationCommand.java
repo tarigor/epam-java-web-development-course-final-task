@@ -38,12 +38,10 @@ public class UserRegistrationCommand extends BaseCommand implements Command {
             User user = buildUserFromPage(request);
             if (commonSiteActivityService.doNewUserRegistration(user)) {
                 logger.info("A new user has been added");
-                attributesMap.put("registrationCompleted", true);
                 request.setAttribute("registrationCompleted", true);
                 doRedirect(request, response, LOGIN_PAGE);
             } else {
                 logger.info("There is a such user with such an email");
-                attributesMap.put("newUserFault", true);
                 request.setAttribute("newUserFault", true);
                 doRedirect(request, response, REGISTRATION_PAGE);
             }

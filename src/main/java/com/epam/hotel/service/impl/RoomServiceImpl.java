@@ -4,7 +4,6 @@ import com.epam.hotel.dao.factory.DAOServiceFactory;
 import com.epam.hotel.dao.factory.DAOType;
 import com.epam.hotel.dao.impl.RoomDAOImpl;
 import com.epam.hotel.entity.Room;
-import com.epam.hotel.entity.RoomType;
 import com.epam.hotel.service.BaseService;
 import com.epam.hotel.service.RoomService;
 
@@ -12,7 +11,6 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class RoomServiceImpl extends BaseService implements RoomService {
 
@@ -37,7 +35,7 @@ public class RoomServiceImpl extends BaseService implements RoomService {
 //    }
 
     @Override
-    public ArrayList<Room> getFreeRooms(String dateFrom, String dateTo){
+    public ArrayList<Room> getFreeRooms(String dateFrom, String dateTo) {
         Date dateFromSQL = convertStringSqlDate(dateFrom);
         Date dateToSQL = convertStringSqlDate(dateTo);
         ArrayList<Room> roomsList =

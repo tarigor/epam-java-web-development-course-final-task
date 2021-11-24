@@ -99,6 +99,6 @@
 </script>
 
 <c:import url="common/footer.jsp"/>
-<c:import url="common/cookies.jsp"/>
+<%--<c:import url="common/cookies.jsp"/>--%>
 </body>
 </html>

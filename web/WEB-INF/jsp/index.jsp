@@ -27,18 +27,18 @@
 			</c:if>
 			<f:message key="index.hello.guest.part2" bundle="${local}"/>
 		</h4>
-		<form action="command?name=booking" method="post">
-		<div class="u-align-center u-clearfix u-custom-html u-expanded-width u-custom-html-1">
-			<input type="text" name="datefilter" value="">
-		</div>
-		<button type="submit"
-		   class="u-border-2 u-border-white u-btn u-button-style u-hover-grey-50 u-none u-text-body-alt-color u-text-hover-white u-btn-1">
-			<f:message key="index.check.availability" bundle="${local}"/>
-		</button>
+		<form action="command?name=check_free_room" method="post">
+			<div class="u-align-center u-clearfix u-custom-html u-expanded-width u-custom-html-1">
+				<input type="text" name="datefilter" value="">
+			</div>
+			<button type="submit"
+			        class="u-border-2 u-border-white u-btn u-button-style u-hover-grey-50 u-none u-text-body-alt-color u-text-hover-white u-btn-1">
+				<f:message key="index.check.availability" bundle="${local}"/>
+			</button>
 		</form>
 	</div>
 </section>
 <c:import url="common/footer.jsp"/>
-<c:import url="common/cookies.jsp"/>
+<%--<c:import url="common/cookies.jsp"/>--%>
 </body>
 </html>

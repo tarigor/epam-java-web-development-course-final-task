@@ -1,5 +1,6 @@
 package com.epam.hotel.controller.filter;
 
+import com.epam.hotel.command.BaseCommand;
 import com.epam.hotel.command.factory.CommandFactory;
 import org.apache.log4j.Logger;
 
@@ -12,7 +13,7 @@ import java.io.IOException;
  * The class provides the methods of handling request filtering in depends on the receiving command
  * from the web page before servlet initialization and implements the {@link Filter} interface.
  */
-public class CommandFilter implements Filter {
+public class CommandFilter extends BaseCommand implements Filter {
     public static final String COMMAND_NAME = "name";
     public static final String CLASS_NAME = "className";
     private static final Logger logger = Logger.getLogger(CommandFilter.class);
@@ -21,13 +22,14 @@ public class CommandFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         commandFactory = CommandFactory.getInstance();
-        System.out.println("i'm in init method of command filter");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+
+        attributesMap.clear();
 
         String command = request.getParameter(COMMAND_NAME).toUpperCase();
         request.setAttribute(COMMAND_NAME, command);

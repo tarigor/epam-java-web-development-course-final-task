@@ -1,4 +1,4 @@
-CREATE PROCEDURE `get_free_rooms` (IN dateFrom date, IN dateTo date)
+CREATE PROCEDURE `get_free_rooms`(IN dateFrom date, IN dateTo date)
 BEGIN
     drop temporary table if exists temp1;
     create temporary table if not exists temp1
