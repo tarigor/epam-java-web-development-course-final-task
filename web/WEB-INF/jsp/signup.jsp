@@ -57,9 +57,9 @@
 							<label for="">User Type</label>
 							<select id="userRole" name="userType" class="custom-select"
 							        aria-label="Default select example">
-								<option selected value="CLIENT">CLIENT</option>
-								<option value="ADMIN">Administrator</option>
-								<option value="CLIENT">Client</option>
+								<option selected value="CLIENT"></option>
+								<option value="ADMIN">ADMINISTRATOR</option>
+								<option value="CLIENT">CLIENT</option>
 							</select>
 						</div>
 						<div class="form-wrapper">

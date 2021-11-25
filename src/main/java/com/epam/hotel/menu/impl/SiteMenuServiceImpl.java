@@ -37,7 +37,7 @@ public class SiteMenuServiceImpl implements SiteMenuService {
         ArrayList<Menu> sortedMenuListByRole = new ArrayList<>();
         for (MenuRole singleMenuRole : menuRole) {
             for (Map.Entry<String, Menu> entry : this.menuList.entrySet()) {
-                if (entry.getValue().getMenuRole().equals(singleMenuRole)) {
+                if (entry.getValue().getRole().equals(singleMenuRole)) {
                     sortedMenuListByRole.add(entry.getValue());
                 }
             }

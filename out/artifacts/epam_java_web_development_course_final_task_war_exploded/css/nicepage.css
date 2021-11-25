@@ -20624,7 +20624,7 @@ p {
     }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 775px) {
     .u-align-left-xs {
         text-align: left;
     }

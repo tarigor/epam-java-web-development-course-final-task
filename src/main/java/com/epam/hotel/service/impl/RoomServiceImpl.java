@@ -8,8 +8,6 @@ import com.epam.hotel.service.BaseService;
 import com.epam.hotel.service.RoomService;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class RoomServiceImpl extends BaseService implements RoomService {
@@ -86,15 +84,15 @@ public class RoomServiceImpl extends BaseService implements RoomService {
 //        return listOfAvailableRooms;
 //    }
 
-    private Date convertStringSqlDate(String date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date dateSQL = null;
-        try {
-            java.util.Date dateUtil = formatter.parse(date);
-            dateSQL = new Date(dateUtil.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return dateSQL;
-    }
+//    private Date convertStringSqlDate(String date) {
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+//        Date dateSQL = null;
+//        try {
+//            java.util.Date dateUtil = formatter.parse(date);
+//            dateSQL = new Date(dateUtil.getTime());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        return dateSQL;
+//    }
 }

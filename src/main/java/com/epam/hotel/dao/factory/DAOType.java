@@ -6,5 +6,7 @@ package com.epam.hotel.dao.factory;
 public enum DAOType {
     USER_DAO,
     CLIENT_ORDER_DAO,
-    ROOM_DAO;
+    ROOM_DAO,
+    ORDER_DAO,
+    ADMIN_DAO;
 }

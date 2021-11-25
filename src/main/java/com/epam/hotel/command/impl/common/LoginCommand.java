@@ -58,12 +58,14 @@ public class LoginCommand extends BaseCommand implements Command {
             User loggedUser = commonSiteActivityService.checkUserForExistingAndRightPasswordInputted(userWhileLogin);
             if (loggedUser != null) {
                 if (loggedUser.getUserType().equals(UserType.ADMIN)) {
+                    request.getSession().setAttribute("user", loggedUser);
+                    request.setAttribute("clientOrders", adminService.getAllOrdersOfAllClients());
                     request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.ADMIN_LOGGED, MenuRole.ANYONE_LOGGED));
                     doRedirect(request, response, ADMIN_PAGE);
                 } else {
                     request.getSession().setAttribute("user", loggedUser);
                     request.getSession().setAttribute("clientOrders", clientService.getClientOrders(loggedUser));
-                    request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.USER_LOGGED, MenuRole.ANYONE_LOGGED));
+                    request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.CLIENT_LOGGED, MenuRole.ANYONE_LOGGED));
 
                     //handling a case when booking action happened without user logged
                     boolean loginAndCompleteBooking = Boolean.parseBoolean(request.getParameter("loginAndCompleteBooking"));

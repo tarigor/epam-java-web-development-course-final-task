@@ -11,6 +11,7 @@ import java.rmi.ServerException;
 
 public class BookCommand extends BaseCommand implements Command {
     private static final String LOGIN_PAGE = "login";
+    private static final String USER_PAGE = "clientcabinet";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException {
@@ -30,6 +31,9 @@ public class BookCommand extends BaseCommand implements Command {
             doRedirect(request, response, LOGIN_PAGE);
         } else {
             System.out.println("user->" + user.toString());
+            bookService.insertNewOrder(user.getUserID(), singleRoomsSelected, doubleRoomsSelected, suiteRoomsSelected, deluxeRoomsSelected, dateFrom, dateTo);
+            request.getSession().setAttribute("clientOrders", clientService.getClientOrders(user));
+            doRedirect(request, response, USER_PAGE);
         }
     }
 }

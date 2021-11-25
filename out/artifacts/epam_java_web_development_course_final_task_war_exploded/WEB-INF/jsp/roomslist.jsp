@@ -22,7 +22,7 @@
 			<div class="container">
 				<div class="row text-center">
 					<div class="col-12">
-						<a>
+						<a style="color: white">
 							<f:message key="roomslist.header.message.part1" bundle="${local}"/>
 							<c:choose>
 								<c:when test="${user==null}">
@@ -41,16 +41,15 @@
 							<input type="hidden" name="dateFrom" value="${dateFrom}">
 							<input type="hidden" name="dateTo" value="${dateTo}">
 							<table class="table table-image" align="center">
-								<thead>
+								<thead class="u-grey-80 u-opacity u-opacity-70">
 								<tr style="text-align:center">
-									<th scope="col">Room Number</th>
-									<th scope="col"></th>
-									<th scope="col">Type Room</th>
-									<th scope="col">Price</th>
-									<th scope="col"></th>
+									<th scope="col" style="text-align:center">Room Number</th>
+									<th scope="col" style="text-align:center"></th>
+									<th scope="col" style="text-align:center">Type Room</th>
+									<th scope="col" style="text-align:center">Price</th>
 								</tr>
 								</thead>
-								<tbody>
+								<tbody class="u-grey-10 u-opacity-85">
 								<tr>
 									<th scope="row" class="text-center">
 										<div class="d-flex justify-content-center mt-100 row">
@@ -72,11 +71,8 @@
 										<img src="https://www.travelline.ru/resource/images/rt/3652/637321324083617504-c802f669-089d-466d-a31c-d7cd2ba5afe8"
 										     class="img-fluid img-thumbnail" alt="image" style="height:100px;">
 									</td>
-									<td>Single Room</td>
-									<td>42.2</td>
-									<td>
-										<button type="submit" class="btn btn-dark">Book</button>
-									</td>
+									<td style="text-align:center">Single Room</td>
+									<td style="text-align:center">42.2</td>
 								</tr>
 								<tr>
 									<th scope="row" class="text-center">
@@ -103,11 +99,8 @@
 										<img src="https://www.travelline.ru/resource/images/rt/19641/637321325354036836-a772be13-ef6f-474d-be09-5fd8af3b7b30"
 										     class="img-fluid img-thumbnail" alt="image" style="height:100px;">
 									</td>
-									<td>Double Room</td>
-									<td>72.3</td>
-									<td>
-										<button type="button" class="btn btn-dark">Book</button>
-									</td>
+									<td style="text-align:center">Double Room</td>
+									<td style="text-align:center">72.3</td>
 								</tr>
 								<tr>
 									<th scope="row" class="text-center">
@@ -134,11 +127,8 @@
 										<img src="https://www.travelline.ru/resource/images/rt/3650/637321325650296040-d8c427ef-b9ba-4699-a059-8e2fdbff6c44"
 										     class="img-fluid img-thumbnail" alt="image" style="height:100px;">
 									</td>
-									<td>Studio</td>
-									<td>92.5</td>
-									<td>
-										<button type="button" class="btn btn-dark">Book</button>
-									</td>
+									<td style="text-align:center">Studio</td>
+									<td style="text-align:center">92.5</td>
 								</tr>
 								<tr>
 									<th scope="row" class="text-center">
@@ -165,10 +155,15 @@
 										<img src="https://www.travelline.ru/resource/images/rt/3649/637321325955926799-0183cc73-13c0-4933-9df3-7a910272a833"
 										     class="img-fluid img-thumbnail" alt="image" style="height:100px;">
 									</td>
-									<td>Deluxe</td>
-									<td>121.1</td>
+									<td style="text-align:center">Deluxe</td>
+									<td style="text-align:center">121.1</td>
+								</tr>
+								<tr class="text-center">
+									<td></td>
+									<td></td>
+									<td></td>
 									<td>
-										<button type="button" class="btn btn-dark">Book</button>
+										<button type="submit" class="btn btn-dark">Book</button>
 									</td>
 								</tr>
 								</tbody>
@@ -178,8 +173,8 @@
 				</div>
 			</div>
 		</div>
-<%--		<div class="u-clearfix u-custom-html u-custom-html-2"></div>--%>
-<%--		<div class="u-clearfix u-custom-html u-custom-html-3"></div>--%>
+		<%--		<div class="u-clearfix u-custom-html u-custom-html-2"></div>--%>
+		<%--		<div class="u-clearfix u-custom-html u-custom-html-3"></div>--%>
 	</div>
 </section>
 <c:import url="common/footer.jsp"/>

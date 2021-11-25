@@ -4,7 +4,7 @@ import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.dao.factory.DAOServiceFactory;
 import com.epam.hotel.dao.factory.DAOType;
 import com.epam.hotel.dao.impl.ClientOrderDAOImpl;
-import com.epam.hotel.entity.ClientOrder;
+import com.epam.hotel.entity.ClientOrderRoom;
 import com.epam.hotel.entity.User;
 import com.epam.hotel.service.BaseService;
 import com.epam.hotel.service.ClientService;
@@ -19,10 +19,10 @@ public class ClientServiceImpl extends BaseService implements ClientService {
     }
 
     @Override
-    public ArrayList<ClientOrder> getClientOrders(User user) {
-        ArrayList<ClientOrder> clientOrders = transaction.createConnection().performTransaction(() -> clientOrderDAO.get(user));
+    public ArrayList<ClientOrderRoom> getClientOrders(User user) {
+        ArrayList<ClientOrderRoom> clientOrders = transaction.createConnection().performTransaction(() -> clientOrderDAO.get(user));
         clientOrders.forEach(System.out::println);
-        for (ClientOrder order : clientOrders) {
+        for (ClientOrderRoom order : clientOrders) {
             System.out.println("canBeCanceled->" + order.isCanBeCanceled());
         }
         return clientOrders;

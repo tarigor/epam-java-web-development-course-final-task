@@ -3,7 +3,7 @@ package com.epam.hotel.dao.impl;
 import com.epam.hotel.dao.BaseDao;
 import com.epam.hotel.dao.ClientOrderDAO;
 import com.epam.hotel.dao.exception.DaoException;
-import com.epam.hotel.entity.ClientOrder;
+import com.epam.hotel.entity.ClientOrderRoom;
 import com.epam.hotel.entity.OrderStatus;
 import com.epam.hotel.entity.User;
 
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class ClientOrderDAOImpl extends BaseDao implements ClientOrderDAO {
     private static final String GET_CLIENT_ORDERS = "" +
-            "SELECT client_order_id, room_id, room_class, persons_amount, check_in_date, check_out_date, order_status " +
+            "SELECT client_order_id, room_id, room_class, check_in_date, check_out_date, order_status " +
             "FROM client_order_room " +
             "join client_order co on client_order_room.client_order_id = co.client_order_room_id " +
             "join room r on client_order_room.room_id = r.id " +
@@ -49,14 +49,14 @@ public class ClientOrderDAOImpl extends BaseDao implements ClientOrderDAO {
     }
 
     @Override
-    public ArrayList<ClientOrder> get(User user) throws DaoException {
+    public ArrayList<ClientOrderRoom> get(User user) throws DaoException {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_CLIENT_ORDERS);
             preparedStatement.setLong(1, user.hashCode());
             preparedStatement.executeQuery();
             ResultSet resultSet = preparedStatement.getResultSet();
 
-            ArrayList<ClientOrder> clientOrders = new ArrayList<>();
+            ArrayList<ClientOrderRoom> clientOrders = new ArrayList<>();
 
             while (resultSet.next()) {
                 clientOrders.add(clientOrdersBuild(resultSet));
@@ -80,15 +80,14 @@ public class ClientOrderDAOImpl extends BaseDao implements ClientOrderDAO {
         }
     }
 
-    private ClientOrder clientOrdersBuild(ResultSet resultSet) throws SQLException {
-        return new ClientOrder(
+    private ClientOrderRoom clientOrdersBuild(ResultSet resultSet) throws SQLException {
+        return new ClientOrderRoom(
                 resultSet.getLong(1),
                 resultSet.getInt(2),
                 resultSet.getString(3),
-                resultSet.getInt(4),
+                resultSet.getDate(4),
                 resultSet.getDate(5),
-                resultSet.getDate(6),
-                OrderStatus.valueOf(resultSet.getString(7))
+                OrderStatus.valueOf(resultSet.getString(6))
         );
     }
 }

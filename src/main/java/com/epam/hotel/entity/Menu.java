@@ -7,13 +7,13 @@ public class Menu {
     private int id;
     private String command;
     private MenuItemDescription menuItemDescription;
-    private MenuRole menuRole;
+    private MenuRole role;
 
-    public Menu(int id, String command, MenuItemDescription menuItemDescription, MenuRole menuRole) {
+    public Menu(int id, String command, MenuItemDescription menuItemDescription, MenuRole role) {
         this.id = id;
         this.command = command;
         this.menuItemDescription = menuItemDescription;
-        this.menuRole = menuRole;
+        this.role = role;
     }
 
     public int getId() {
@@ -40,12 +40,12 @@ public class Menu {
         this.menuItemDescription = menuItemDescription;
     }
 
-    public MenuRole getMenuRole() {
-        return menuRole;
+    public MenuRole getRole() {
+        return role;
     }
 
-    public void setMenuRole(MenuRole menuRole) {
-        this.menuRole = menuRole;
+    public void setRole(MenuRole role) {
+        this.role = role;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Menu {
                 "id=" + id +
                 ", pageCommandName='" + command + '\'' +
                 ", menuItemDescription=" + menuItemDescription +
-                ", menuRole=" + menuRole +
+                ", menuRole=" + role +
                 '}';
     }
 }

@@ -21,13 +21,12 @@
 			<f:message
 					key="client.cabinet.page.name" bundle="${local}"/></h3>
 		<br>
-		<table class="u-align-center  table table-bordered"
+		<table class="u-align-center  table"
 		       style="margin-left: auto;margin-right: auto;text-align: center">
-			<thead>
-			<tr class="table-secondary text-center">
+			<thead class="u-grey-80 u-opacity u-opacity-70">
+			<tr class="text-center">
 				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col1" bundle="${local}"/></th>
 				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col2" bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col3" bundle="${local}"/></th>
 				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col4" bundle="${local}"/></th>
 				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col5" bundle="${local}"/></th>
 				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col6" bundle="${local}"/></th>
@@ -36,10 +35,9 @@
 			</thead>
 			<tbody>
 			<c:forEach items="${clientOrders}" var="clientOrder">
-				<tr class="table-light text-center ">
+				<tr class=" text-center u-grey-10 u-opacity-85">
 					<th scope="col" style="text-align: center">${clientOrder.getRoomID()}</th>
 					<th scope="col" style="text-align: center">${clientOrder.getRoomClass()}</th>
-					<th scope="col" style="text-align: center">${clientOrder.getPersonsAmount()}</th>
 					<th scope="col" style="text-align: center">${clientOrder.getCheckInDate()}</th>
 					<th scope="col" style="text-align: center">${clientOrder.getCheckOutDate()}</th>
 					<th scope="col" style="text-align: center">${clientOrder.getOrderStatus()}</th>

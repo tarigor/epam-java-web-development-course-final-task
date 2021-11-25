@@ -2,28 +2,68 @@ package com.epam.hotel.entity;
 
 import java.util.Date;
 
-public class ClientOrder {
+public class ClientOrderRoom {
     private long orderID;
     private boolean canBeCanceled;
+    private String firstName;
+    private String lastName;
+    private String email;
     private int roomID;
     private String roomClass;
-    private int personsAmount;
     private Date checkInDate;
     private Date checkOutDate;
     private OrderStatus orderStatus;
 
 
-    public ClientOrder(long orderID, int roomID, String roomClass, int personsAmount, Date checkInDate, Date checkOutDate, OrderStatus orderStatus) {
+    public ClientOrderRoom(long orderID, int roomID, String roomClass, Date checkInDate, Date checkOutDate, OrderStatus orderStatus) {
         this.orderID = orderID;
         this.roomID = roomID;
         this.roomClass = roomClass;
-        this.personsAmount = personsAmount;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.orderStatus = orderStatus;
         if (orderStatus.equals(OrderStatus.WAITING_FOR_APPROVAL)) {
             setCanBeCanceled(true);
         }
+    }
+
+    public ClientOrderRoom(long orderID, String firstName, String lastName, String email, int roomID, String roomClass, Date checkInDate, Date checkOutDate, OrderStatus orderStatus) {
+        this.orderID = orderID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.roomID = roomID;
+        this.roomClass = roomClass;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.orderStatus = orderStatus;
+        if (orderStatus.equals(OrderStatus.WAITING_FOR_APPROVAL)) {
+            setCanBeCanceled(true);
+        }
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public long getOrderID() {
@@ -58,14 +98,6 @@ public class ClientOrder {
         this.roomClass = roomClass;
     }
 
-    public int getPersonsAmount() {
-        return personsAmount;
-    }
-
-    public void setPersonsAmount(int personsAmount) {
-        this.personsAmount = personsAmount;
-    }
-
     public Date getCheckInDate() {
         return checkInDate;
     }
@@ -97,7 +129,15 @@ public class ClientOrder {
                 ", canBeCanceled=" + canBeCanceled +
                 ", roomID=" + roomID +
                 ", roomClass='" + roomClass + '\'' +
-                ", personsAmount=" + personsAmount +
+                ", checkInDate=" + checkInDate +
+                ", checkOutDate=" + checkOutDate +
+                ", orderStatus=" + orderStatus +
+                '}';
+    }
+
+    public String toStringShort() {
+        return "ClientOrder{" +
+                "  roomID=" + roomID +
                 ", checkInDate=" + checkInDate +
                 ", checkOutDate=" + checkOutDate +
                 ", orderStatus=" + orderStatus +

@@ -39,4 +39,8 @@ public class CommandFactory {
         }
         return clazz;
     }
+
+    public String getCommandRole(String command) {
+        return ((LinkedTreeMap) jsonFileHandler.getMapOfCommandFromJson().get(command)).get("role").toString();
+    }
 }

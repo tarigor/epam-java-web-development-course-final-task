@@ -31,7 +31,7 @@ public class MenuInitializer implements Filter {
             if (userRole.equals(UserType.ADMIN)) {
                 request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.ADMIN_LOGGED, MenuRole.ANYONE_LOGGED));
             } else if (userRole.equals(UserType.CLIENT)) {
-                request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.USER_LOGGED, MenuRole.ANYONE_LOGGED));
+                request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.CLIENT_LOGGED, MenuRole.ANYONE_LOGGED));
             }
         } else {
             logger.info("It is anyone user has been logged");

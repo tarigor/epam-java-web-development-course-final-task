@@ -1,26 +1,30 @@
 {
   "LOGIN": {
     "clazz": "com.epam.hotel.command.impl.common.LoginCommand",
-    "method": "POST"
+    "role": "ANYONE"
   },
   "LOGOUT": {
     "clazz": "com.epam.hotel.command.impl.common.LogoutCommand",
-    "method": "POST"
+    "role": "CLIENT,ADMIN"
   },
   "USER_REGISTRATION": {
     "clazz": "com.epam.hotel.command.impl.common.UserRegistrationCommand",
-    "method": "POST"
+    "role": "ANYONE"
   },
   "REMOVE_ROOM_FROM_BOOKING": {
     "clazz": "com.epam.hotel.command.impl.common.RemoveRoomFromBooking",
-    "method": "POST"
+    "role": "CLIENT"
   },
   "CHECK_FREE_ROOM": {
     "clazz": "com.epam.hotel.command.impl.common.CheckFreeRoomCommand",
-    "method": "POST"
+    "role": "ANYONE,CLIENT,ADMIN"
   },
   "BOOK": {
     "clazz": "com.epam.hotel.command.impl.common.BookCommand",
-    "method": "POST"
+    "role": "CLIENT"
+  },
+  "ORDER_HANDLING": {
+    "clazz": "com.epam.hotel.command.impl.common.OrderHandlingCommand",
+    "role": "ADMIN"
   }
 }
