@@ -1,9 +1,10 @@
 package com.epam.hotel.entity;
 
 public enum OrderStatus {
-    APPROVED_AND_BOOKED("client.cabinet.approved"),
+    APPROVED_WAITING_FOR_PAYMENT("client.cabinet.approved"),
     WAITING_FOR_APPROVAL("client.cabinet.waiting"),
-    REJECTED("client.cabinet.rejected");
+    REJECTED("client.cabinet.rejected"),
+    PAID_AND_BOOKED("client.cabinet.paid");
     private String description;
 
     OrderStatus(String description) {

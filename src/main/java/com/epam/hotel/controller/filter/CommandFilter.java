@@ -2,6 +2,7 @@ package com.epam.hotel.controller.filter;
 
 import com.epam.hotel.command.BaseCommand;
 import com.epam.hotel.command.factory.CommandFactory;
+import com.epam.hotel.entity.User;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
@@ -29,17 +30,43 @@ public class CommandFilter extends BaseCommand implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        attributesMap.clear();
+//        attributesMap.clear();
 
         String command = request.getParameter(COMMAND_NAME).toUpperCase();
         request.setAttribute(COMMAND_NAME, command);
         logger.info(String.format("The following command has been detected - /%s", command));
 
-        filterChain.doFilter(request, response);
+
+        if (checkCommandRole(request, command)) {
+            filterChain.doFilter(request, response);
+        } else {
+            System.out.println("you are not authorized to do this");
+            request.setAttribute("errorMessage", "not.authorized.access");
+            try {
+                servletRequest.getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void destroy() {
 
     }
+
+    private boolean checkCommandRole(HttpServletRequest req, String command) {
+        String commandRole = CommandFactory.getInstance().getCommandRole(command);
+        System.out.println("command role -> " + commandRole);
+        User user = (User) req.getSession().getAttribute("user");
+        if (user != null) {
+            System.out.println("user role -> " + user.getUserType().name());
+        }
+        if (commandRole.contains("ANYONE")) {
+            return true;
+        }
+        assert user != null;
+        return commandRole.contains(user.getUserType().name());
+    }
+
 }

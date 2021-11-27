@@ -12,6 +12,7 @@ public class User {
     private UserType userType;
     private String email;
     private String password;
+    private double account;
 
     public User() {
     }
@@ -23,6 +24,14 @@ public class User {
         this.userType = userType;
         this.email = email;
         this.password = password;
+    }
+
+    public double getAccount() {
+        return account;
+    }
+
+    public void setAccount(double account) {
+        this.account = account;
     }
 
     public long getUserID() {
@@ -100,6 +109,7 @@ public class User {
                 ", userType=" + userType +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", account=" + account +
                 '}';
     }
 }

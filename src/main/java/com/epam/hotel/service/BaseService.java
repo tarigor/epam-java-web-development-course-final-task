@@ -9,8 +9,8 @@ import java.text.SimpleDateFormat;
 public abstract class BaseService {
     protected static final TransactionImpl transaction = TransactionImpl.getInstance();
 
-    protected Date convertStringSqlDate(String date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    protected static Date convertStringToSqlDate(String date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date dateSQL = null;
         try {
             java.util.Date dateUtil = formatter.parse(date);

@@ -3,5 +3,6 @@
   "CLIENT_ORDER_DAO": "com.epam.hotel.dao.impl.ClientOrderDAOImpl",
   "ROOM_DAO": "com.epam.hotel.dao.impl.RoomDAOImpl",
   "ORDER_DAO": "com.epam.hotel.dao.impl.OrderDAOImpl",
-  "ADMIN_DAO": "com.epam.hotel.dao.impl.AdminDAOImpl"
+  "ADMIN_DAO": "com.epam.hotel.dao.impl.AdminDAOImpl",
+  "REQUEST_DAO": "com.epam.hotel.dao.impl.RequestDAOImpl"
 }

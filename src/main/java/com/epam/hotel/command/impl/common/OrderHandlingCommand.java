@@ -17,7 +17,7 @@ public class OrderHandlingCommand extends BaseCommand implements Command {
         int orderID = Integer.parseInt(request.getParameter("orderID"));
         int roomID = Integer.parseInt(request.getParameter("roomID"));
         adminService.doActionWithOrder(actionType, orderID, roomID);
-        request.setAttribute("clientOrders", adminService.getAllOrdersOfAllClients());
+        request.setAttribute("clientOrders", adminService.getAllOrders());
         doRedirect(request, response, ADMIN_CABINET);
     }
 }

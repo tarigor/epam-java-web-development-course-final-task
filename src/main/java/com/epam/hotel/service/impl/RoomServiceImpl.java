@@ -34,8 +34,8 @@ public class RoomServiceImpl extends BaseService implements RoomService {
 
     @Override
     public ArrayList<Room> getFreeRooms(String dateFrom, String dateTo) {
-        Date dateFromSQL = convertStringSqlDate(dateFrom);
-        Date dateToSQL = convertStringSqlDate(dateTo);
+        Date dateFromSQL = convertStringToSqlDate(dateFrom);
+        Date dateToSQL = convertStringToSqlDate(dateTo);
         ArrayList<Room> roomsList =
                 transaction.createConnection().performTransaction(() -> roomDAO.getFreeRooms(dateFromSQL, dateToSQL));
         roomsList.forEach(System.out::println);

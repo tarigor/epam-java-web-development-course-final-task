@@ -8,5 +8,6 @@ public enum DAOType {
     CLIENT_ORDER_DAO,
     ROOM_DAO,
     ORDER_DAO,
-    ADMIN_DAO;
+    ADMIN_DAO,
+    REQUEST_DAO;
 }

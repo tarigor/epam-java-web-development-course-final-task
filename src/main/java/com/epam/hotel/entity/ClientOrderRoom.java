@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class ClientOrderRoom {
     private long orderID;
+    private int requestId;
     private boolean canBeCanceled;
     private String firstName;
     private String lastName;
@@ -13,10 +14,12 @@ public class ClientOrderRoom {
     private Date checkInDate;
     private Date checkOutDate;
     private OrderStatus orderStatus;
+    private boolean paymentRequired;
 
 
-    public ClientOrderRoom(long orderID, int roomID, String roomClass, Date checkInDate, Date checkOutDate, OrderStatus orderStatus) {
+    public ClientOrderRoom(long orderID, int requestId, int roomID, String roomClass, Date checkInDate, Date checkOutDate, OrderStatus orderStatus) {
         this.orderID = orderID;
+        this.requestId = requestId;
         this.roomID = roomID;
         this.roomClass = roomClass;
         this.checkInDate = checkInDate;
@@ -25,10 +28,14 @@ public class ClientOrderRoom {
         if (orderStatus.equals(OrderStatus.WAITING_FOR_APPROVAL)) {
             setCanBeCanceled(true);
         }
+        if (orderStatus.equals(OrderStatus.APPROVED_WAITING_FOR_PAYMENT)) {
+            setPaymentRequired(true);
+        }
     }
 
-    public ClientOrderRoom(long orderID, String firstName, String lastName, String email, int roomID, String roomClass, Date checkInDate, Date checkOutDate, OrderStatus orderStatus) {
+    public ClientOrderRoom(long orderID, int requestId, String firstName, String lastName, String email, int roomID, String roomClass, Date checkInDate, Date checkOutDate, OrderStatus orderStatus) {
         this.orderID = orderID;
+        this.requestId = requestId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -40,6 +47,22 @@ public class ClientOrderRoom {
         if (orderStatus.equals(OrderStatus.WAITING_FOR_APPROVAL)) {
             setCanBeCanceled(true);
         }
+    }
+
+    public boolean isPaymentRequired() {
+        return paymentRequired;
+    }
+
+    public void setPaymentRequired(boolean paymentRequired) {
+        this.paymentRequired = paymentRequired;
+    }
+
+    public int getRequestID() {
+        return requestId;
+    }
+
+    public void setRequestId(int requestId) {
+        this.requestId = requestId;
     }
 
     public String getFirstName() {

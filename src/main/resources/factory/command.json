@@ -19,12 +19,40 @@
     "clazz": "com.epam.hotel.command.impl.common.CheckFreeRoomCommand",
     "role": "ANYONE,CLIENT,ADMIN"
   },
-  "BOOK": {
-    "clazz": "com.epam.hotel.command.impl.common.BookCommand",
-    "role": "CLIENT"
+  "SEND_INVOICE": {
+    "clazz": "com.epam.hotel.command.impl.common.SendInvoiceCommand",
+    "role": "ADMIN"
   },
   "ORDER_HANDLING": {
     "clazz": "com.epam.hotel.command.impl.common.OrderHandlingCommand",
     "role": "ADMIN"
+  },
+  "REQUEST": {
+    "clazz": "com.epam.hotel.command.impl.common.RequestCommand",
+    "role": "ANYONE,CLIENT"
+  },
+  "CANCEL_REQUEST": {
+    "clazz": "com.epam.hotel.command.impl.common.CancelRequestCommand",
+    "role": "CLIENT"
+  },
+  "REQUEST_HANDLING": {
+    "clazz": "com.epam.hotel.command.impl.common.RequestHandlingCommand",
+    "role": "ADMIN"
+  },
+  "ADMIN_CABINET": {
+    "clazz": "com.epam.hotel.command.impl.common.AdminCabinetCommand",
+    "role": "ADMIN"
+  },
+  "CLIENT_CABINET": {
+    "clazz": "com.epam.hotel.command.impl.common.ClientCabinetCommand",
+    "role": "CLIENT"
+  },
+  "MAKE_PAYMENT": {
+    "clazz": "com.epam.hotel.command.impl.common.MakePaymentCommand",
+    "role": "CLIENT"
+  },
+  "ACCOUNT": {
+    "clazz": "com.epam.hotel.command.impl.common.AccountCommand",
+    "role": "CLIENT"
   }
 }

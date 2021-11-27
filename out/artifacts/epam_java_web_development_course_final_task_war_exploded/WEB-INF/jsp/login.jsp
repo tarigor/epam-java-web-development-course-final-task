@@ -1,6 +1,7 @@
 <%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="html" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true" %>
 
 <f:setLocale value="${sessionScope.language}" scope="session"/>
@@ -28,14 +29,12 @@
 			<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
 				<div class="inner">
 					<form action="${pageContext.request.contextPath}/command?name=login" method="post">
-						<c:if test="${loginAndCompleteBooking}">
-							<input type="hidden" name="loginAndCompleteBooking" value="${loginAndCompleteBooking}">
-							<input type="hidden" name="singleRoomsSelected" value="${singleRoomsSelected}">
-							<input type="hidden" name="doubleRoomsSelected" value="${doubleRoomsSelected}">
-							<input type="hidden" name="suiteRoomsSelected" value="${suiteRoomsSelected}">
-							<input type="hidden" name="deluxeRoomsSelected" value="${deluxeRoomsSelected}">
-							<input type="hidden" name="dateFrom" value="${dateFrom}">
-							<input type="hidden" name="dateTo" value="${dateTo}">
+						<c:if test="${loginAndCompleteRequest}">
+							<input type="hidden" name="loginAndCompleteRequest" value="${loginAndCompleteRequest}">
+							<input type="hidden" name="persons" value="${clientRequest.getPersons()}">
+							<input type="hidden" name="roomClass" value="${clientRequest.getRoomClass()}">
+							<input type="hidden" name="dateFrom" value="${clientRequest.getDateFrom()}">
+							<input type="hidden" name="dateTo" value="${clientRequest.getDateTo()}">
 						</c:if>
 						<h3 class="text-center">Log-in</h3>
 						<c:if test="${registrationCompleted}">
@@ -62,7 +61,7 @@
 						<br>
 						<button type="submit">
 							<c:choose>
-								<c:when test="${loginAndCompleteBooking}">
+								<c:when test="${loginAndCompleteRequest}">
 									<f:message key="login.login.and.booking" bundle="${local}"/>
 								</c:when>
 								<c:otherwise>

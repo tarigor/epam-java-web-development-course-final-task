@@ -59,22 +59,20 @@ public class LoginCommand extends BaseCommand implements Command {
             if (loggedUser != null) {
                 if (loggedUser.getUserType().equals(UserType.ADMIN)) {
                     request.getSession().setAttribute("user", loggedUser);
-                    request.setAttribute("clientOrders", adminService.getAllOrdersOfAllClients());
                     request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.ADMIN_LOGGED, MenuRole.ANYONE_LOGGED));
-                    doRedirect(request, response, ADMIN_PAGE);
-                } else {
+                    response.sendRedirect("command?name=admin_cabinet");
+                } else if (loggedUser.getUserType().equals(UserType.CLIENT)) {
                     request.getSession().setAttribute("user", loggedUser);
-                    request.getSession().setAttribute("clientOrders", clientService.getClientOrders(loggedUser));
                     request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.CLIENT_LOGGED, MenuRole.ANYONE_LOGGED));
-
-                    //handling a case when booking action happened without user logged
-                    boolean loginAndCompleteBooking = Boolean.parseBoolean(request.getParameter("loginAndCompleteBooking"));
-                    if (loginAndCompleteBooking) {
+                    boolean loginAndCompleteRequest = Boolean.parseBoolean(request.getParameter("loginAndCompleteRequest"));
+                    if (loginAndCompleteRequest) {
+                        int persons = Integer.parseInt(request.getParameter("persons"));
+                        String roomClass = request.getParameter("roomClass");
                         String dateFrom = request.getParameter("dateFrom");
                         String dateTo = request.getParameter("dateTo");
-                        response.sendRedirect(String.format("command?name=check_free_room&dateFrom=%s&dateTo=%s", dateFrom, dateTo));
+                        response.sendRedirect(String.format("command?name=request&persons=%d&roomClass=%s&dateFrom=%s&dateTo=%s", persons, roomClass, dateFrom, dateTo));
                     } else {
-                        doRedirect(request, response, USER_PAGE);
+                        response.sendRedirect("command?name=client_cabinet");
                     }
                 }
             } else {

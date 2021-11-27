@@ -3,27 +3,21 @@ package com.epam.hotel.dao.impl;
 import com.epam.hotel.dao.BaseDao;
 import com.epam.hotel.dao.UserDAO;
 import com.epam.hotel.dao.exception.DaoException;
+import com.epam.hotel.entity.OrderStatus;
 import com.epam.hotel.entity.User;
 import com.epam.hotel.entity.UserType;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
+import java.sql.*;
 
 /**
  * The class provides the methods of the user table handling.
  */
 public class UserDAOImpl extends BaseDao implements UserDAO {
+    private static final String INSERT_NEW_REQUEST = "call insert_new_request(?,?,?,?,?,?)";
     private final String INSERT_NEW_USER =
-            "INSERT INTO `user` (`id`,`first_name`, `last_name`, `user_type`, `email`, `password`) VALUES(?,?,?,?,?,?)";
+            "INSERT INTO `user` (`id`,`first_name`, `last_name`, `user_type`, `email`, `password`,account) VALUES(?,?,?,?,?,?,?)";
     private final String GET_USER_BY_ID =
             "SELECT * FROM user WHERE id = ?";
-
-    @Override
-    public List<User> getAllUsers() {
-        return null;
-    }
 
     @Override
     public long checkIfUserExist(int userHashCode) {
@@ -45,17 +39,6 @@ public class UserDAOImpl extends BaseDao implements UserDAO {
     }
 
     @Override
-    public User get(String email) {
-        return null;
-    }
-
-    @Override
-    public List get(User user) {
-        return null;
-    }
-
-
-    @Override
     public int insert(User user) throws DaoException {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_NEW_USER);
@@ -69,15 +52,6 @@ public class UserDAOImpl extends BaseDao implements UserDAO {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
-    }
-
-    @Override
-    public void update(User user) {
-    }
-
-    @Override
-    public void delete(User user) {
-
     }
 
     @Override
@@ -96,11 +70,33 @@ public class UserDAOImpl extends BaseDao implements UserDAO {
                 user.setUserType(UserType.valueOf(resultSet.getString(4)));
                 user.setEmail(resultSet.getString(5));
                 user.setPassword(resultSet.getString(6));
+                user.setAccount(resultSet.getDouble(7));
                 return user;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void insertRequest(long clientID, int persons, String roomClass, Date dateFrom, Date dateTo) {
+        int request_id = 0;
+        try {
+            CallableStatement callableStatement = connection.prepareCall(INSERT_NEW_REQUEST);
+            callableStatement.setLong(1, clientID);
+            callableStatement.setInt(2, persons);
+            callableStatement.setString(3, roomClass);
+            callableStatement.setDate(4, dateFrom);
+            callableStatement.setDate(5, dateTo);
+            callableStatement.setString(6, OrderStatus.WAITING_FOR_APPROVAL.name());
+            callableStatement.executeQuery();
+            ResultSet resultSet = callableStatement.getResultSet();
+            while (resultSet.next()) {
+                request_id = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

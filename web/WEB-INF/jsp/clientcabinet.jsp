@@ -21,31 +21,87 @@
 			<f:message
 					key="client.cabinet.page.name" bundle="${local}"/></h3>
 		<br>
+		<a class="u-align-center u-custom-font u-font-georgia u-text u-text-default u-text-1" style="color: white">REQUESTS</a>
+		<table class="u-align-center  table"
+		       style="margin-left: auto;margin-right: auto;text-align: center">
+			<thead class="u-grey-80 u-opacity u-opacity-70">
+			<tr class="text-center">
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.request.col1"
+				                                                      bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.request.col2"
+				                                                      bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.request.col3"
+				                                                      bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.request.col4"
+				                                                      bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.request.col5"
+				                                                      bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.request.col6"
+				                                                      bundle="${local}"/></th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<c:forEach items="${clientRequests}" var="clientRequest">
+				<tr class=" text-center u-grey-10 u-opacity-85">
+					<th scope="col" style="text-align: center">${clientRequest.getRequestID()}</th>
+					<th scope="col" style="text-align: center">${clientRequest.getPersons()}</th>
+					<th scope="col" style="text-align: center">${clientRequest.getRoomClass()}</th>
+					<th scope="col" style="text-align: center">${clientRequest.getDateFrom()}</th>
+					<th scope="col" style="text-align: center">${clientRequest.getDateTo()}</th>
+					<th scope="col" style="text-align: center"><f:message
+							key="${clientRequest.getRequestStatus().getDescription()}"
+							bundle="${local}"/></th>
+					<th style="text-align: center">
+						<c:if test="${clientRequest.isProcessed()}">
+							<a href="<c:url value="command?name=cancel_request&requestID=${clientRequest.getRequestID()}"/>"
+							   class="btn btn-danger">
+								<f:message key="client.cabinet.request.cancel" bundle="${local}"/>
+							</a>
+						</c:if>
+					</th>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		<br>
+		<a class="u-align-center u-custom-font u-font-georgia u-text u-text-default u-text-1" style="color: white">ORDERS</a>
 		<table class="u-align-center  table"
 		       style="margin-left: auto;margin-right: auto;text-align: center">
 			<thead class="u-grey-80 u-opacity u-opacity-70">
 			<tr class="text-center">
 				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col1" bundle="${local}"/></th>
 				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col2" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col3" bundle="${local}"/></th>
 				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col4" bundle="${local}"/></th>
 				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col5" bundle="${local}"/></th>
 				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col6" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="client.cabinet.col7" bundle="${local}"/></th>
 				<th></th>
 			</tr>
 			</thead>
 			<tbody>
 			<c:forEach items="${clientOrders}" var="clientOrder">
 				<tr class=" text-center u-grey-10 u-opacity-85">
+					<th scope="col" style="text-align: center">${clientOrder.getOrderID()}</th>
+					<th scope="col" style="text-align: center">${clientOrder.getRequestID()}</th>
 					<th scope="col" style="text-align: center">${clientOrder.getRoomID()}</th>
 					<th scope="col" style="text-align: center">${clientOrder.getRoomClass()}</th>
 					<th scope="col" style="text-align: center">${clientOrder.getCheckInDate()}</th>
 					<th scope="col" style="text-align: center">${clientOrder.getCheckOutDate()}</th>
-					<th scope="col" style="text-align: center">${clientOrder.getOrderStatus()}</th>
+					<th scope="col" style="text-align: center"><f:message
+							key="${clientOrder.getOrderStatus().getDescription()}" bundle="${local}"/></th>
 					<th style="text-align: center">
 						<a>
-							<c:if test="${clientOrder.isCanBeCanceled()}">
-								<a href="<c:url value="command?name=remove_room_from_booking&orderID=${clientOrder.getOrderID()}&roomID=${clientOrder.getRoomID()}"/>">
-									<f:message key="client.cabinet.cancel" bundle="${local}"/>
+							<c:if test="${clientOrder.isPaymentRequired()}">
+								<a href="<c:url value="command?name=account
+								&orderPrepare=true
+								&roomID=${clientOrder.getRoomID()}
+								&roomClass=${clientOrder.getRoomClass()}
+								&dateFrom=${clientOrder.getCheckInDate()}
+								&dateTo=${clientOrder.getCheckOutDate()}
+								"/>" class="btn btn-success">
+									<f:message key="client.cabinet.pay" bundle="${local}"/>
 								</a>
 							</c:if>
 						</a>

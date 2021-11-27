@@ -4,9 +4,21 @@
 <f:setBundle basename="local.menu" var="local"/>
 <header class="u-clearfix u-grey-60 u-header" id="sec-d985" data-animation-name="" data-animation-duration="0"
         data-animation-delay="0" data-animation-direction="">
-	<div style="text-align: center">
-	</div>
 	<div class="u-clearfix u-sheet u-sheet-1">
+		<p class="u-align-center u-text u-text-1">
+			<c:choose>
+				<c:when test="${sessionScope.user==null}">
+					<a>Hello Guest!</a>
+				</c:when>
+				<c:when test="${sessionScope.user.getUserType().name().contains('ADMIN')}">
+					<a>Hello Admin!</a>
+				</c:when>
+				<c:when test="${sessionScope.user.getUserType().name().contains('CLIENT')}">
+					<a>Hello ${sessionScope.user.getFirstName()} ${sessionScope.user.getLastName()}!</a>
+				</c:when>
+			</c:choose>
+		</p>
+		<h3 class="u-custom-font u-font-georgia u-text u-text-default u-text-white u-text-2">Hotel Grodno Inn</h3>
 		<nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1" data-responsive-from="XL">
 			<div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px; font-weight: 700;">
 				<a class="u-button-style u-custom-active-border-color u-custom-active-color u-custom-border u-custom-border-color u-custom-borders u-custom-hover-border-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
@@ -64,11 +76,9 @@
 				<div class="u-grey-25 u-menu-overlay u-opacity u-opacity-70"></div>
 			</div>
 		</nav>
-		<a class="u-custom-font u-font-georgia u-text u-text-default u-text-white u-text-1"
-		   href="page?name=index"><f:message key="header.hotel.name" bundle="${local}"/></a>
-		<div style="text-align: center">
-			<a href="/page?name=${lastpage}&lang=en_US" style="font-size: x-small">ENG</a>
-			<a href="/page?name=${lastpage}&lang=by_BY" style="font-size: x-small">WRW</a>
-		</div>
+		<a href="/page?name=${lastpage}&lang=by_BY"
+		   class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-1">WRW</a>
+		<a href="/page?name=${lastpage}&lang=en_US"
+		   class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-2">ENG</a>
 	</div>
 </header>

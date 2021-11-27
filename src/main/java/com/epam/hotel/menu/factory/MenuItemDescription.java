@@ -7,7 +7,8 @@ public enum MenuItemDescription {
     SIGN_UP("menu.sign.up"),
     CLIENT_CABINET("menu.client.cabinet"),
     ADMIN_CABINET("menu.admin.cabinet"),
-    LOGOUT("menu.logoff");
+    LOGOUT("menu.logoff"),
+    ACCOUNT("menu.account");
     String bundle;
 
     MenuItemDescription(String bundle) {

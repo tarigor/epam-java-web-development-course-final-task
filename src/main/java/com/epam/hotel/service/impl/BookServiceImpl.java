@@ -16,6 +16,7 @@ public class BookServiceImpl extends BaseService implements BookService {
 
     @Override
     public void insertNewOrder(long userID,
+                               int requestID,
                                String[] singleRoomsSelected,
                                String[] doubleRoomsSelected,
                                String[] suiteRoomsSelected,
@@ -33,23 +34,27 @@ public class BookServiceImpl extends BaseService implements BookService {
 
         if (orders.size() > 1) {
             transaction.createConnection().performTransaction(() -> {
-                int orderIdAssigned = transaction.createConnection().performTransaction(() -> orderDAO.insertOrderDataIntoTwoTable(userID, orders.get(0)));
+                int orderIdAssigned = orderDAO.insertOrderDataIntoTwoTable(userID,requestID, orders.get(0));
                 System.out.println("oderIDAssigned->" + orderIdAssigned);
                 for (int i = 1; i < orders.size(); i++) {
-                    orderDAO.insertOrderDataIntoSingleTable(orderIdAssigned, orders.get(i));
+                    orderDAO.insertOrderDataIntoSingleTable(orderIdAssigned, requestID, orders.get(i));
                 }
+                orderDAO.changeStatusOfRequest(requestID);
             });
         } else if (orders.size() == 1) {
-            transaction.createConnection().performTransaction(() -> orderDAO.insertOrderDataIntoTwoTable(userID, orders.get(0)));
+            transaction.createConnection().performTransaction(() -> {
+                orderDAO.insertOrderDataIntoTwoTable(userID,requestID, orders.get(0));
+                orderDAO.changeStatusOfRequest(requestID);
+            });
         }
     }
 
     private void addOrder(String[] roomsSelected, String dateFrom, String dateTo, ArrayList<Order> clientOrderRooms) {
-        Date dateFromSQL = convertStringSqlDate(dateFrom);
-        Date dateToSQL = convertStringSqlDate(dateTo);
+        Date dateFromSQL = convertStringToSqlDate(dateFrom);
+        Date dateToSQL = convertStringToSqlDate(dateTo);
         if (roomsSelected != null && roomsSelected.length != 0) {
             for (int i = 0; i < roomsSelected.length; i++) {
-                clientOrderRooms.add(new Order(Integer.parseInt(roomsSelected[i]), dateFromSQL, dateToSQL, OrderStatus.WAITING_FOR_APPROVAL));
+                clientOrderRooms.add(new Order(Integer.parseInt(roomsSelected[i]), dateFromSQL, dateToSQL, OrderStatus.APPROVED_WAITING_FOR_PAYMENT));
             }
         }
     }
