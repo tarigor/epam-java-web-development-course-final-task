@@ -16,15 +16,15 @@
     "role": "CLIENT"
   },
   "CHECK_FREE_ROOM": {
-    "clazz": "com.epam.hotel.command.impl.common.CheckFreeRoomCommand",
+    "clazz": "com.epam.hotel.command.impl.admincommand.CheckFreeRoomCommand",
     "role": "ANYONE,CLIENT,ADMIN"
   },
   "SEND_INVOICE": {
-    "clazz": "com.epam.hotel.command.impl.common.SendInvoiceCommand",
+    "clazz": "com.epam.hotel.command.impl.admincommand.SendInvoiceCommand",
     "role": "ADMIN"
   },
   "ORDER_HANDLING": {
-    "clazz": "com.epam.hotel.command.impl.common.OrderHandlingCommand",
+    "clazz": "com.epam.hotel.command.impl.admincommand.OrderHandlingCommand",
     "role": "ADMIN"
   },
   "REQUEST": {
@@ -32,27 +32,35 @@
     "role": "ANYONE,CLIENT"
   },
   "CANCEL_REQUEST": {
-    "clazz": "com.epam.hotel.command.impl.common.CancelRequestCommand",
+    "clazz": "com.epam.hotel.command.impl.clientcommand.CancelRequestCommand",
     "role": "CLIENT"
   },
   "REQUEST_HANDLING": {
-    "clazz": "com.epam.hotel.command.impl.common.RequestHandlingCommand",
+    "clazz": "com.epam.hotel.command.impl.admincommand.RequestHandlingCommand",
     "role": "ADMIN"
   },
   "ADMIN_CABINET": {
-    "clazz": "com.epam.hotel.command.impl.common.AdminCabinetCommand",
+    "clazz": "com.epam.hotel.command.impl.admincommand.AdminCabinetCommand",
     "role": "ADMIN"
   },
   "CLIENT_CABINET": {
-    "clazz": "com.epam.hotel.command.impl.common.ClientCabinetCommand",
+    "clazz": "com.epam.hotel.command.impl.clientcommand.ClientCabinetCommand",
     "role": "CLIENT"
   },
   "MAKE_PAYMENT": {
-    "clazz": "com.epam.hotel.command.impl.common.MakePaymentCommand",
+    "clazz": "com.epam.hotel.command.impl.clientcommand.MakePaymentCommand",
     "role": "CLIENT"
   },
   "ACCOUNT": {
-    "clazz": "com.epam.hotel.command.impl.common.AccountCommand",
+    "clazz": "com.epam.hotel.command.impl.clientcommand.AccountCommand",
+    "role": "CLIENT"
+  },
+  "CHARGE": {
+    "clazz": "com.epam.hotel.command.impl.clientcommand.ChargeCommand",
+    "role": "CLIENT"
+  },
+  "PAY": {
+    "clazz": "com.epam.hotel.command.impl.clientcommand.PayCommand",
     "role": "CLIENT"
   }
 }

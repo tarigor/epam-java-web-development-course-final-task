@@ -27,8 +27,9 @@
 			</c:if>
 			<f:message key="index.hello.guest.part2" bundle="${local}"/>
 		</h4>
-		<h6 class="u-custom-font u-font-georgia u-text u-text-body-alt-color u-text-default u-text-2">Please make your
-			request below</h6>
+		<h6 class="u-custom-font u-font-georgia u-text u-text-body-alt-color u-text-default u-text-2">
+			<f:message key="index.request.message" bundle="${local}"/>
+			</h6>
 		<form action="command?name=request" method="post">
 			<div class="u-clearfix u-custom-html u-custom-html-1">
 				<select id="personsAmount" name="persons" class="custom-select" aria-label="Default select example">
@@ -45,7 +46,7 @@
 					<option value="10">10</option>
 				</select>
 			</div>
-			<p class="u-text u-text-body-alt-color u-text-default u-text-3">Persons Amount</p>
+			<p class="u-text u-text-body-alt-color u-text-default u-text-3"><f:message key="index.persons" bundle="${local}"/></p>
 			<div class="u-clearfix u-custom-html u-custom-html-2">
 				<select id="roomClass" name="roomClass" class="custom-select" aria-label="Default select example">
 					<option selected="" value=""></option>
@@ -55,11 +56,11 @@
 					<option value="DELUXE">DELUXE</option>
 				</select>
 			</div>
-			<p class="u-text u-text-body-alt-color u-text-default u-text-4">Room Class</p>
+			<p class="u-text u-text-body-alt-color u-text-default u-text-4"><f:message key="index.room.class" bundle="${local}"/></p>
 			<div class="u-clearfix u-custom-html u-custom-html-3">
 				<input type="text" name="datefilter" value="">
 			</div>
-			<p class="u-text u-text-body-alt-color u-text-default u-text-5">Date Range </p>
+			<p class="u-text u-text-body-alt-color u-text-default u-text-4" style="text-align: right"><f:message key="index.date.range" bundle="${local}"/></p>
 			<button type="submit"
 			   class="u-border-2 u-border-white u-btn u-button-style u-hover-grey-50 u-none u-text-body-alt-color u-text-hover-white u-btn-1">
 				<f:message key="index.check.availability" bundle="${local}"/>

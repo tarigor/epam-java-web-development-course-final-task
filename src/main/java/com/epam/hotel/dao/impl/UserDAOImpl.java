@@ -14,6 +14,7 @@ import java.sql.*;
  */
 public class UserDAOImpl extends BaseDao implements UserDAO {
     private static final String INSERT_NEW_REQUEST = "call insert_new_request(?,?,?,?,?,?)";
+    private static final String MODIFY_ACCOUNT = "call charge_account(?, ?)";
     private final String INSERT_NEW_USER =
             "INSERT INTO `user` (`id`,`first_name`, `last_name`, `user_type`, `email`, `password`,account) VALUES(?,?,?,?,?,?,?)";
     private final String GET_USER_BY_ID =
@@ -48,6 +49,7 @@ public class UserDAOImpl extends BaseDao implements UserDAO {
             preparedStatement.setString(4, user.getUserType().name());
             preparedStatement.setString(5, user.getEmail());
             preparedStatement.setString(6, user.getPassword());
+            preparedStatement.setDouble(7, 0.0);
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -55,7 +57,7 @@ public class UserDAOImpl extends BaseDao implements UserDAO {
     }
 
     @Override
-    public User get(int userHashCode) {
+    public User get(long userHashCode) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_USER_BY_ID);
             preparedStatement.setLong(1, userHashCode);
@@ -98,5 +100,23 @@ public class UserDAOImpl extends BaseDao implements UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public double modifyAccount(long clientID, double chargeAmount) {
+        double account = 0.0;
+        try {
+            CallableStatement callableStatement = connection.prepareCall(MODIFY_ACCOUNT);
+            callableStatement.setLong(1, clientID);
+            callableStatement.setDouble(2, chargeAmount);
+            callableStatement.executeQuery();
+            ResultSet resultSet = callableStatement.getResultSet();
+            while (resultSet.next()) {
+                account = resultSet.getDouble(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return account;
     }
 }

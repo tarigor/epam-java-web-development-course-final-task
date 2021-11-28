@@ -15,5 +15,7 @@ public enum CommandType {
     ADMIN_CABINET,
     CLIENT_CABINET,
     MAKE_PAYMENT,
-    ACCOUNT;
+    ACCOUNT,
+    CHARGE,
+    PAY;
 }

@@ -56,6 +56,7 @@ public abstract class BaseCommand {
             String name = e.nextElement();
             Object value = request.getAttribute(name);
             attributesMap.put(name, value);
+            request.getSession().setAttribute("attributesMap",attributesMap);
         }
     }
 }

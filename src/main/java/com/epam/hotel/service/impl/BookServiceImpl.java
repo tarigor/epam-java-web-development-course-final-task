@@ -3,6 +3,7 @@ package com.epam.hotel.service.impl;
 import com.epam.hotel.dao.factory.DAOServiceFactory;
 import com.epam.hotel.dao.factory.DAOType;
 import com.epam.hotel.dao.impl.OrderDAOImpl;
+import com.epam.hotel.dao.impl.UserDAOImpl;
 import com.epam.hotel.entity.Order;
 import com.epam.hotel.entity.OrderStatus;
 import com.epam.hotel.service.BaseService;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 public class BookServiceImpl extends BaseService implements BookService {
     private OrderDAOImpl orderDAO = (OrderDAOImpl) DAOServiceFactory.getInstance().getDAO(DAOType.ORDER_DAO);
+    private UserDAOImpl userDAO = (UserDAOImpl) DAOServiceFactory.getInstance().getDAO(DAOType.USER_DAO);
 
     @Override
     public void insertNewOrder(long userID,
@@ -34,19 +36,28 @@ public class BookServiceImpl extends BaseService implements BookService {
 
         if (orders.size() > 1) {
             transaction.createConnection().performTransaction(() -> {
-                int orderIdAssigned = orderDAO.insertOrderDataIntoTwoTable(userID,requestID, orders.get(0));
+                int orderIdAssigned = orderDAO.insertOrderDataIntoTwoTable(userID, requestID, orders.get(0));
                 System.out.println("oderIDAssigned->" + orderIdAssigned);
                 for (int i = 1; i < orders.size(); i++) {
                     orderDAO.insertOrderDataIntoSingleTable(orderIdAssigned, requestID, orders.get(i));
                 }
-                orderDAO.changeStatusOfRequest(requestID);
+                orderDAO.changeStatusOfRequest(requestID, OrderStatus.REQUEST_PROCESSED);
             });
         } else if (orders.size() == 1) {
             transaction.createConnection().performTransaction(() -> {
-                orderDAO.insertOrderDataIntoTwoTable(userID,requestID, orders.get(0));
-                orderDAO.changeStatusOfRequest(requestID);
+                orderDAO.insertOrderDataIntoTwoTable(userID, requestID, orders.get(0));
+                orderDAO.changeStatusOfRequest(requestID, OrderStatus.REQUEST_PROCESSED);
             });
         }
+    }
+
+    @Override
+    public void payInvoice(long userID, int orderID, int requestID, int roomID, double roomPrice) {
+        double changeValue = roomPrice * (-1);
+        transaction.createConnection().performTransaction(() -> {
+            userDAO.modifyAccount(userID, changeValue);
+            orderDAO.changeStatusOfOrder(orderID, requestID, roomID, OrderStatus.PAID_AND_BOOKED);
+        });
     }
 
     private void addOrder(String[] roomsSelected, String dateFrom, String dateTo, ArrayList<Order> clientOrderRooms) {

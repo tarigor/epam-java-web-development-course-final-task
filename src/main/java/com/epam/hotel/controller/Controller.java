@@ -25,7 +25,6 @@ public class Controller extends HttpServlet {
     }
 
     private void doHandling(HttpServletRequest req, HttpServletResponse resp) {
-//        String command = req.getParameter(COMMAND).toUpperCase();
         String command = (String) req.getAttribute(COMMAND_NAME);
         logger.info(String.format("the following command detected - /%s", command));
 

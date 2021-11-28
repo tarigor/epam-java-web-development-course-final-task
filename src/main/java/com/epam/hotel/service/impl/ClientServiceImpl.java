@@ -4,6 +4,7 @@ import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.dao.factory.DAOServiceFactory;
 import com.epam.hotel.dao.factory.DAOType;
 import com.epam.hotel.dao.impl.ClientOrderDAOImpl;
+import com.epam.hotel.dao.impl.RoomDAOImpl;
 import com.epam.hotel.dao.impl.UserDAOImpl;
 import com.epam.hotel.entity.ClientOrderRoom;
 import com.epam.hotel.entity.ClientRequest;
@@ -19,6 +20,8 @@ public class ClientServiceImpl extends BaseService implements ClientService {
             (ClientOrderDAOImpl) DAOServiceFactory.getInstance().getDAO(DAOType.CLIENT_ORDER_DAO);
     private final UserDAOImpl userDAO =
             (UserDAOImpl) DAOServiceFactory.getInstance().getDAO(DAOType.USER_DAO);
+    private final RoomDAOImpl roomDAO =
+            (RoomDAOImpl) DAOServiceFactory.getInstance().getDAO(DAOType.ROOM_DAO);
 
     public ClientServiceImpl() {
     }
@@ -59,6 +62,16 @@ public class ClientServiceImpl extends BaseService implements ClientService {
         return new ClientRequest(persons, roomClass, convertStringToSqlDate(dateFrom), convertStringToSqlDate(dateTo));
     }
 
+    @Override
+    public double chargeAccount(long userID, double chargeAmount) {
+        return transaction.createConnection().performTransaction(() -> userDAO.modifyAccount(userID, chargeAmount));
+    }
+
+    @Override
+    public User getClient(long clientID) {
+        return transaction.createConnection().performTransaction(() -> userDAO.get(clientID));
+    }
+
     public void removeOrderFromBooking(int orderID, int roomID) {
         transaction.createConnection().performTransaction(() -> {
             try {
@@ -67,6 +80,5 @@ public class ClientServiceImpl extends BaseService implements ClientService {
                 e.printStackTrace();
             }
         });
-
     }
 }

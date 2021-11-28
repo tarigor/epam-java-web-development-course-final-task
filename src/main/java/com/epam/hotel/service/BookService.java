@@ -9,4 +9,5 @@ public interface BookService {
                         String[] deluxeRoomsSelected,
                         String dateFrom,
                         String dateTo);
+    void payInvoice(long userID, int orderID,int requestID, int roomID, double roomPrice);
 }

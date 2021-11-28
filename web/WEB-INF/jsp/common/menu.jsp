@@ -8,17 +8,17 @@
 		<p class="u-align-center u-text u-text-1">
 			<c:choose>
 				<c:when test="${sessionScope.user==null}">
-					<a>Hello Guest!</a>
+					<a><f:message key="head.hello.guest" bundle="${local}"/>!</a>
 				</c:when>
 				<c:when test="${sessionScope.user.getUserType().name().contains('ADMIN')}">
-					<a>Hello Admin!</a>
+					<a><f:message key="head.hello.admin" bundle="${local}"/>!</a>
 				</c:when>
 				<c:when test="${sessionScope.user.getUserType().name().contains('CLIENT')}">
-					<a>Hello ${sessionScope.user.getFirstName()} ${sessionScope.user.getLastName()}!</a>
+					<a><f:message key="head.hello" bundle="${local}"/> ${sessionScope.user.getFirstName()} ${sessionScope.user.getLastName()}!</a>
 				</c:when>
 			</c:choose>
 		</p>
-		<h3 class="u-custom-font u-font-georgia u-text u-text-default u-text-white u-text-2">Hotel Grodno Inn</h3>
+		<h3 class="u-custom-font u-font-georgia u-text u-text-default u-text-white u-text-2"><f:message key="header.hotel.name" bundle="${local}"/></h3>
 		<nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1" data-responsive-from="XL">
 			<div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px; font-weight: 700;">
 				<a class="u-button-style u-custom-active-border-color u-custom-active-color u-custom-border u-custom-border-color u-custom-borders u-custom-hover-border-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"

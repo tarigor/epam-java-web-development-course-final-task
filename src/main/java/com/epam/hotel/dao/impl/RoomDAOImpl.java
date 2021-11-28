@@ -4,42 +4,12 @@ import com.epam.hotel.dao.BaseDao;
 import com.epam.hotel.dao.RoomDAO;
 import com.epam.hotel.entity.Room;
 
-import java.sql.CallableStatement;
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class RoomDAOImpl extends BaseDao implements RoomDAO {
-    //    private static final String GET_ROOMS_WITHIN_RANGE =
-//            "select distinct room_id " +
-//                    "from client_order_room " +
-//                    "where ? between check_in_date and check_out_date " +
-//                    "or ? between check_in_date and check_out_date " +
-//                    "or ? < check_in_date and ? > check_out_date " +
-//                    "order by room_id";
     private static final String GET_FREE_ROOMS = "call get_free_rooms(?,?)";
-
-//    @Override
-//    public ArrayList<Integer> getRoomsWithinRange(Date dateFrom, Date dateTo) {
-//        System.out.println("date From ->" + dateFrom.toString() + " " + "date To" + dateTo.toString());
-//        ArrayList<Integer> roomList = new ArrayList<>();
-//        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement(GET_ROOMS_WITHIN_RANGE);
-//            preparedStatement.setDate(1, dateFrom);
-//            preparedStatement.setDate(2, dateTo);
-//            preparedStatement.setDate(3, dateFrom);
-//            preparedStatement.setDate(4, dateTo);
-//            preparedStatement.executeQuery();
-//            ResultSet resultSet = preparedStatement.getResultSet();
-//            while (resultSet.next()) {
-//                roomList.add(resultSet.getInt(1));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return roomList;
-//    }
+    private static final String GET_ROOM_PRICE = "select room_cost from room where id = ?";
 
     public ArrayList<Room> getFreeRooms(Date dateFrom, Date dateTo) {
         ArrayList<Room> roomArrayList = new ArrayList<>();
@@ -59,5 +29,22 @@ public class RoomDAOImpl extends BaseDao implements RoomDAO {
             e.printStackTrace();
         }
         return roomArrayList;
+    }
+
+    @Override
+    public double getRoomPrice(int roomID) {
+        double roomPrice = 0.0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_ROOM_PRICE);
+            preparedStatement.setInt(1, roomID);
+            preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.getResultSet();
+            while (resultSet.next()) {
+                roomPrice = resultSet.getDouble(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return roomPrice;
     }
 }

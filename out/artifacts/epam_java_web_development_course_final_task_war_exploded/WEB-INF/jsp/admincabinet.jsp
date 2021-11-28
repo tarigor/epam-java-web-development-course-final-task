@@ -69,7 +69,7 @@
 						&dateFrom=${clientRequest.getDateFrom()}
 						&dateTo=${clientRequest.getDateTo()}
 						"/>">
-							<c:if test="${!clientRequest.isProcessed()}">
+							<c:if test="${clientRequest.isProcessed()}">
 								<button type="button" class="btn btn-success"><f:message
 										key="admin.cabinet.room.selection"
 										bundle="${local}"/></button>

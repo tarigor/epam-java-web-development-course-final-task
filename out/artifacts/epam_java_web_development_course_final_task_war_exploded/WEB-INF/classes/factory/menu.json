@@ -11,12 +11,6 @@
     "menuItemDescription": "ACCOUNT",
     "role": "CLIENT_LOGGED"
   },
-  "ROOMS_LIST": {
-    "id": "2",
-    "command": "/page?name=roomslist",
-    "menuItemDescription": "ROOMS_LIST",
-    "role": "ADMIN_LOGGED"
-  },
   "LOG_IN": {
     "id": "3",
     "command": "/page?name=login",

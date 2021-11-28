@@ -96,6 +96,8 @@
 							<c:if test="${clientOrder.isPaymentRequired()}">
 								<a href="<c:url value="command?name=account
 								&orderPrepare=true
+								&orderID=${clientOrder.getOrderID()}
+								&requestID=${clientOrder.getRequestID()}
 								&roomID=${clientOrder.getRoomID()}
 								&roomClass=${clientOrder.getRoomClass()}
 								&dateFrom=${clientOrder.getCheckInDate()}

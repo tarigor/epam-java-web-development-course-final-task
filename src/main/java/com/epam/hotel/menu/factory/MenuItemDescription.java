@@ -2,7 +2,6 @@ package com.epam.hotel.menu.factory;
 
 public enum MenuItemDescription {
     MAIN("menu.main"),
-    ROOMS_LIST("menu.rooms.list"),
     LOG_IN("menu.login"),
     SIGN_UP("menu.sign.up"),
     CLIENT_CABINET("menu.client.cabinet"),

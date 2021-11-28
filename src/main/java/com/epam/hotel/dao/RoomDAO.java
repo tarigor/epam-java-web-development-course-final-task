@@ -8,4 +8,5 @@ import java.util.ArrayList;
 public interface RoomDAO {
     //    List getRoomsWithinRange(Date dateFrom, Date dateTo);
     ArrayList<Room> getFreeRooms(Date dateFrom, Date dateTo);
+    double getRoomPrice(int roomID);
 }

@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface RoomService {
     ArrayList<Room> getFreeRooms(String dateFrom, String dateTo);
+    double getRoomPrice(int roomID);
 }

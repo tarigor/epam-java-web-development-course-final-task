@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -30,9 +31,12 @@ public class MenuFilter extends BaseCommand implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         //for keeping content while language change and page reload
-        if (attributesMap.size() != 0) {
-            for (Map.Entry<String, Object> entry : attributesMap.entrySet()) {
-                request.setAttribute(entry.getKey(), entry.getValue());
+        HashMap<String, Object> map = (HashMap<String, Object>) request.getSession().getAttribute("attributesMap");
+        if (map != null) {
+            if (map.size() != 0) {
+                for (Map.Entry<String, Object> entry : map.entrySet()) {
+                    request.setAttribute(entry.getKey(), entry.getValue());
+                }
             }
         }
 

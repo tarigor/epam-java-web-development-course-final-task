@@ -4,14 +4,18 @@ import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.entity.User;
 
 import java.sql.Date;
-import java.util.List;
 
 /**
  * The interface of the {@link UserDAO} class.
  */
 public interface UserDAO {
     long checkIfUserExist(int userHashCode);
+
     int insert(User user) throws DaoException;
-    User get(int userHashCode);
+
+    User get(long userHashCode);
+
     void insertRequest(long clientID, int persons, String roomClass, Date dateFrom, Date dateTo);
+
+    double modifyAccount(long clientID, double chargeAmount);
 }

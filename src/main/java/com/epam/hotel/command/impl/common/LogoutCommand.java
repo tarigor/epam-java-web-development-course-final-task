@@ -20,7 +20,7 @@ public class LogoutCommand extends BaseCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException {
         request.getSession().invalidate();
-        attributesMap.clear();
+       // attributesMap.clear();
         request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.ANYONE_NOT_LOGGED));
         doRedirect(request, response, MAIN_PAGE);
     }

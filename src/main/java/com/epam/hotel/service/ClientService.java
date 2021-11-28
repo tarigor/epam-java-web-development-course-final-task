@@ -16,4 +16,9 @@ public interface ClientService {
     void removeRequest(int requestID);
 
     ClientRequest createRequest(int persons, String roomClass, String dateFrom, String dateTo);
+
+    double chargeAccount(long clientID, double chargeAmount);
+
+    User getClient(long clientID);
+
 }

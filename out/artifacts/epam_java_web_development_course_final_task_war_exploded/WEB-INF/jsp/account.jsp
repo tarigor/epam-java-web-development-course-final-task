@@ -38,40 +38,22 @@
 								<a>${sessionScope.user.getLastName()}</a>
 							</label>
 							<a class=" text-center"><f:message key="account.balance" bundle="${local}"/>:</a>
-							<label for="" class="form-control text-center align-middle">${sessionScope.user.getAccount()} USD</label>
-							<button class="btn btn-success"><f:message key="account.charge.button" bundle="${local}"/></button>
+							<label for=""
+							       class="form-control text-center align-middle">${sessionScope.user.getAccount()}
+								USD</label>
 						</div>
-						<table class="table table-bordered" style="color: white">
-							<thead>
-							<tr>
-								<th scope="col"></th>
-								<th scope="col"><f:message key="account.details" bundle="${local}"/></th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr>
-								<th scope="row"><f:message key="client.cabinet.col3" bundle="${local}"/></th>
-								<td>${roomID}</td>
-							</tr>
-							<tr>
-								<th scope="row"><f:message key="client.cabinet.col4" bundle="${local}"/></th>
-								<td>${roomClass}</td>
-							</tr>
-							<tr>
-								<th scope="row"><f:message key="client.cabinet.col5" bundle="${local}"/></th>
-								<td>${dateFrom}</td>
-							</tr>
-							<tr>
-								<th scope="row"><f:message key="client.cabinet.col6" bundle="${local}"/></th>
-								<td>${dateTo}</td>
-							</tr>
-							<tr>
-								<th scope="row"><f:message key="account.total" bundle="${local}"/></th>
-								<td>55.2 USD</td>
-							</tr>
-							</tbody>
-						</table>
-						<button class="btn btn-success" style="align-self: center"><f:message key="account.pay" bundle="${local}"/></button>
+						<div class="form-wrapper">
+							<a href="<c:url value="command?name=charge&user=${sessionScope.user.getUserID()}"/>"
+							   class="btn btn-success form-control text-center align-middle"
+							   style="text-align: center;color: white"><f:message
+									key="account.charge.button"
+									bundle="${local}"/></a>
+						</div>
+						<c:if test="${charged}">
+							<label style="text-align: center;font-size: medium;color: #62C584"><f:message
+									key="account.charged"
+									bundle="${local}"/></label>
+						</c:if>
 					</form>
 				</div>
 			</div>
