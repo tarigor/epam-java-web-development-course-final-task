@@ -15,7 +15,7 @@
         <url-pattern>/command</url-pattern>
     </servlet-mapping>
     <listener>
-        <listener-class>com.epam.hotel.controller.listener.ConnectionPoolListener</listener-class>
+        <listener-class>com.epam.hotel.controller.listener.InitListener</listener-class>
     </listener>
     <filter>
         <filter-name>MenuInitializer</filter-name>

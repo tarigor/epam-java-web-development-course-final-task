@@ -6,6 +6,9 @@ import com.epam.hotel.service.impl.PropertiesFileServiceImpl;
 
 import java.util.regex.Pattern;
 
+/**
+ * Provides an ENUMs of the available regex patterns during an input check on a web page.
+ */
 public enum InputRegex {
     /**
      * Input text requirements
@@ -18,7 +21,7 @@ public enum InputRegex {
     NAME("^[a-zA-Z]+([._]?[a-zA-Z]+)*$",
             ((PropertiesFileServiceImpl) ServiceFactory
                     .getInstance()
-                    .getService(ServiceType.PROPERTIES_FILE_SERVICE))
+                    .getServiceObjectsMap().get(ServiceType.PROPERTIES_FILE_SERVICE))
                     .getProperties(Constants.PROPERTIES)
                     .getProperty("validator.wrong.user.name.input")),
     /**
@@ -33,19 +36,19 @@ public enum InputRegex {
     PASSWORD("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!=])(?=\\S+$).{4,}$",
             ((PropertiesFileServiceImpl) ServiceFactory
                     .getInstance()
-                    .getService(ServiceType.PROPERTIES_FILE_SERVICE))
+                    .getServiceObjectsMap().get(ServiceType.PROPERTIES_FILE_SERVICE))
                     .getProperties(Constants.PROPERTIES)
                     .getProperty("validator.wrong.user.password.input")),
     EMAIL("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}",
             ((PropertiesFileServiceImpl) ServiceFactory
                     .getInstance()
-                    .getService(ServiceType.PROPERTIES_FILE_SERVICE))
+                    .getServiceObjectsMap().get(ServiceType.PROPERTIES_FILE_SERVICE))
                     .getProperties(Constants.PROPERTIES)
                     .getProperty("validator.wrong.user.email.input")),
     PASSWORD_DOUBLE_CHECK("",
             ((PropertiesFileServiceImpl) ServiceFactory
                     .getInstance()
-                    .getService(ServiceType.PROPERTIES_FILE_SERVICE))
+                    .getServiceObjectsMap().get(ServiceType.PROPERTIES_FILE_SERVICE))
                     .getProperties(Constants.PROPERTIES)
                     .getProperty("validator.wrong.user.password.double.check.input"));
     String regexExpression;

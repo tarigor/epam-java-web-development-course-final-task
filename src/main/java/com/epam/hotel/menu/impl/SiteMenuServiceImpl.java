@@ -5,9 +5,7 @@ import com.epam.hotel.menu.SiteMenuService;
 import com.epam.hotel.menu.factory.MenuFactory;
 import com.epam.hotel.menu.factory.MenuItemDescription;
 import com.epam.hotel.menu.factory.MenuRole;
-import com.epam.hotel.service.factory.ServiceFactory;
-import com.epam.hotel.service.factory.ServiceType;
-import com.epam.hotel.service.impl.PropertiesFileServiceImpl;
+import com.epam.hotel.service.exception.ServiceException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,20 +14,22 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SiteMenuServiceImpl implements SiteMenuService {
-    private final PropertiesFileServiceImpl propertiesFileService =
-            (PropertiesFileServiceImpl) ServiceFactory.getInstance().getService(ServiceType.PROPERTIES_FILE_SERVICE);
-    private HashMap<String, Menu> menuList = new HashMap<>();
+    private HashMap<String, Menu> menuList;
+    private static final SiteMenuServiceImpl instance = new SiteMenuServiceImpl();
 
     public SiteMenuServiceImpl() {
-        init(menuList);
     }
 
-    private void init(HashMap<String, Menu> menuList) {
+    public static SiteMenuServiceImpl getInstance() {
+        return instance;
+    }
+
+    public void init() throws ServiceException {
+        menuList = new HashMap<>();
         MenuFactory menuFactory = MenuFactory.getInstance();
         for (MenuItemDescription menuItem : MenuItemDescription.values()) {
             menuList.put(menuItem.name(), menuFactory.getMenu(menuItem.name()));
         }
-        this.menuList = menuList;
     }
 
     @Override

@@ -55,8 +55,8 @@
     "clazz": "com.epam.hotel.command.impl.clientcommand.AccountCommand",
     "role": "CLIENT"
   },
-  "CHARGE": {
-    "clazz": "com.epam.hotel.command.impl.clientcommand.ChargeCommand",
+  "TOP_UP": {
+    "clazz": "com.epam.hotel.command.impl.clientcommand.TopUpCommand",
     "role": "CLIENT"
   },
   "PAY": {

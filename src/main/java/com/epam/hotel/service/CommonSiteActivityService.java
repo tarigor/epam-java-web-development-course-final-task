@@ -1,15 +1,18 @@
 package com.epam.hotel.service;
 
 import com.epam.hotel.entity.User;
+import com.epam.hotel.service.exception.ServiceException;
 
 /**
- * The interface provides the methods to be implemented by of {@link com.epam.hotel.service.impl.DatabaseConnectionServiceImpl} class.
+ * Provides methods to be implemented in {@link com.epam.hotel.service.impl.CommonSiteActivityServiceImpl} class.
+ * See description of the methods implemented:
+ *
+ * @see com.epam.hotel.service.impl.CommonSiteActivityServiceImpl#checkUserForExistingAndRightPasswordInputted(User)
+ * @see com.epam.hotel.service.impl.CommonSiteActivityServiceImpl#doNewUserRegistration(User)
  */
 public interface CommonSiteActivityService {
-    User checkUserForExistingAndRightPasswordInputted(User user);
+    User checkUserForExistingAndRightPasswordInputted(User user) throws ServiceException;
 
-    void doUserLogout(User user);
-
-    boolean doNewUserRegistration(User user);
+    boolean doNewUserRegistration(User user) throws ServiceException;
 
 }

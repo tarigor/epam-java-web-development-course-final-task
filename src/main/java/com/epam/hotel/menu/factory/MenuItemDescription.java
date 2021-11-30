@@ -1,5 +1,9 @@
 package com.epam.hotel.menu.factory;
 
+/**
+ * Provides an ENUMs of the available menu options
+ * with a key name which is uses on the web pages for internalization function.
+ */
 public enum MenuItemDescription {
     MAIN("menu.main"),
     LOG_IN("menu.login"),

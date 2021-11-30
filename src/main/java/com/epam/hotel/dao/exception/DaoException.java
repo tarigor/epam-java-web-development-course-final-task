@@ -2,6 +2,9 @@ package com.epam.hotel.dao.exception;
 
 import java.security.PrivilegedActionException;
 
+/**
+ * Provides an exception handling of DAO layer.
+ */
 public class DaoException extends Exception {
     /**
      * Constructs a new exception with {@code null} as its detail message.

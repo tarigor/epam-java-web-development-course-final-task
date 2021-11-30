@@ -43,7 +43,7 @@
 								USD</label>
 						</div>
 						<div class="form-wrapper">
-							<a href="<c:url value="command?name=charge&user=${sessionScope.user.getUserID()}"/>"
+							<a href="<c:url value="command?name=top_up&user=${sessionScope.user.getUserID()}"/>"
 							   class="btn btn-success form-control text-center align-middle"
 							   style="text-align: center;color: white"><f:message
 									key="account.charge.button"

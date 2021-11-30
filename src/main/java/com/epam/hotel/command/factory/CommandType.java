@@ -1,5 +1,8 @@
 package com.epam.hotel.command.factory;
 
+/**
+ * ENUMs of the all types of the commands.
+ */
 public enum CommandType {
     LOGIN,
     LOGOUT,
@@ -16,6 +19,6 @@ public enum CommandType {
     CLIENT_CABINET,
     MAKE_PAYMENT,
     ACCOUNT,
-    CHARGE,
+    TOP_UP,
     PAY;
 }

@@ -1,14 +1,14 @@
 package com.epam.hotel.command.factory;
 
 import com.epam.hotel.entity.CommandJsonFile;
+import com.epam.hotel.service.exception.ServiceException;
 import com.epam.hotel.utility.JsonFileHandler;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.NoSuchElementException;
 
 /**
- * The class provides a factory of command receiving vi HTTP from the web pages.
- * The class implemented based on singleton pattern.
+ * Provides the functionality of getting a specific command class based on factory pattern.
  */
 public class CommandFactory {
     private static final CommandFactory instance = new CommandFactory();
@@ -24,23 +24,29 @@ public class CommandFactory {
     }
 
     /**
-     * The method provides a command getting from the command factory.
+     * Provides a command getting from the command factory.
      *
      * @param command String name of the command.
-     * @return A class provided a command implementation.
+     * @return class provides a command implementation.
      */
     public Class getCommand(String command) {
         Class clazz = null;
         try {
             String className = ((LinkedTreeMap) jsonFileHandler.getMapOfCommandFromJson().get(command)).get("clazz").toString();
             clazz = Class.forName(className);
-        } catch (NoSuchElementException | ClassNotFoundException e) {
+        } catch (NoSuchElementException | ClassNotFoundException | ServiceException e) {
             e.fillInStackTrace();
         }
         return clazz;
     }
 
-    public String getCommandRole(String command) {
+    /**
+     * Methods provides a getting of the role type from json file of the specific command.
+     *
+     * @param command String name of the command.
+     * @return a role of the specific command.
+     */
+    public String getCommandRole(String command) throws ServiceException {
         return ((LinkedTreeMap) jsonFileHandler.getMapOfCommandFromJson().get(command)).get("role").toString();
     }
 }

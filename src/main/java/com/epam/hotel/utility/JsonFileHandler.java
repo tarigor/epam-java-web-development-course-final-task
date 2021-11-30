@@ -1,5 +1,6 @@
 package com.epam.hotel.utility;
 
+import com.epam.hotel.service.exception.ServiceException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -8,6 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
+/**
+ * Provides the functionality of getting data from a json file.
+ *
+ * @param <T>
+ */
 public class JsonFileHandler<T> {
     private final Gson gson;
     private final String jsonFilePath;
@@ -18,11 +24,11 @@ public class JsonFileHandler<T> {
     }
 
     /**
-     * Methods provides json file parsing into the HashMap.
+     * Parses a json file into the HashMap.
      *
-     * @return HashMap contains key/value of command name/http command instance)
+     * @return a hashmap contains a result of a json file parsing.
      */
-    public HashMap<String, T> getMapOfCommandFromJson() {
+    public HashMap<String, T> getMapOfCommandFromJson() throws ServiceException {
 //        System.out.println("rootPath->" + Thread.currentThread().getContextClassLoader().
 //                getResource("").getPath());
         // for tomcat run
@@ -38,7 +44,7 @@ public class JsonFileHandler<T> {
         try {
             fileContent = new String(Files.readAllBytes(Paths.get(rootPath + jsonFilePath)));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ServiceException(e);
         }
         return gson.fromJson(fileContent, new TypeToken<HashMap<String, T>>() {
         }.getType());

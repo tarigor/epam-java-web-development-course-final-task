@@ -1,6 +1,7 @@
 package com.epam.hotel.connectionmanager.connectionpool.impl;
 
 import com.epam.hotel.connectionmanager.connectionpool.ConnectionPool;
+import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.service.impl.DatabaseConnectionServiceImpl;
 import com.epam.hotel.service.impl.PropertiesFileServiceImpl;
 import com.epam.hotel.service.impl.ReusablePoolServiceImpl;
@@ -9,7 +10,7 @@ import org.apache.log4j.Logger;
 import java.sql.Connection;
 
 /**
- * The class provides the methods handling a connection pool.
+ * Provides the functionality of the connection pool for accessing to database.
  */
 public class ConnectionPoolImpl implements ConnectionPool {
     private static final Logger logger = Logger.getLogger(ConnectionPoolImpl.class);
@@ -26,7 +27,7 @@ public class ConnectionPoolImpl implements ConnectionPool {
     }
 
     /**
-     * The method provides an initialization of the {@link ConnectionPoolImpl} and {@link DatabaseConnectionServiceImpl} classes.
+     * Initializes of the {@link ConnectionPoolImpl} and {@link DatabaseConnectionServiceImpl} classes.
      *
      * @param propertiesFileService     an instance of the {@link PropertiesFileServiceImpl} class.
      * @param databaseConnectionService an instance of the {@link DatabaseConnectionServiceImpl} class.
@@ -41,19 +42,19 @@ public class ConnectionPoolImpl implements ConnectionPool {
     }
 
     /**
-     * The method provides a connection getting from the connection pool.
+     * Gets a new connection from the connection pool.
      *
-     * @return a connection instance.
+     * @return an instance of the connection.
      */
     @Override
-    public Connection getConnectionFromPool() {
+    public Connection getConnectionFromPool() throws DaoException {
         return reusablePoolService.getConnection();
     }
 
     /**
-     * The method provides the connection release after using of it.
+     * Releases the connection after using of it.
      *
-     * @param connection the connection instance will going to be released.
+     * @param connection which is going to be released.
      */
     @Override
     public void releaseConnection(Connection connection) {

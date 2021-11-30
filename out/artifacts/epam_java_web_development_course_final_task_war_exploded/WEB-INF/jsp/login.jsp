@@ -36,14 +36,14 @@
 							<input type="hidden" name="dateFrom" value="${clientRequest.getDateFrom()}">
 							<input type="hidden" name="dateTo" value="${clientRequest.getDateTo()}">
 						</c:if>
-						<h3 class="text-center">Log-in</h3>
+						<h3 class="text-center"><f:message key="login.login" bundle="${local}"/></h3>
 						<c:if test="${registrationCompleted}">
 							<label style="text-align: center;font-size: medium;color: #62C584"><f:message
 									key="login.registration.completed"
 									bundle="${local}"/></label>
 						</c:if>
 						<div class="form-wrapper">
-							<label for="">Email</label>
+							<label for=""><f:message key="email" bundle="${local}"/></label>
 							<input type="text" name="email" class="form-control">
 							<c:if test="${emailState}">
 								<label class="text-warning"
@@ -51,7 +51,7 @@
 							</c:if>
 						</div>
 						<div class="form-wrapper">
-							<label for="">Password</label>
+							<label for=""><f:message key="password" bundle="${local}"/></label>
 							<input type="password" name="password" class="form-control">
 							<c:if test="${passwordState}">
 								<label class="text-warning"

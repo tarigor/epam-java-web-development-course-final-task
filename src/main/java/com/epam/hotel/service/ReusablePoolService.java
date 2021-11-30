@@ -1,12 +1,19 @@
 package com.epam.hotel.service;
 
+import com.epam.hotel.dao.exception.DaoException;
+import com.epam.hotel.service.impl.ReusablePoolServiceImpl;
+
 import java.sql.Connection;
 
 /**
- * The interface provides the methods to be implemented by of {@link com.epam.hotel.service.impl.ReusablePoolServiceImpl} class.
+ * Provides methods to be implemented in {@link com.epam.hotel.service.impl.ReusablePoolServiceImpl} class.
+ * See description of the methods implemented:
+ *
+ * @see ReusablePoolServiceImpl#getConnection()
+ * @see com.epam.hotel.service.impl.ReusablePoolServiceImpl#releaseConnection(Connection)
  */
 public interface ReusablePoolService {
-    Connection getConnection();
+    Connection getConnection() throws DaoException;
 
     void releaseConnection(Connection connection);
 }

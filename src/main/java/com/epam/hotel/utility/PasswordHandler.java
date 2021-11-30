@@ -1,5 +1,6 @@
 package com.epam.hotel.utility;
 
+import com.epam.hotel.service.exception.ServiceException;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -13,6 +14,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
+/**
+ * Provides the functionality of encrypting/decrypting of the user password.
+ */
 public class PasswordHandler {
     public static final String DESEDE_ENCRYPTION_SCHEME = "DESede";
     private static final String UNICODE_FORMAT = "UTF8";
@@ -23,7 +27,7 @@ public class PasswordHandler {
 
     }
 
-    public PasswordHandler setEncryptionKey(int hash) {
+    public PasswordHandler setEncryptionKey(int hash) throws ServiceException {
         try {
             String myEncryptionKey = generateKey(hash);
             String myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
@@ -33,7 +37,7 @@ public class PasswordHandler {
             cipher = Cipher.getInstance(myEncryptionScheme);
             key = skf.generateSecret(ks);
         } catch (InvalidKeySpecException | InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException | NoSuchPaddingException e) {
-            e.printStackTrace();
+            throw new ServiceException(e);
         }
         return this;
     }
@@ -43,7 +47,13 @@ public class PasswordHandler {
         return key.append(hash).append(hash).append(hash).toString();
     }
 
-    public String encryptPassword(String unencryptedString) {
+    /**
+     * Encrypts a password.
+     *
+     * @param unencryptedString an unencrypted password.
+     * @return an encrypted password.
+     */
+    public String encryptPassword(String unencryptedString) throws ServiceException {
         String encryptedString = null;
         try {
             cipher.init(Cipher.ENCRYPT_MODE, key);
@@ -51,13 +61,18 @@ public class PasswordHandler {
             byte[] encryptedText = cipher.doFinal(plainText);
             encryptedString = new String(Base64.encodeBase64(encryptedText));
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ServiceException(e);
         }
         return encryptedString;
     }
 
-
-    public String decryptPassword(String encryptedString) {
+    /**
+     * Decrypts a password.
+     *
+     * @param encryptedString an encrypted password.
+     * @return a decrypted password.
+     */
+    public String decryptPassword(String encryptedString) throws ServiceException {
         String decryptedText = null;
         try {
             cipher.init(Cipher.DECRYPT_MODE, key);
@@ -65,7 +80,7 @@ public class PasswordHandler {
             byte[] plainText = cipher.doFinal(encryptedText);
             decryptedText = new String(plainText);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ServiceException(e);
         }
         return decryptedText;
     }

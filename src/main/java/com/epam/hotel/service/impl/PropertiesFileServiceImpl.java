@@ -1,24 +1,26 @@
 package com.epam.hotel.service.impl;
 
 import com.epam.hotel.service.PropertyFileService;
+import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 /**
- * The class provides the a method for access to a properties files.
+ * Provides the functionality to access a properties file.
  */
 public class PropertiesFileServiceImpl implements PropertyFileService {
+    private static final Logger LOGGER = Logger.getLogger(PropertiesFileServiceImpl.class);
     private final String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath().
             replace("/out/artifacts/epam_java_web_development_course_final_task_war_exploded/WEB-INF/classes/",
                     "/src/main/resources/");
 
     /**
-     * The method gets a certain properties file from the resources folder.
+     * Gets a specific properties file from a resources folder.
      *
-     * @param propertiesPath the path to the certain properties file.
-     * @return an instance of the certain properties class.
+     * @param propertiesPath a path to the specific properties file.
+     * @return an instance of {@link Properties} class.
      */
     @Override
     public Properties getProperties(String propertiesPath) {
@@ -27,7 +29,7 @@ public class PropertiesFileServiceImpl implements PropertyFileService {
         try {
             properties.load(new FileInputStream(applicationPath));
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return properties;
     }

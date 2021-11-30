@@ -1,5 +1,7 @@
 package com.epam.hotel.entity;
 
+import com.epam.hotel.types.OrderStatus;
+
 import java.sql.Date;
 
 public class ClientRequest {

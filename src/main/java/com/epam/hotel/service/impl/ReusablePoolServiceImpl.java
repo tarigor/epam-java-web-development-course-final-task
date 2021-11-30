@@ -1,5 +1,6 @@
 package com.epam.hotel.service.impl;
 
+import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.service.ReusablePoolService;
 import org.apache.log4j.Logger;
 
@@ -9,7 +10,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 /**
- * The class provides the methods for handling with a pool of the connections for accessing to the database.
+ * Provides the functionality to access a database using a connection pool.
  */
 public class ReusablePoolServiceImpl implements ReusablePoolService {
     private final Logger logger = Logger.getLogger(ReusablePoolServiceImpl.class);
@@ -34,12 +35,12 @@ public class ReusablePoolServiceImpl implements ReusablePoolService {
     }
 
     /**
-     * The method gets a single connection from the pool.
+     * Gets a single connection from the connection pool.
      *
      * @return an instance of the connection from the connection pool.
      */
     @Override
-    public synchronized Connection getConnection() {
+    public synchronized Connection getConnection() throws DaoException {
         long now = System.currentTimeMillis();
         Connection connection;
         if (freeConnections.size() > 0) {
@@ -73,22 +74,21 @@ public class ReusablePoolServiceImpl implements ReusablePoolService {
     }
 
     /**
-     * The method checks if the connection is using now.
+     * Checks that the connection is not closed now.
      *
-     * @param connection an instance of the connection which is going to be checked for using.
+     * @param connection an instance of the connection which is going to be checked for close state.
      * @return usage test result.
      */
-    private boolean checkIfConnectionIsUsing(Connection connection) {
+    private boolean checkIfConnectionIsUsing(Connection connection) throws DaoException {
         try {
             return (!connection.isClosed());
         } catch (SQLException e) {
-            e.printStackTrace();
-            return (false);
+            throw new DaoException(e);
         }
     }
 
     /**
-     * The method releases a certain connection after usage of it.
+     * Releases a specific connection after usage of it.
      *
      * @param connection an instance of the connection which is going to be released.
      */

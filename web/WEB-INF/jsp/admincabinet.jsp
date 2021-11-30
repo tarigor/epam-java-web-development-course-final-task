@@ -5,7 +5,8 @@
 <f:setBundle basename="local.menu" var="local"/>
 <html style="font-size: 16px;">
 <head>
-	<title>Admin Cabinet</title>
+	<title><f:message
+			key="admin.cabinet.page.name" bundle="${local}"/></title>
 	<link rel="stylesheet" href="../../css/Admin-Cabinet.css" media="screen">
 	<meta property="og:title" content="Admin Cabinet">
 	<c:import url="common/head.jsp"/>
@@ -19,28 +20,30 @@
 			<f:message
 					key="admin.cabinet.name" bundle="${local}"/></h3>
 		<br>
-		<a class="u-align-center u-custom-font u-font-georgia u-text u-text-default u-text-1" style="color: white">REQUESTS</a>
+		<a class="u-align-center u-custom-font u-font-georgia u-text u-text-default u-text-1"
+		   style="color: white"><f:message
+				key="admin.cabinet.requests" bundle="${local}"/></a>
 		<table class="u-align-center table"
 		       style="margin-left: auto;margin-right: auto;text-align: center">
 			<thead class="u-grey-80 u-opacity u-opacity-70">
 			<tr class="text-center" style="font-size: x-small">
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.request.col1"
+				<th scope="col" style="text-align: center"><f:message key="request.id"
 				                                                      bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.request.col2"
+				<th scope="col" style="text-align: center"><f:message key="first.name"
 				                                                      bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.request.col3"
+				<th scope="col" style="text-align: center"><f:message key="last.name"
 				                                                      bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.request.col4"
+				<th scope="col" style="text-align: center"><f:message key="email"
 				                                                      bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.request.col5"
+				<th scope="col" style="text-align: center"><f:message key="persons"
 				                                                      bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.request.col6"
+				<th scope="col" style="text-align: center"><f:message key="room.class"
 				                                                      bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.request.col7"
+				<th scope="col" style="text-align: center"><f:message key="check.in.date"
 				                                                      bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.request.col8"
+				<th scope="col" style="text-align: center"><f:message key="check.out.date"
 				                                                      bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.request.col9"
+				<th scope="col" style="text-align: center"><f:message key="status.of.request"
 				                                                      bundle="${local}"/></th>
 				<th></th>
 			</tr>
@@ -81,21 +84,22 @@
 			</tbody>
 		</table>
 		<br>
-		<a class="u-align-center u-custom-font u-font-georgia u-text u-text-default u-text-1" style="color: white">ORDERS</a>
+		<a class="u-align-center u-custom-font u-font-georgia u-text u-text-default u-text-1"
+		   style="color: white"><f:message key="admin.cabinet.orders" bundle="${local}"/></a>
 		<table class="u-align-center table"
 		       style="margin-left: auto;margin-right: auto;text-align: center">
 			<thead class="u-grey-80 u-opacity u-opacity-70">
 			<tr class="text-center" style="font-size: x-small">
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.col1" bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.col2" bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.col3" bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.col4" bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.col5" bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.col6" bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.col7" bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.col8" bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.col9" bundle="${local}"/></th>
-				<th scope="col" style="text-align: center"><f:message key="admin.cabinet.col10" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="order.id" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="request.id" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="first.name" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="last.name" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="email" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="room.id" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="room.class" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="check.in.date" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="check.out.date" bundle="${local}"/></th>
+				<th scope="col" style="text-align: center"><f:message key="status.of.booking" bundle="${local}"/></th>
 				<th></th>
 			</tr>
 			</thead>
@@ -118,12 +122,12 @@
 							<c:if test="${clientOrder.isCanBeCanceled()}">
 								<a href="<c:url value="command?name=order_handling&type=reject&orderID=${clientOrder.getOrderID()}&roomID=${clientOrder.getRoomID()}"/>">
 									<button type="button" class="btn btn-danger"><f:message
-											key="admin.cabinet.reject"
+											key="reject"
 											bundle="${local}"/></button>
 								</a>
 								<a href="<c:url value="command?name=order_handling&type=approve&orderID=${clientOrder.getOrderID()}&roomID=${clientOrder.getRoomID()}"/>">
 									<button type="button" class="btn btn-success"><f:message
-											key="admin.cabinet.approve"
+											key="approve"
 											bundle="${local}"/></button>
 								</a>
 							</c:if>

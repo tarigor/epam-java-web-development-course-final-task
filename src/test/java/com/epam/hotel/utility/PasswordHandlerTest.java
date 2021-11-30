@@ -2,13 +2,14 @@ package com.epam.hotel.utility;
 
 
 import com.epam.hotel.entity.User;
-import com.epam.hotel.entity.UserType;
+import com.epam.hotel.service.exception.ServiceException;
+import com.epam.hotel.types.UserType;
 import org.junit.jupiter.api.Test;
 
 class PasswordHandlerTest {
 
     @Test
-    void encryptPassword() {
+    void encryptPassword() throws ServiceException {
         User user = new User(0, "Igor", "Taren", UserType.ADMIN, "user@tut.by", "12345678");
         System.out.println("hash->" + user.hashCode());
 
@@ -24,7 +25,7 @@ class PasswordHandlerTest {
     }
 
     @Test
-    void decryptPassword() {
+    void decryptPassword() throws ServiceException {
         User user = new User(0, "Igor", "Taren", UserType.ADMIN, "user@tut.by", "12345678");
         System.out.println("hash->" + user.hashCode());
 

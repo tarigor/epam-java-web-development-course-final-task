@@ -1,7 +1,6 @@
 package com.epam.hotel.controller.filter;
 
 import com.epam.hotel.command.BaseCommand;
-import com.epam.hotel.menu.impl.SiteMenuServiceImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
@@ -12,14 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The class provides the methods of handling request filtering in depends on navigation command receiving
- * from the menu of the web page before servlet initialization and implements the {@link Filter} interface.
+ * Provides the functionality of handling of the request filtering in depends on navigation command receiving
+ * from the menu of the web page before servlet initialization.
  */
 public class MenuFilter extends BaseCommand implements Filter {
     public static final String NAME = "name";
     public static final String DEFAULT_LANGUAGE = "en_US";
-    private static Logger logger = Logger.getLogger(MenuFilter.class);
-    private SiteMenuServiceImpl siteMenuService = new SiteMenuServiceImpl();
+    private static final Logger logger = Logger.getLogger(MenuFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

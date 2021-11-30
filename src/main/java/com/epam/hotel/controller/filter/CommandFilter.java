@@ -3,6 +3,7 @@ package com.epam.hotel.controller.filter;
 import com.epam.hotel.command.BaseCommand;
 import com.epam.hotel.command.factory.CommandFactory;
 import com.epam.hotel.entity.User;
+import com.epam.hotel.service.exception.ServiceException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
@@ -11,13 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * The class provides the methods of handling request filtering in depends on the receiving command
- * from the web page before servlet initialization and implements the {@link Filter} interface.
+ * Provides the functionality  of handling of the request filtering in depends on the receiving command
+ * from the web page before servlet initialization.
  */
 public class CommandFilter extends BaseCommand implements Filter {
     public static final String COMMAND_NAME = "name";
-    public static final String CLASS_NAME = "className";
-    private static final Logger logger = Logger.getLogger(CommandFilter.class);
+    private static final Logger LOGGER = Logger.getLogger(CommandFilter.class);
     private CommandFactory commandFactory;
 
     @Override
@@ -34,19 +34,26 @@ public class CommandFilter extends BaseCommand implements Filter {
 
         String command = request.getParameter(COMMAND_NAME).toUpperCase();
         request.setAttribute(COMMAND_NAME, command);
-        logger.info(String.format("The following command has been detected - /%s", command));
+        LOGGER.info(String.format("The following command has been detected - /%s", command));
 
 
-        if (checkCommandRole(request, command)) {
-            filterChain.doFilter(request, response);
-        } else {
-            System.out.println("you are not authorized to do this");
-            request.setAttribute("errorMessage", "not.authorized.access");
-            try {
-                servletRequest.getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
+        try {
+            if (checkCommandRole(request, command)) {
+                filterChain.doFilter(request, response);
+            } else {
+                System.out.println("you are not authorized to do this");
+                request.setAttribute("errorMessage", "not.authorized.access");
+                try {
+                    servletRequest.getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
+                } catch (ServletException | IOException e) {
+                    response.getWriter().print("<html><head><title>A Critical Error Has Happened!</title></head>");
+                    response.getWriter().print("<body>A Critical Error Has Happened!</body>");
+                    response.getWriter().println("</html>");
+                    LOGGER.error(e);
+                }
             }
+        } catch (ServiceException e) {
+            e.printStackTrace();
         }
     }
 
@@ -55,7 +62,7 @@ public class CommandFilter extends BaseCommand implements Filter {
 
     }
 
-    private boolean checkCommandRole(HttpServletRequest req, String command) {
+    private boolean checkCommandRole(HttpServletRequest req, String command) throws ServiceException {
         String commandRole = CommandFactory.getInstance().getCommandRole(command);
         System.out.println("command role -> " + commandRole);
         User user = (User) req.getSession().getAttribute("user");

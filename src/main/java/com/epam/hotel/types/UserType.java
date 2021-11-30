@@ -1,5 +1,8 @@
-package com.epam.hotel.entity;
+package com.epam.hotel.types;
 
+/**
+ * Provides an ENUMs of the available user's typeis.
+ */
 public enum UserType {
     ADMIN("Administrator"),
     CLIENT("Client");

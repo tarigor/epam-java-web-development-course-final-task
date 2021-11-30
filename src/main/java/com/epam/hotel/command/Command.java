@@ -1,13 +1,15 @@
 package com.epam.hotel.command;
 
+import com.epam.hotel.service.exception.ServiceException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.rmi.ServerException;
 
 /**
- * Common interface of the commands provides a single method - execute.
+ * Provides the single method - execute{@link Command#execute(HttpServletRequest, HttpServletResponse)}.
  */
 public interface Command {
-    void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException;
+    void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException, ServiceException;
 }

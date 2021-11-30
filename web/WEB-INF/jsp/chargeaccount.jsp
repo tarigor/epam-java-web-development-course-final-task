@@ -28,7 +28,8 @@
 			<br>
 			<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
 				<div class="inner">
-					<form action="${pageContext.request.contextPath}/command?name=charge&userID=${sessionScope.user.getUserID()}" method="post">
+					<form action="${pageContext.request.contextPath}/command?name=charge&userID=${sessionScope.user.getUserID()}"
+					      method="post">
 						<h3 class="text-center"><f:message key="account.page.name" bundle="${local}"/></h3>
 						<div class="form-wrapper">
 							<a class=" text-center"><f:message key="account.holder" bundle="${local}"/>:</a>
@@ -47,7 +48,8 @@
 						</div>
 						<div class="form-wrapper">
 							<button type="submit"
-							   class="btn btn-success form-control text-center align-middle" style="text-align: center"><f:message
+							        class="btn btn-success form-control text-center align-middle"
+							        style="text-align: center"><f:message
 									key="account.charge.button"
 									bundle="${local}"/></button>
 						</div>

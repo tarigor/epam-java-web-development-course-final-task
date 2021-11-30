@@ -43,7 +43,7 @@
 								USD</label>
 						</div>
 						<div class="form-wrapper">
-							<a href="<c:url value="command?name=charge&user=${sessionScope.user.getUserID()}"/>"
+							<a href="<c:url value="command?name=top_up&user=${sessionScope.user.getUserID()}"/>"
 							   class="btn btn-success form-control text-center align-middle"
 							   style="text-align: center;color: white"><f:message
 									key="account.charge.button"
@@ -63,19 +63,19 @@
 							</thead>
 							<tbody>
 							<tr>
-								<th scope="row"><f:message key="client.cabinet.col3" bundle="${local}"/></th>
+								<th scope="row"><f:message key="room.id" bundle="${local}"/></th>
 								<td>${roomID}</td>
 							</tr>
 							<tr>
-								<th scope="row"><f:message key="client.cabinet.col4" bundle="${local}"/></th>
+								<th scope="row"><f:message key="room.class" bundle="${local}"/></th>
 								<td>${roomClass}</td>
 							</tr>
 							<tr>
-								<th scope="row"><f:message key="client.cabinet.col5" bundle="${local}"/></th>
+								<th scope="row"><f:message key="check.in.date" bundle="${local}"/></th>
 								<td>${dateFrom}</td>
 							</tr>
 							<tr>
-								<th scope="row"><f:message key="client.cabinet.col6" bundle="${local}"/></th>
+								<th scope="row"><f:message key="check.out.date" bundle="${local}"/></th>
 								<td>${dateTo}</td>
 							</tr>
 							<tr>

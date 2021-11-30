@@ -1,5 +1,8 @@
 package com.epam.hotel.service.factory;
 
+/**
+ * Provides an ENUMs of the available services.
+ */
 public enum ServiceType {
     COMMON_SITE_ACTIVITY_SERVICE,
     DATABASE_CONNECTION_SERVICE,

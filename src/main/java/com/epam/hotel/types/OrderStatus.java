@@ -1,5 +1,8 @@
-package com.epam.hotel.entity;
+package com.epam.hotel.types;
 
+/**
+ * Provides an ENUMs of the available order's statuses.
+ */
 public enum OrderStatus {
     APPROVED_WAITING_FOR_PAYMENT("client.cabinet.approved"),
     WAITING_FOR_APPROVAL("client.cabinet.waiting"),
