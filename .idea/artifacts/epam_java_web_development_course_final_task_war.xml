@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" build-on-make="true" name="epam-java-web-development-course-final-task:war">
-    <output-path>$PROJECT_DIR$/out/artifacts/epam_java_web_development_course_final_task_war</output-path>
-    <root id="archive" name="epam-java-web-development-course-final-task_war.war">
-      <element id="artifact" artifact-name="epam-java-web-development-course-final-task:war exploded" />
-    </root>
-  </artifact>
-</component>
