@@ -33,7 +33,7 @@ public class MenuFactory {
             MenuItemDescription menuItemDescription = MenuItemDescription.valueOf(((LinkedTreeMap) jsonFileHandler.getMapOfCommandFromJson().get(menuItem)).get("menuItemDescription").toString());
             MenuRole menuRole = MenuRole.valueOf(((LinkedTreeMap) jsonFileHandler.getMapOfCommandFromJson().get(menuItem)).get("role").toString());
             return new Menu(id, pageCommandName, menuItemDescription, menuRole);
-        }catch (ServiceException e){
+        } catch (ServiceException e) {
             throw new ServiceException(e);
         }
     }

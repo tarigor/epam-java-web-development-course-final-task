@@ -33,4 +33,15 @@ public class PropertiesFileServiceImpl implements PropertyFileService {
         }
         return properties;
     }
+
+    public Properties getProperties(String propertiesPath, String rootPath) {
+        String applicationPath = String.format("%s%s", rootPath, propertiesPath);
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileInputStream(applicationPath));
+        } catch (IOException e) {
+            LOGGER.error(e);
+        }
+        return properties;
+    }
 }

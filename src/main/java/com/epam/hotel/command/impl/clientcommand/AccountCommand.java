@@ -28,7 +28,6 @@ public class AccountCommand extends BaseCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException, ServiceException {
         boolean orderPrepare = Boolean.parseBoolean(request.getParameter("orderPrepare"));
-        System.out.println("roomID->" + request.getParameter("roomID"));
         User user = updateClient(request);
         if (orderPrepare) {
             int roomID = Integer.parseInt(request.getParameter("roomID"));
@@ -48,6 +47,9 @@ public class AccountCommand extends BaseCommand implements Command {
         } else {
             if (request.getParameter("result") != null) {
                 request.setAttribute("charged", true);
+            }
+            if (request.getParameter("paid") != null) {
+                request.setAttribute("paid", true);
             }
             doRedirect(request, response, ACCOUNT_PAGE);
         }

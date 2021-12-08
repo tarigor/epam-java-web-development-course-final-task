@@ -17,8 +17,8 @@ public class OrderDAOImpl extends BaseDao implements OrderDAO {
     private static final String INSERT_ORDER_INTO_TWO_TABLES = "call insert_new_order(?,?,?,?,?,?,?)";
     private static final String INSERT_ORDER_INTO_SINGLE_TABLE =
             "insert into `order` (client_order_id, request_id, room_id, check_in_date, check_out_date, order_status) VALUES (?,?,?,?,?,?)";
-    private static final String CHANGE_REQUEST_STATUS = "UPDATE hotelDB.request t SET t.request_status = ? WHERE t.request_id = ?";
-    private static final String CHANGE_ORDER_STATUS = "UPDATE hotelDB.`order` t SET t.order_status = ? WHERE t.client_order_id = ? AND t.request_id = ? AND t.room_id =?";
+    private static final String CHANGE_REQUEST_STATUS = "UPDATE request t SET t.request_status = ? WHERE t.request_id = ?";
+    private static final String CHANGE_ORDER_STATUS = "UPDATE `order` t SET t.order_status = ? WHERE t.client_order_id = ? AND t.request_id = ? AND t.room_id =?";
     private static final String GET_ALL_ORDERS_OF_ALL_CLIENTS = "" +
             "SELECT client_order_id,\n" +
             "       request_id,\n" +
@@ -36,7 +36,7 @@ public class OrderDAOImpl extends BaseDao implements OrderDAO {
             "         join client_order co on `order`.client_order_id = co.client_order_room_id\n" +
             "         join room r on `order`.room_id = r.id\n" +
             "         join room_class rc on r.room_class_id = rc.id";
-    private static final String CHANGE_ORDER_STATUS_V2 = "UPDATE hotelDB.`order` t SET t.order_status = ? WHERE t.client_order_id = ? AND t.room_id = ?";
+    private static final String CHANGE_ORDER_STATUS_V2 = "UPDATE `order` t SET t.order_status = ? WHERE t.client_order_id = ? AND t.room_id = ?";
 
     /**
      * Provides a inserting the records into a two tables "client_order" and "order" tables using stored procedure.
@@ -134,7 +134,7 @@ public class OrderDAOImpl extends BaseDao implements OrderDAO {
             preparedStatement.setInt(2, orderID);
             preparedStatement.setInt(3, requestID);
             preparedStatement.setInt(4, roomID);
-            count=preparedStatement.executeUpdate();
+            count = preparedStatement.executeUpdate();
             return count;
         } catch (SQLException e) {
             throw new DaoException(e);

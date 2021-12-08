@@ -8,12 +8,13 @@ import com.epam.hotel.service.impl.ReusablePoolServiceImpl;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
+import java.util.Properties;
 
 /**
  * Provides the functionality of the connection pool for accessing to database.
  */
 public class ConnectionPoolImpl implements ConnectionPool {
-    private static final Logger logger = Logger.getLogger(ConnectionPoolImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(ConnectionPoolImpl.class);
     private static final ConnectionPoolImpl instance = new ConnectionPoolImpl();
     private static final String DATABASE_PROPERTIES = "database.properties";
     private static final String CONNECTION_EXPIRATION_TIME = "connection.expiration.time";
@@ -35,10 +36,20 @@ public class ConnectionPoolImpl implements ConnectionPool {
      */
     public void init(PropertiesFileServiceImpl propertiesFileService, DatabaseConnectionServiceImpl databaseConnectionService, ReusablePoolServiceImpl reusablePoolService) {
         this.reusablePoolService = reusablePoolService;
-        databaseConnectionService.init(propertiesFileService.getProperties(DATABASE_PROPERTIES));
+        Properties properties = propertiesFileService.getProperties(DATABASE_PROPERTIES);
+        LOGGER.info(String.format("database.url -> %s", properties.getProperty("database.url")));
+        databaseConnectionService.init(properties);
         reusablePoolService.setDatabaseConnectionService(databaseConnectionService);
         reusablePoolService.setExpirationTime(Long.parseLong(propertiesFileService.getProperties(DATABASE_PROPERTIES).getProperty(CONNECTION_EXPIRATION_TIME)));
-        logger.info("Connection Pool has been initialised");
+        LOGGER.info("Connection Pool has been initialised");
+    }
+
+    public void initForTest(DatabaseConnectionServiceImpl databaseConnectionService, ReusablePoolServiceImpl reusablePoolService, Properties properties) {
+        this.reusablePoolService = reusablePoolService;
+        databaseConnectionService.init(properties);
+        reusablePoolService.setDatabaseConnectionService(databaseConnectionService);
+        reusablePoolService.setExpirationTime(Long.parseLong(properties.getProperty(CONNECTION_EXPIRATION_TIME)));
+        LOGGER.info("Connection Pool has been initialised");
     }
 
     /**

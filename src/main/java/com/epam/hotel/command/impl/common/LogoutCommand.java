@@ -4,7 +4,6 @@ import com.epam.hotel.command.BaseCommand;
 import com.epam.hotel.command.Command;
 import com.epam.hotel.menu.factory.MenuRole;
 import com.epam.hotel.menu.impl.SiteMenuServiceImpl;
-import com.epam.hotel.service.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +14,7 @@ import java.rmi.ServerException;
  * Provides the functionality of the logout action.
  */
 public class LogoutCommand extends BaseCommand implements Command {
-    private static final String MAIN_PAGE = "index";
+    private static final String LOGIN_PAGE = "login";
 
     /**
      * Handles a GET or POST request received via HTTP from a WEB page.
@@ -26,10 +25,9 @@ public class LogoutCommand extends BaseCommand implements Command {
      * @throws IOException     when an input or output error is detected when the servlet handles the request.
      */
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException, ServiceException {
-        SiteMenuServiceImpl siteMenuService = new SiteMenuServiceImpl();
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException {
         request.getSession().invalidate();
         request.getSession().setAttribute("menuList", SiteMenuServiceImpl.getInstance().getMenuListCollectedByRoleSortedByID(MenuRole.COMMON, MenuRole.ANYONE_NOT_LOGGED));
-        doRedirect(request, response, MAIN_PAGE);
+        doRedirect(request, response, LOGIN_PAGE);
     }
 }

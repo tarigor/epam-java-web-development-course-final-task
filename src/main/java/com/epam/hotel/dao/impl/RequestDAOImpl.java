@@ -6,9 +6,7 @@ import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.entity.ClientRequest;
 import com.epam.hotel.types.OrderStatus;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +25,7 @@ public class RequestDAOImpl extends BaseDao implements RequestDAO {
             "JOIN client_request cr on request.request_id = cr.client_request_id\n" +
             "JOIN user u on cr.client_r_id = u.id\n" +
             "where request_id = ? and email= ?";
-
+    private static final String INSERT_NEW_REQUEST = "call insert_new_request(?,?,?,?,?,?)";
 
     /**
      * Provides the functionality of getting of all client requests from the database.
@@ -96,5 +94,35 @@ public class RequestDAOImpl extends BaseDao implements RequestDAO {
         return clientRequest;
     }
 
+    /**
+     * Provides an inserting a new request.
+     *
+     * @param clientID  a client ID belongs to the request.
+     * @param persons   the persons amount belongs to the request.
+     * @param roomClass a room class belongs to the request.
+     * @param dateFrom  a date from which room has requested.
+     * @param dateTo    a date till which room has requested.
+     * @throws DaoException in case of error occurs while accessing to database.
+     */
+    @Override
+    public int insertRequest(long clientID, int persons, String roomClass, Date dateFrom, Date dateTo) throws DaoException {
+        int requestID = 0;
+        try (CallableStatement callableStatement = connection.prepareCall(INSERT_NEW_REQUEST)) {
+            callableStatement.setLong(1, clientID);
+            callableStatement.setInt(2, persons);
+            callableStatement.setString(3, roomClass);
+            callableStatement.setDate(4, dateFrom);
+            callableStatement.setDate(5, dateTo);
+            callableStatement.setString(6, OrderStatus.WAITING_FOR_APPROVAL.name());
+            callableStatement.executeQuery();
+            ResultSet resultSet = callableStatement.getResultSet();
+            while (resultSet.next()) {
+                requestID = resultSet.getInt(1);
+            }
+            return requestID;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
 
 }

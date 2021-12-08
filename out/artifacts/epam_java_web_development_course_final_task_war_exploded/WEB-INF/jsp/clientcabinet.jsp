@@ -3,13 +3,13 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <f:setLocale value="${sessionScope.language}" scope="session"/>
-<f:setBundle basename="local.menu" var="local"/>
+<f:setBundle basename="local.local" var="local"/>
 
 <html style="font-size: 16px;">
 <head>
 	<title><f:message key="client.cabinet.page.name"
 	                  bundle="${local}"/></title>
-	<link rel="stylesheet" href="../../css/Client-Cabinet.css" media="screen">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/Client-Cabinet.css" media="screen">
 	<meta property="og:title" content="Client Cabinet">
 	<c:import url="common/head.jsp"/>
 </head>
@@ -57,7 +57,7 @@
 							bundle="${local}"/></th>
 					<th style="text-align: center">
 						<c:if test="${clientRequest.isProcessed()}">
-							<a href="<c:url value="command?name=cancel_request&requestID=${clientRequest.getRequestID()}"/>"
+							<a href="<c:url value="${pageContext.request.contextPath}/command?name=cancel_request&requestID=${clientRequest.getRequestID()}"/>"
 							   class="btn btn-danger">
 								<f:message key="cancel" bundle="${local}"/>
 							</a>
@@ -98,7 +98,7 @@
 					<th style="text-align: center">
 						<a>
 							<c:if test="${clientOrder.isPaymentRequired()}">
-								<a href="<c:url value="command?name=account
+								<a href="<c:url value="${pageContext.request.contextPath}/command?name=account
 								&orderPrepare=true
 								&orderID=${clientOrder.getOrderID()}
 								&requestID=${clientOrder.getRequestID()}

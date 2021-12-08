@@ -17,7 +17,6 @@ import java.util.HashMap;
  * Provides the fields declaration which can be used by child classes.
  */
 public abstract class BaseCommand {
-    private static final Logger LOGGER = Logger.getLogger(BaseCommand.class);
     protected static final CommonSiteActivityService commonSiteActivityService =
             (CommonSiteActivityServiceImpl) ServiceFactory.getInstance().getServiceObjectsMap().get(ServiceType.COMMON_SITE_ACTIVITY_SERVICE);
     protected static final ClientServiceImpl clientService =
@@ -25,10 +24,10 @@ public abstract class BaseCommand {
     protected static final RoomServiceImpl roomService =
             (RoomServiceImpl) ServiceFactory.getInstance().getServiceObjectsMap().get(ServiceType.ROOM_SERVICE);
     protected static final BookServiceImpl bookService =
-            (BookServiceImpl)ServiceFactory.getInstance().getServiceObjectsMap().get(ServiceType.BOOK_SERVICE);
+            (BookServiceImpl) ServiceFactory.getInstance().getServiceObjectsMap().get(ServiceType.BOOK_SERVICE);
     protected static final AdminServiceImpl adminService =
             (AdminServiceImpl) ServiceFactory.getInstance().getServiceObjectsMap().get(ServiceType.ADMIN_SERVICE);
-
+    private static final Logger LOGGER = Logger.getLogger(BaseCommand.class);
     protected static HashMap<String, Object> attributesMap = new HashMap<>();
 
     /**
@@ -43,7 +42,7 @@ public abstract class BaseCommand {
         try {
             storeAttributesInMap(request);
             request.getSession().setAttribute("lastpage", pageName);
-            request.getRequestDispatcher(String.format("WEB-INF/jsp/%s.jsp", pageName)).forward(request, response);
+            request.getRequestDispatcher(request.getContextPath() + String.format("/WEB-INF/jsp/%s.jsp", pageName)).forward(request, response);
         } catch (ServletException e) {
             response.getWriter().print("<html><head><title>A Critical Error Has Happened!</title></head>");
             response.getWriter().print("<body>A Critical Error Has Happened!</body>");

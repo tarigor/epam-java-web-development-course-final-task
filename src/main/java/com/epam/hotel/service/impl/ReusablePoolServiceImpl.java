@@ -13,7 +13,7 @@ import java.util.Hashtable;
  * Provides the functionality to access a database using a connection pool.
  */
 public class ReusablePoolServiceImpl implements ReusablePoolService {
-    private final Logger logger = Logger.getLogger(ReusablePoolServiceImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(ReusablePoolServiceImpl.class);
     private final Hashtable<Connection, Long> usedConnections;
     private final Hashtable<Connection, Long> freeConnections;
     private long expirationTime;
@@ -26,12 +26,12 @@ public class ReusablePoolServiceImpl implements ReusablePoolService {
 
     public void setExpirationTime(long expirationTime) {
         this.expirationTime = expirationTime;
-        logger.info(String.format("ReusablePoolImpl -> the expiration time has been set: %dms", expirationTime));
+        LOGGER.info(String.format("ReusablePoolImpl -> the expiration time has been set: %dms", expirationTime));
     }
 
     public void setDatabaseConnectionService(DatabaseConnectionServiceImpl databaseConnectionService) {
         this.databaseConnectionService = databaseConnectionService;
-        logger.info("ReusablePoolImpl -> databaseConnectionService has been assigned");
+        LOGGER.info("ReusablePoolImpl -> databaseConnectionService has been assigned");
     }
 
     /**
@@ -56,7 +56,7 @@ public class ReusablePoolServiceImpl implements ReusablePoolService {
                     if (checkIfConnectionIsUsing(connection)) {
                         freeConnections.remove(connection);
                         usedConnections.put(connection, now);
-                        logger.info(String.format("Amount of the connections in a Pool of the Connections -> %d", usedConnections.size()));
+                        LOGGER.info(String.format("Amount of the connections in a Pool of the Connections -> %d", usedConnections.size()));
                         return connection;
                     } else {
                         // object failed validation

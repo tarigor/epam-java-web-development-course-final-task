@@ -17,11 +17,14 @@ import java.io.IOException;
  */
 public class CommandFilter extends BaseCommand implements Filter {
     public static final String COMMAND_NAME = "name";
+    public static final String NOT_AUTHORIZED_ACCESS = "error.not.authorized.access";
+    public static final String ERROR_SERVICE_SCOPE = "error.service.scope";
+    public static final String ERROR_JSP = "/WEB-INF/jsp/error.jsp";
     private static final Logger LOGGER = Logger.getLogger(CommandFilter.class);
     private CommandFactory commandFactory;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         commandFactory = CommandFactory.getInstance();
     }
 
@@ -30,50 +33,50 @@ public class CommandFilter extends BaseCommand implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-//        attributesMap.clear();
-
         String command = request.getParameter(COMMAND_NAME).toUpperCase();
         request.setAttribute(COMMAND_NAME, command);
         LOGGER.info(String.format("The following command has been detected - /%s", command));
-
 
         try {
             if (checkCommandRole(request, command)) {
                 filterChain.doFilter(request, response);
             } else {
-                System.out.println("you are not authorized to do this");
-                request.setAttribute("errorMessage", "not.authorized.access");
-                try {
-                    servletRequest.getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
-                } catch (ServletException | IOException e) {
-                    response.getWriter().print("<html><head><title>A Critical Error Has Happened!</title></head>");
-                    response.getWriter().print("<body>A Critical Error Has Happened!</body>");
-                    response.getWriter().println("</html>");
-                    LOGGER.error(e);
-                }
+                showErrorPage(servletRequest, request, response, NOT_AUTHORIZED_ACCESS);
             }
         } catch (ServiceException e) {
-            e.printStackTrace();
+            showErrorPage(servletRequest, request, response, ERROR_SERVICE_SCOPE);
         }
     }
 
-    @Override
-    public void destroy() {
-
+    private void showErrorPage(ServletRequest servletRequest, HttpServletRequest request, HttpServletResponse response, String notAuthorizedAccess) throws IOException {
+        request.setAttribute("errorMessage", notAuthorizedAccess);
+        try {
+            servletRequest.getRequestDispatcher(request.getContextPath() + ERROR_JSP).forward(request, response);
+        } catch (ServletException | IOException e) {
+            response.getWriter().print("<html><head><title>Critical Error Has Happened!</title></head>");
+            response.getWriter().print("<body>Critical Error Has Happened!</body>");
+            response.getWriter().println("</html>");
+            LOGGER.error(e);
+        }
     }
 
     private boolean checkCommandRole(HttpServletRequest req, String command) throws ServiceException {
         String commandRole = CommandFactory.getInstance().getCommandRole(command);
-        System.out.println("command role -> " + commandRole);
+        LOGGER.info(String.format("command role detected -> %s", commandRole));
         User user = (User) req.getSession().getAttribute("user");
         if (user != null) {
-            System.out.println("user role -> " + user.getUserType().name());
+            LOGGER.info(String.format("user role detected -> %s", user.getUserType().name()));
         }
         if (commandRole.contains("ANYONE")) {
             return true;
         }
         assert user != null;
         return commandRole.contains(user.getUserType().name());
+    }
+
+    @Override
+    public void destroy() {
+
     }
 
 }

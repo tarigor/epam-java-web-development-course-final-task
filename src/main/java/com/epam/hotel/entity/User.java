@@ -28,6 +28,14 @@ public class User {
         this.password = password;
     }
 
+    public User(String firstName, String lastName, UserType userType, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userType = userType;
+        this.email = email;
+        this.password = password;
+    }
+
     public double getAccount() {
         return account;
     }

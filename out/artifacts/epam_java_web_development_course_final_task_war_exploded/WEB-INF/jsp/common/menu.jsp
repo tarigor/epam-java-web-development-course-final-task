@@ -1,7 +1,7 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <f:setLocale value="${sessionScope.language}" scope="session"/>
-<f:setBundle basename="local.menu" var="local"/>
+<f:setBundle basename="local.local" var="local"/>
 <header class="u-clearfix u-grey-60 u-header" id="sec-d985" data-animation-name="" data-animation-duration="0"
         data-animation-delay="0" data-animation-direction="">
 	<div class="u-clearfix u-sheet u-sheet-1">
@@ -46,7 +46,7 @@
 					<c:forEach items="${menuList}" var="item">
 						<li class="u-nav-item">
 							<a class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-							   href="${item.getCommand()}&lang=${sessionScope.language}"
+							   href="${pageContext.request.contextPath}${item.getCommand()}&lang=${sessionScope.language}"
 							   href="${item.getCommand()}"
 							   style="padding: 10px;">
 								<f:message key="${item.getMenuItemDescription().getBundle()}"

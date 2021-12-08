@@ -2,12 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <f:setLocale value="${sessionScope.language}" scope="session"/>
-<f:setBundle basename="local.menu" var="local"/>
+<f:setBundle basename="local.local" var="local"/>
 <html style="font-size: 16px;">
 <head>
 	<title><f:message
 			key="admin.cabinet.page.name" bundle="${local}"/></title>
-	<link rel="stylesheet" href="../../css/Admin-Cabinet.css" media="screen">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/Admin-Cabinet.css" media="screen">
 	<meta property="og:title" content="Admin Cabinet">
 	<c:import url="common/head.jsp"/>
 </head>
@@ -62,7 +62,7 @@
 					<th scope="col" style="text-align: center"><f:message
 							key="${clientRequest.getRequestStatus().getDescription()}" bundle="${local}"/></th>
 					<th style="text-align: center">
-						<a href="<c:url value="command?name=request_handling
+						<a href="<c:url value="${pageContext.request.contextPath}/command?name=request_handling
 						&requestID=${clientRequest.getRequestID()}
 						&firstName=${clientRequest.getFirstName()}
 						&lastName=${clientRequest.getLastName()}
@@ -120,12 +120,12 @@
 					<th style="text-align: center">
 						<a>
 							<c:if test="${clientOrder.isCanBeCanceled()}">
-								<a href="<c:url value="command?name=order_handling&type=reject&orderID=${clientOrder.getOrderID()}&roomID=${clientOrder.getRoomID()}"/>">
+								<a href="<c:url value="${pageContext.request.contextPath}/command?name=order_handling&type=reject&orderID=${clientOrder.getOrderID()}&roomID=${clientOrder.getRoomID()}"/>">
 									<button type="button" class="btn btn-danger"><f:message
 											key="reject"
 											bundle="${local}"/></button>
 								</a>
-								<a href="<c:url value="command?name=order_handling&type=approve&orderID=${clientOrder.getOrderID()}&roomID=${clientOrder.getRoomID()}"/>">
+								<a href="<c:url value="${pageContext.request.contextPath}/command?name=order_handling&type=approve&orderID=${clientOrder.getOrderID()}&roomID=${clientOrder.getRoomID()}"/>">
 									<button type="button" class="btn btn-success"><f:message
 											key="approve"
 											bundle="${local}"/></button>

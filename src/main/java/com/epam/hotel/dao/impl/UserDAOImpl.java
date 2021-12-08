@@ -4,17 +4,18 @@ import com.epam.hotel.dao.BaseDao;
 import com.epam.hotel.dao.UserDAO;
 import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.entity.User;
-import com.epam.hotel.types.OrderStatus;
 import com.epam.hotel.types.UserType;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Provides the functionality when working with a "user" table of the database.
  */
 public class UserDAOImpl extends BaseDao implements UserDAO {
-    private static final String INSERT_NEW_REQUEST = "call insert_new_request(?,?,?,?,?,?)";
-    private static final String MODIFY_ACCOUNT = "call charge_account(?, ?)";
+    private static final String TOP_UP_ACCOUNT = "call charge_account(?, ?)";
     private final String INSERT_NEW_USER =
             "INSERT INTO `user` (`id`,`first_name`, `last_name`, `user_type`, `email`, `password`,account) VALUES(?,?,?,?,?,?,?)";
     private final String GET_USER_BY_ID =
@@ -28,7 +29,7 @@ public class UserDAOImpl extends BaseDao implements UserDAO {
      * @throws DaoException in case of error occurs while accessing to database.
      */
     @Override
-    public long checkIfUserExist(int userHashCode) throws DaoException {
+    public long checkIfUserExist(long userHashCode) throws DaoException {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_USER_BY_ID);
             preparedStatement.setLong(1, userHashCode);
@@ -45,6 +46,7 @@ public class UserDAOImpl extends BaseDao implements UserDAO {
         }
         return 0;
     }
+
 
     /**
      * Provides an insertion of the new user in a database.
@@ -103,36 +105,6 @@ public class UserDAOImpl extends BaseDao implements UserDAO {
         return null;
     }
 
-    /**
-     * Provides an inserting a new request.
-     *
-     * @param clientID  a client ID belongs to the request.
-     * @param persons   the persons amount belongs to the request.
-     * @param roomClass a room class belongs to the request.
-     * @param dateFrom  a date from which room has requested.
-     * @param dateTo    a date till which room has requested.
-     * @throws DaoException in case of error occurs while accessing to database.
-     */
-    @Override
-    public int insertRequest(long clientID, int persons, String roomClass, Date dateFrom, Date dateTo) throws DaoException {
-        int requestID = 0;
-        try(CallableStatement callableStatement = connection.prepareCall(INSERT_NEW_REQUEST)) {
-            callableStatement.setLong(1, clientID);
-            callableStatement.setInt(2, persons);
-            callableStatement.setString(3, roomClass);
-            callableStatement.setDate(4, dateFrom);
-            callableStatement.setDate(5, dateTo);
-            callableStatement.setString(6, OrderStatus.WAITING_FOR_APPROVAL.name());
-            callableStatement.executeQuery();
-            ResultSet resultSet = callableStatement.getResultSet();
-            while (resultSet.next()){
-                requestID = resultSet.getInt(1);
-            }
-            return requestID;
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }
 
     /**
      * Provides a modification of the "account" column of the "user" table of the specific user.
@@ -143,10 +115,10 @@ public class UserDAOImpl extends BaseDao implements UserDAO {
      * @throws DaoException in case of error occurs while accessing to database.
      */
     @Override
-    public double modifyAccount(long clientID, double chargeAmount) throws DaoException {
+    public double topUpAccount(long clientID, double chargeAmount) throws DaoException {
         double account = 0.0;
         try {
-            CallableStatement callableStatement = connection.prepareCall(MODIFY_ACCOUNT);
+            CallableStatement callableStatement = connection.prepareCall(TOP_UP_ACCOUNT);
             callableStatement.setLong(1, clientID);
             callableStatement.setDouble(2, chargeAmount);
             callableStatement.executeQuery();

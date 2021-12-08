@@ -19,9 +19,9 @@ import java.util.ArrayList;
  * Provides the functionality of the admin activities.
  */
 public class AdminServiceImpl extends BaseService implements AdminService {
-    private static final Logger LOGGER = Logger.getLogger(AdminServiceImpl.class);
     public static final String APPROVE = "approve";
     public static final String REJECT = "reject";
+    private static final Logger LOGGER = Logger.getLogger(AdminServiceImpl.class);
     private final OrderDAOImpl orderDAO = (OrderDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.ORDER_DAO);
     private final RequestDAOImpl requestDAO = (RequestDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.REQUEST_DAO);
 

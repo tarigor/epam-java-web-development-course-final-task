@@ -17,7 +17,7 @@ import java.util.Map;
 public class MenuFilter extends BaseCommand implements Filter {
     public static final String NAME = "name";
     public static final String DEFAULT_LANGUAGE = "en_US";
-    private static final Logger logger = Logger.getLogger(MenuFilter.class);
+    private static final Logger LOGGER = Logger.getLogger(MenuFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -50,7 +50,7 @@ public class MenuFilter extends BaseCommand implements Filter {
             pageName = "index";
         }
 
-        logger.info(String.format("Redirected to %s", pageName));
+        LOGGER.info(String.format("Redirected to %s", pageName));
         request.getSession().setAttribute("lastpage", pageName);
         request.getRequestDispatcher(String.format("/WEB-INF/jsp/%s.jsp", pageName)).forward(request, response);
     }

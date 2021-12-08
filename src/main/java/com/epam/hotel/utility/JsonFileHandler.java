@@ -29,17 +29,15 @@ public class JsonFileHandler<T> {
      * @return a hashmap contains a result of a json file parsing.
      */
     public HashMap<String, T> getMapOfCommandFromJson() throws ServiceException {
-//        System.out.println("rootPath->" + Thread.currentThread().getContextClassLoader().
-//                getResource("").getPath());
         // for tomcat run
+        System.out.println("GET PATH -> " + Thread.currentThread().getContextClassLoader().
+                getResource("").getPath());
         String rootPath = Thread.currentThread().getContextClassLoader().
                 getResource("").getPath().
                 replace("/out/artifacts/epam_java_web_development_course_final_task_war_exploded/WEB-INF/classes/", "/src/main/resources/factory/");
         //for test
 //        String rootPath = Thread.currentThread().getContextClassLoader().
-//                getResource("").getPath().
-//                replace("/target/test-classes/", "/src/main/resources/factory/");
-//        System.out.println("rootPath + jsonFilePath->" + rootPath + jsonFilePath);
+//                getResource("").getPath().replace("/target/test-classes/", "/src/main/resources/factory/");
         String fileContent = null;
         try {
             fileContent = new String(Files.readAllBytes(Paths.get(rootPath + jsonFilePath)));

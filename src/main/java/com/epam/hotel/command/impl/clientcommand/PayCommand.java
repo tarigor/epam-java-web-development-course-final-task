@@ -15,6 +15,7 @@ import java.rmi.ServerException;
  */
 public class PayCommand extends BaseCommand implements Command {
     private static final String INVOICE_PAGE = "invoice";
+    private static final String ACCOUNT_PAGE = "account";
 
     /**
      * Handles a GET or POST request received via HTTP from a WEB page.
@@ -32,9 +33,9 @@ public class PayCommand extends BaseCommand implements Command {
         int roomID = Integer.parseInt(request.getParameter("roomID"));
         double roomPrice = Double.parseDouble(request.getParameter("roomPrice"));
         bookService.payInvoice(clientID, orderID, requestID, roomID, roomPrice);
-        request.setAttribute("paid", true);
         updateClient(request);
-        doRedirect(request, response, INVOICE_PAGE);
+
+        response.sendRedirect(request.getContextPath() + "/command?name=account&paid=true");
     }
 
     private User updateClient(HttpServletRequest request) throws ServiceException {

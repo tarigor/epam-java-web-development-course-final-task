@@ -22,7 +22,7 @@ import java.util.Objects;
  * Provides the functionality of the new user registration.
  */
 public class UserRegistrationCommand extends BaseCommand implements Command {
-    private static final Logger logger = Logger.getLogger(UserRegistrationCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(UserRegistrationCommand.class);
     private static final String REGISTRATION_PAGE = "signup";
     private static final String LOGIN_PAGE = "login";
     private final PasswordHandler passwordHandler = new PasswordHandler();
@@ -42,15 +42,15 @@ public class UserRegistrationCommand extends BaseCommand implements Command {
         boolean validateResult = doValidate(request, validator);
         boolean validateDoublePasswordResult = validator.validatePasswordTwice(request.getParameter("password"), request.getParameter("repeatedPassword"));
 
-//        if (validateResult && validateDoublePasswordResult) {
-        if (true) {
+        if (validateResult && validateDoublePasswordResult) {
+//        if (true) {
             User user = buildUserFromPage(request);
             if (commonSiteActivityService.doNewUserRegistration(user)) {
-                logger.info("A new user has been added");
+                LOGGER.info("A new user has been added");
                 request.setAttribute("registrationCompleted", true);
                 doRedirect(request, response, LOGIN_PAGE);
             } else {
-                logger.info("There is a such user with such an email");
+                LOGGER.info("There is a such user with such an email");
                 request.setAttribute("newUserFault", true);
                 doRedirect(request, response, REGISTRATION_PAGE);
             }

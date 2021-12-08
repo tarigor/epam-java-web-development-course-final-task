@@ -21,6 +21,10 @@ public class ServiceFactory {
         jsonFileHandler = new JsonFileHandler<String>(SERVICE_JSON_FILE_PATH);
     }
 
+    public static ServiceFactory getInstance() {
+        return instance;
+    }
+
     public boolean isExceptionWhileInit() {
         return exceptionWhileInit;
     }
@@ -31,10 +35,6 @@ public class ServiceFactory {
 
     public HashMap<ServiceType, Object> getServiceObjectsMap() {
         return serviceObjectsMap;
-    }
-
-    public static ServiceFactory getInstance() {
-        return instance;
     }
 
     /**
@@ -56,7 +56,7 @@ public class ServiceFactory {
         try {
             o = clazz.newInstance();
         } catch (IllegalAccessException | InstantiationException e) {
-            e.printStackTrace();
+            throw new ServiceException(e);
         }
         return o;
     }

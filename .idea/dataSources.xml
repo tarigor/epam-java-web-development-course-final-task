@@ -7,5 +7,34 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/hotelDB</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="testDB" uuid="37f430cd-9465-4548-a5b9-ca4e13c1d317">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:~/test</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="HSQLDB (Local) -" uuid="d20d91a8-4198-4834-b49b-cd8b7bad78dc">
+      <driver-ref>hsqldb.local</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
+      <jdbc-url>jdbc:hsqldb:file:test</jdbc-url>
+      <driver-properties>
+        <property name="sql.syntax_mys" value="true" />
+        <property name="syntax_mys" value="true" />
+      </driver-properties>
+    </data-source>
+    <data-source source="LOCAL" name="hotel_db@172.18.0.2" uuid="fac656c7-37f7-4618-a2af-aebc777ff7d8">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://172.18.0.2:3306/hotel_db</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="hoteldb@hoteldb.cbgda3k9gjwp.us-east-2.rds.amazonaws.com" uuid="92e41494-b1bf-4398-bc9b-7448cbf4ab08">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://hoteldb.cbgda3k9gjwp.us-east-2.rds.amazonaws.com/hoteldb</jdbc-url>
+    </data-source>
   </component>
 </project>

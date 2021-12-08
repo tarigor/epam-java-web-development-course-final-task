@@ -68,6 +68,6 @@ public enum InputRegex {
     }
 
     private static class Constants {
-        public static final String PROPERTIES = "local/menu.properties";
+        public static final String PROPERTIES = "local/local.properties";
     }
 }

@@ -16,8 +16,8 @@ import java.io.IOException;
  * Provides the functionality of the menu initialization based on the logged user.
  */
 public class MenuInitializer implements Filter {
+    public static final String ERROR_JSP = "/WEB-INF/jsp/error.jsp";
     private static final Logger LOGGER = Logger.getLogger(MenuInitializer.class);
-    private SiteMenuServiceImpl siteMenuService;
 
     @Override
     public void init(FilterConfig filterConfig) {
@@ -30,15 +30,9 @@ public class MenuInitializer implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         if (ServiceFactory.getInstance().isExceptionWhileInit()) {
+            LOGGER.info("AN ERROR HAPPENED WHILE INIT");
             request.setAttribute("errorMessage", "A CRITICAL ERROR OCCURRED");
-            try {
-                servletRequest.getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
-            } catch (ServletException | IOException e) {
-                response.getWriter().print("<html><head><title>A Critical Error Has Happened!</title></head>");
-                response.getWriter().print("<body>A Critical Error Has Happened!</body>");
-                response.getWriter().println("</html>");
-                LOGGER.error(e);
-            }
+            forwardErrorPage(servletRequest, request, response);
         }
 
         User loggedUser = (User) request.getSession().getAttribute("user");
@@ -62,6 +56,17 @@ public class MenuInitializer implements Filter {
                     MenuRole.ANYONE_NOT_LOGGED));
         }
         filterChain.doFilter(request, response);
+    }
+
+    private void forwardErrorPage(ServletRequest servletRequest, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            servletRequest.getRequestDispatcher(ERROR_JSP).forward(request, response);
+        } catch (ServletException | IOException ex) {
+            response.getWriter().print("<html><head><title>A Critical Error Has Happened!</title></head>");
+            response.getWriter().print("<body>A Critical Error Has Happened!</body>");
+            response.getWriter().println("</html>");
+            LOGGER.error(ex);
+        }
     }
 
     @Override

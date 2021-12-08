@@ -14,8 +14,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SiteMenuServiceImpl implements SiteMenuService {
-    private HashMap<String, Menu> menuList;
     private static final SiteMenuServiceImpl instance = new SiteMenuServiceImpl();
+    private HashMap<String, Menu> menuList;
 
     public SiteMenuServiceImpl() {
     }

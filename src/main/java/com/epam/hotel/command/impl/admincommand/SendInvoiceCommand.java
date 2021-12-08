@@ -34,6 +34,6 @@ public class SendInvoiceCommand extends BaseCommand implements Command {
         int requestID = Integer.parseInt(request.getParameter("requestID"));
 
         bookService.insertNewOrder(clientID, requestID, singleRoomsSelected, doubleRoomsSelected, suiteRoomsSelected, deluxeRoomsSelected, dateFrom, dateTo);
-        response.sendRedirect("command?name=admin_cabinet");
+        response.sendRedirect(request.getContextPath() + "/command?name=admin_cabinet");
     }
 }

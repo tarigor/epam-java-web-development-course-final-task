@@ -4,34 +4,28 @@ package com.epam.hotel.utility;
 import com.epam.hotel.entity.User;
 import com.epam.hotel.service.exception.ServiceException;
 import com.epam.hotel.types.UserType;
+import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 class PasswordHandlerTest {
+    private static final Logger LOGGER = Logger.getLogger(PasswordHandlerTest.class);
 
     @Test
-    void encryptPassword() throws ServiceException {
-        User user = new User(0, "Igor", "Taren", UserType.ADMIN, "user@tut.by", "12345678");
-        System.out.println("hash->" + user.hashCode());
+    void testPasswordEncryptDecrypt() throws ServiceException {
+        String initPass = "12345678";
 
-        String userHash = String.valueOf(user.hashCode());
-        StringBuffer key = new StringBuffer();
-        key.append(userHash).append(userHash).append(userHash);
+        User user = new User(0, "Dyadya", "Stepa", UserType.ADMIN, "@tut.by", initPass);
+        LOGGER.info(String.format("hash -> %d", user.hashCode()));
 
-        System.out.println("key->" + key.toString());
+        PasswordHandler passwordHandler = new PasswordHandler().setEncryptionKey(user.hashCode());
+        String encrPass = passwordHandler.encryptPassword(initPass);
+        LOGGER.info(String.format("encrPass -> %s", encrPass));
 
-        PasswordHandler passwordHandler = new PasswordHandler().setEncryptionKey(1111111111);
-        String encrPass = passwordHandler.encryptPassword("478374Taren");
-        System.out.println("encrPass->" + encrPass);
+        String decrPass = passwordHandler.decryptPassword(encrPass);
+        LOGGER.info(String.format("decrPass -> %s", decrPass));
+
+        Assert.assertTrue(initPass.contentEquals(decrPass));
     }
 
-    @Test
-    void decryptPassword() throws ServiceException {
-        User user = new User(0, "Igor", "Taren", UserType.ADMIN, "user@tut.by", "12345678");
-        System.out.println("hash->" + user.hashCode());
-
-        PasswordHandler passwordHandler = new PasswordHandler().setEncryptionKey(1111111111);
-        String decrPass = passwordHandler.decryptPassword("CBgMQFUBWGPEK+ukuE8OHQ==");
-        System.out.println("descrPass->" + decrPass);
-
-    }
 }

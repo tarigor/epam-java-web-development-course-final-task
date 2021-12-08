@@ -3,9 +3,9 @@
          xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <welcome-file-list>
-        <welcome-file>/WEB-INF/jsp/index.jsp</welcome-file>
-    </welcome-file-list>
+<!--    <welcome-file-list>-->
+<!--        <welcome-file>/WEB-INF/jsp/index.jsp</welcome-file>-->
+<!--    </welcome-file-list>-->
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>com.epam.hotel.controller.Controller</servlet-class>
@@ -24,6 +24,14 @@
     <filter-mapping>
         <filter-name>MenuInitializer</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>IndexPage</filter-name>
+        <filter-class>com.epam.hotel.controller.filter.IndexPage</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>IndexPage</filter-name>
+        <url-pattern>/</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>CommandFilter</filter-name>

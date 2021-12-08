@@ -10,15 +10,14 @@ import java.util.ArrayList;
 /**
  * Provides methods to be implemented in {@link com.epam.hotel.dao.impl.ClientOrderDAOImpl} class.
  * See description of the methods implemented:
+ * <p>
+ * // * @see com.epam.hotel.dao.impl.ClientOrderDAOImpl#deleteRecord(int, int)
  *
-// * @see com.epam.hotel.dao.impl.ClientOrderDAOImpl#deleteRecord(int, int)
  * @see com.epam.hotel.dao.impl.ClientOrderDAOImpl#get(User)
  * @see com.epam.hotel.dao.impl.ClientOrderDAOImpl#getClientRequests(long)
  * @see com.epam.hotel.dao.impl.ClientOrderDAOImpl#removeRequest(int)
  */
 public interface ClientOrderDAO {
-
-//    int deleteRecord(int order_id, int room_id) throws DaoException;
 
     ArrayList<ClientOrderRoom> get(User user) throws DaoException;
 

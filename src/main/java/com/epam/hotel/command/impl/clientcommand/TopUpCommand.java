@@ -30,7 +30,7 @@ public class TopUpCommand extends BaseCommand implements Command {
             long clientID = Long.parseLong(request.getParameter("userID"));
             System.out.println("chargeAmount->" + chargeAmount);
             clientService.topUpAccount(clientID, chargeAmount);
-            response.sendRedirect("command?name=account&result=true");
+            response.sendRedirect(request.getContextPath() + "/command?name=account&result=true");
         } else {
             doRedirect(request, response, TOP_UP_PAGE);
         }

@@ -5,12 +5,12 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true" %>
 
 <f:setLocale value="${sessionScope.language}" scope="session"/>
-<f:setBundle basename="local.menu" var="local"/>
+<f:setBundle basename="local.local" var="local"/>
 
 <html style="font-size: 16px;">
 <head>
 	<title>Log In</title>
-	<link rel="stylesheet" href="../../css/Log-in.css" media="screen">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/Log-in.css" media="screen">
 	<meta property="og:title" content="Log In">
 	<c:import url="common/head.jsp"/>
 </head>

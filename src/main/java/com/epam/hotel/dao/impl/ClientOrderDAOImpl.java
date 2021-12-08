@@ -8,7 +8,6 @@ import com.epam.hotel.entity.ClientRequest;
 import com.epam.hotel.entity.User;
 import com.epam.hotel.types.OrderStatus;
 
-import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +29,7 @@ public class ClientOrderDAOImpl extends BaseDao implements ClientOrderDAO {
             "select request_id,persons_amount,room_class,check_in_date,check_out_date,request_status from request\n" +
             "join client_request cr on request.request_id = cr.client_request_id\n" +
             "where client_r_id = ?";
-    private static final String DELETE_REQUEST = "DELETE FROM hotelDB.client_request WHERE client_request_id = ?";
+    private static final String DELETE_REQUEST = "DELETE FROM client_request WHERE client_request_id = ?";
 
     /**
      * Provides a getting of all orders of  the specific client.
@@ -116,26 +115,6 @@ public class ClientOrderDAOImpl extends BaseDao implements ClientOrderDAO {
             throw new DaoException(e);
         }
     }
-
-//    /**
-//     * Provides a deleting of the record from the "order" table.
-//     *
-//     * @param order_id an order ID of record to be deleted.
-//     * @param room_id  a room ID belongs to the order ID.
-//     * @throws DaoException in case of error occurs while accessing to database
-//     */
-//    @Override
-//    public void deleteRecord(int order_id, int room_id) throws DaoException {
-//        int count;
-//        try {
-//            CallableStatement callableStatement = connection.prepareCall(DELETE_RECORD_FROM_TABLE);
-//            callableStatement.setInt(1, order_id);
-//            callableStatement.setInt(2, room_id);
-//            callableStatement.executeQuery();
-//        } catch (SQLException e) {
-//            throw new DaoException(e);
-//        }
-//    }
 
     private ClientOrderRoom clientOrdersBuild(ResultSet resultSet) throws DaoException {
         try {

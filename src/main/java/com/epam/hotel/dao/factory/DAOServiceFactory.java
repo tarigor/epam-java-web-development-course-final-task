@@ -19,12 +19,12 @@ public class DAOServiceFactory {
         jsonFileHandler = new JsonFileHandler(DAO_JSON_FILE_PATH);
     }
 
-    public HashMap<DAOType, Object> getDaoObjectMap() {
-        return daoObjectMap;
-    }
-
     public static DAOServiceFactory getInstance() {
         return instance;
+    }
+
+    public HashMap<DAOType, Object> getDaoObjectMap() {
+        return daoObjectMap;
     }
 
     /**

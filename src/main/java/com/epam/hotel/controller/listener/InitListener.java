@@ -13,7 +13,6 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.util.HashMap;
 
 /**
  * Provides an instantiation of the services classes:

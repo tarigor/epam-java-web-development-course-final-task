@@ -4,6 +4,7 @@ import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.dao.factory.DAOServiceFactory;
 import com.epam.hotel.dao.factory.DAOType;
 import com.epam.hotel.dao.impl.ClientOrderDAOImpl;
+import com.epam.hotel.dao.impl.RequestDAOImpl;
 import com.epam.hotel.dao.impl.UserDAOImpl;
 import com.epam.hotel.entity.ClientOrderRoom;
 import com.epam.hotel.entity.ClientRequest;
@@ -25,6 +26,8 @@ public class ClientServiceImpl extends BaseService implements ClientService {
             (ClientOrderDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.CLIENT_ORDER_DAO);
     private final UserDAOImpl userDAO =
             (UserDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.USER_DAO);
+    private final RequestDAOImpl requestDAO =
+            (RequestDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.REQUEST_DAO);
 
     public ClientServiceImpl() {
     }
@@ -73,7 +76,7 @@ public class ClientServiceImpl extends BaseService implements ClientService {
         Date dateFromSQL = convertStringToSqlDate(dateFrom);
         Date dateToSQL = convertStringToSqlDate(dateTo);
         try {
-            transaction.createConnection().performTransaction(() -> userDAO.insertRequest(clientID, persons, roomClass, dateFromSQL, dateToSQL));
+            transaction.createConnection().performTransaction(() -> requestDAO.insertRequest(clientID, persons, roomClass, dateFromSQL, dateToSQL));
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -117,7 +120,7 @@ public class ClientServiceImpl extends BaseService implements ClientService {
     @Override
     public double topUpAccount(long userID, double chargeAmount) throws ServiceException {
         try {
-            return transaction.createConnection().performTransaction(() -> userDAO.modifyAccount(userID, chargeAmount));
+            return transaction.createConnection().performTransaction(() -> userDAO.topUpAccount(userID, chargeAmount));
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -137,14 +140,4 @@ public class ClientServiceImpl extends BaseService implements ClientService {
             throw new ServiceException(e);
         }
     }
-
-//    /**
-//     * Removes an order from the database.
-//     *
-//     * @param orderID an order ID.
-//     * @param roomID  a room ID belong to the order.
-//     */
-//    public void removeOrderFromBooking(int orderID, int roomID) {
-//        transaction.createConnection().performTransaction(() -> clientOrderDAO.deleteRecord(orderID, roomID));
-//    }
 }

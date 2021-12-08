@@ -51,8 +51,8 @@ public class LoginCommand extends BaseCommand implements Command {
                         InputRegex.PASSWORD}
         );
 
-//        if (validateResult) {
-        if (true) {
+        if (validateResult) {
+//        if (true) {
             User userWhileLogin = buildUserLoginCredentials(request);
             User loggedUser = commonSiteActivityService.checkUserForExistingAndRightPasswordInputted(userWhileLogin);
             if (loggedUser != null) {
@@ -77,9 +77,9 @@ public class LoginCommand extends BaseCommand implements Command {
                         String roomClass = request.getParameter("roomClass");
                         String dateFrom = request.getParameter("dateFrom");
                         String dateTo = request.getParameter("dateTo");
-                        response.sendRedirect(String.format("command?name=request&persons=%d&roomClass=%s&dateFrom=%s&dateTo=%s", persons, roomClass, dateFrom, dateTo));
+                        response.sendRedirect(request.getContextPath() + String.format("/command?name=request&persons=%d&roomClass=%s&dateFrom=%s&dateTo=%s", persons, roomClass, dateFrom, dateTo));
                     } else {
-                        response.sendRedirect("command?name=client_cabinet");
+                        response.sendRedirect(request.getContextPath() + "/command?name=client_cabinet");
                     }
                 }
             } else {

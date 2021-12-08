@@ -8,8 +8,6 @@ public enum CommandType {
     LOGOUT,
     USER_REGISTRATION,
     LOGOFF,
-    REMOVE_ROOM_FROM_BOOKING,
-    CHECK_FREE_ROOM,
     SEND_INVOICE,
     ORDER_HANDLING,
     REQUEST,
@@ -17,7 +15,6 @@ public enum CommandType {
     REQUEST_HANDLING,
     ADMIN_CABINET,
     CLIENT_CABINET,
-    MAKE_PAYMENT,
     ACCOUNT,
     TOP_UP,
     PAY;

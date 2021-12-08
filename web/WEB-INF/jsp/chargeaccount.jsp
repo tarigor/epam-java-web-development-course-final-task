@@ -5,12 +5,12 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true" %>
 
 <f:setLocale value="${sessionScope.language}" scope="session"/>
-<f:setBundle basename="local.menu" var="local"/>
+<f:setBundle basename="local.local" var="local"/>
 
 <html style="font-size: 16px;">
 <head>
 	<title>Log In</title>
-	<link rel="stylesheet" href="../../css/Log-in.css" media="screen">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/Log-in.css" media="screen">
 	<meta property="og:title" content="Log In">
 	<c:import url="common/head.jsp"/>
 </head>
@@ -28,7 +28,7 @@
 			<br>
 			<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
 				<div class="inner">
-					<form action="${pageContext.request.contextPath}/command?name=charge&userID=${sessionScope.user.getUserID()}"
+					<form action="${pageContext.request.contextPath}/command?name=top_up&userID=${sessionScope.user.getUserID()}"
 					      method="post">
 						<h3 class="text-center"><f:message key="account.page.name" bundle="${local}"/></h3>
 						<div class="form-wrapper">
@@ -40,7 +40,7 @@
 							</label>
 							<a class=" text-center"><f:message key="account.balance" bundle="${local}"/>:</a>
 							<label for=""
-							       class="form-control text-center align-middle">${sessionScope.user.getAccount()}
+							       class="form-control text-center align-middle">${String.format("%.2f",sessionScope.user.getAccount())}
 								USD</label>
 							<a class=" text-center"><f:message key="account.charge.balance" bundle="${local}"/>:</a>
 							<input for="" name="chargeAmount"

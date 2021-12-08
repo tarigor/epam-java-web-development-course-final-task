@@ -86,7 +86,7 @@ public class BookServiceImpl extends BaseService implements BookService {
         try {
             double changeValue = roomPrice * (-1);
             transaction.createConnection().performTransaction(() -> {
-                double balance = userDAO.modifyAccount(userID, changeValue);
+                double balance = userDAO.topUpAccount(userID, changeValue);
                 orderDAO.changeStatusOfOrder(orderID, requestID, roomID, OrderStatus.PAID_AND_BOOKED);
                 return balance;
             });

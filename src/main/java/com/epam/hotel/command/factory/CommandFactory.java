@@ -29,13 +29,13 @@ public class CommandFactory {
      * @param command String name of the command.
      * @return class provides a command implementation.
      */
-    public Class getCommand(String command) {
+    public Class getCommand(String command) throws ServiceException {
         Class clazz = null;
         try {
             String className = ((LinkedTreeMap) jsonFileHandler.getMapOfCommandFromJson().get(command)).get("clazz").toString();
             clazz = Class.forName(className);
         } catch (NoSuchElementException | ClassNotFoundException | ServiceException e) {
-            e.fillInStackTrace();
+            throw new ServiceException(e);
         }
         return clazz;
     }

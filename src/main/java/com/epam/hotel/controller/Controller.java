@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class Controller extends HttpServlet {
     public static final String COMMAND_NAME = "name";
-    private static final Logger logger = Logger.getLogger(Controller.class);
+    private static final Logger LOGGER = Logger.getLogger(Controller.class);
 
 
     @Override
@@ -31,14 +31,14 @@ public class Controller extends HttpServlet {
 
     private void doHandling(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = (String) request.getAttribute(COMMAND_NAME);
-        logger.info(String.format("the following command detected - /%s", command));
+        LOGGER.info(String.format("the following command detected - /%s", command));
 
-        Class commandClass = CommandFactory.getInstance().getCommand(command);
         try {
+            Class commandClass = CommandFactory.getInstance().getCommand(command);
             ((Command) commandClass.newInstance()).execute(request, response);
         } catch (IOException | IllegalAccessException | InstantiationException | ServiceException e) {
-            request.setAttribute("errorMessage", e.getMessage());
-            request.getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
+            request.setAttribute("errorMessage", "error.server.side");
+            request.getRequestDispatcher(request.getContextPath()+"/WEB-INF/jsp/error.jsp").forward(request, response);
         }
     }
 }

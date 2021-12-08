@@ -1,7 +1,7 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <f:setLocale value="${sessionScope.language}" scope="session"/>
-<f:setBundle basename="local.menu" var="local"/>
+<f:setBundle basename="local.local" var="local"/>
 <header class="u-clearfix u-grey-60 u-header" id="sec-d985" data-animation-name="" data-animation-duration="0"
         data-animation-delay="0" data-animation-direction="">
 	<div class="u-clearfix u-sheet u-sheet-1">

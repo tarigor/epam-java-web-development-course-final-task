@@ -47,7 +47,7 @@ public class RequestHandlingCommand extends BaseCommand implements Command {
             ArrayList<RoomData> roomsData = roomService.getRoomsData();
             request.setAttribute("roomsData", roomsData);
             doRedirect(request, response, ROOMS_LIST_PAGE);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ServiceException(e);
         }
     }

@@ -3,12 +3,12 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <f:setLocale value="${sessionScope.language}" scope="session"/>
-<f:setBundle basename="local.menu" var="local"/>
+<f:setBundle basename="local.local" var="local"/>
 
 <html style="font-size: 16px;">
 <head>
 	<title>Rooms List</title>
-	<link rel="stylesheet" href="../../css/Rooms-List.css" media="screen">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/Rooms-List.css" media="screen">
 	<meta property="og:title" content="Rooms List">
 	<c:import url="common/head.jsp"/>
 </head>
@@ -25,7 +25,7 @@
 			<div class="container">
 				<div class="row text-center">
 					<div class="col-12">
-						<form method="post" action="command?name=send_invoice">
+						<form method="post" action="${pageContext.request.contextPath}/command?name=send_invoice">
 							<input type="hidden" name="requestID" value="${clientRequest.getRequestID()}">
 							<input type="hidden" name="clientID" value="${clientRequest.getClientID()}">
 							<input type="hidden" name="persons" value="${clientRequest.getPersons()}">
@@ -77,7 +77,7 @@
 											key="${clientRequest.getRequestStatus().getDescription()}"
 											bundle="${local}"/></th>
 									<th style="text-align: center">
-										<a href="<c:url value="command?name=request_handling"/>">
+										<a href="<c:url value="${pageContext.request.contextPath}/command?name=request_handling"/>">
 											<button type="button" class="btn btn-warning"><f:message
 													key="roomslist.request.cancel"
 													bundle="${local}"/></button>

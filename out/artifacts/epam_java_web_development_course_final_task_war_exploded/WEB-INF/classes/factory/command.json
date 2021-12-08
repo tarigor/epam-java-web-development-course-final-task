@@ -15,10 +15,6 @@
     "clazz": "com.epam.hotel.command.impl.common.RemoveRoomFromBooking",
     "role": "CLIENT"
   },
-  "CHECK_FREE_ROOM": {
-    "clazz": "com.epam.hotel.command.impl.admincommand.CheckFreeRoomCommand",
-    "role": "ANYONE,CLIENT,ADMIN"
-  },
   "SEND_INVOICE": {
     "clazz": "com.epam.hotel.command.impl.admincommand.SendInvoiceCommand",
     "role": "ADMIN"
@@ -45,10 +41,6 @@
   },
   "CLIENT_CABINET": {
     "clazz": "com.epam.hotel.command.impl.clientcommand.ClientCabinetCommand",
-    "role": "CLIENT"
-  },
-  "MAKE_PAYMENT": {
-    "clazz": "com.epam.hotel.command.impl.clientcommand.MakePaymentCommand",
     "role": "CLIENT"
   },
   "ACCOUNT": {

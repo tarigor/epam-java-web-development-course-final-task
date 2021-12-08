@@ -3,12 +3,12 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <f:setLocale value="${sessionScope.language}" scope="session"/>
-<f:setBundle basename="local.menu" var="local"/>
+<f:setBundle basename="local.local" var="local"/>
 
 <html style="font-size: 16px;">
 <head>
 	<title>Sign Up</title>
-	<link rel="stylesheet" href="../../css/Sign-up.css" media="screen">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/Sign-up.css" media="screen">
 	<meta property="og:title" content="Sign Up">
 	<c:import url="common/head.jsp"/>
 </head>
