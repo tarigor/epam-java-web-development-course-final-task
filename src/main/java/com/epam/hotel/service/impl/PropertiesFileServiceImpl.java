@@ -30,6 +30,7 @@ public class PropertiesFileServiceImpl implements PropertyFileService {
             properties.load(new FileInputStream(applicationPath));
         } catch (IOException e) {
             LOGGER.error(e);
+            throw new SecurityException(e);
         }
         return properties;
     }
@@ -41,6 +42,7 @@ public class PropertiesFileServiceImpl implements PropertyFileService {
             properties.load(new FileInputStream(applicationPath));
         } catch (IOException e) {
             LOGGER.error(e);
+            throw new SecurityException(e);
         }
         return properties;
     }

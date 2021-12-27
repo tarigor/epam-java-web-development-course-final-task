@@ -52,7 +52,6 @@ public class LoginCommand extends BaseCommand implements Command {
         );
 
         if (validateResult) {
-//        if (true) {
             User userWhileLogin = buildUserLoginCredentials(request);
             User loggedUser = commonSiteActivityService.checkUserForExistingAndRightPasswordInputted(userWhileLogin);
             if (loggedUser != null) {

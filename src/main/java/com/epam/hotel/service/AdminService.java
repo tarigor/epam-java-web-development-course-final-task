@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * @see AdminServiceImpl#getAllRequests()
  * @see com.epam.hotel.service.impl.AdminServiceImpl#changeOrderStatusAdminAction(String, int, int)
  * @see com.epam.hotel.service.impl.AdminServiceImpl#getRequest(long, String)
+ * @see com.epam.hotel.service.impl.AdminServiceImpl#rejectRequest(Integer)
  */
 public interface AdminService {
     ArrayList<ClientOrderRoom> getAllOrders() throws ServiceException;
@@ -24,4 +25,6 @@ public interface AdminService {
     void changeOrderStatusAdminAction(String actionType, int orderID, int roomID) throws ServiceException;
 
     ClientRequest getRequest(long requestID, String email) throws ServiceException;
+
+    Integer rejectRequest(Integer requestID) throws ServiceException;
 }

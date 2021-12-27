@@ -20,8 +20,8 @@ import java.util.ArrayList;
  */
 public class BookServiceImpl extends BaseService implements BookService {
     private static final Logger LOGGER = Logger.getLogger(BookServiceImpl.class);
-    private OrderDAOImpl orderDAO = (OrderDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.ORDER_DAO);
-    private UserDAOImpl userDAO = (UserDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.USER_DAO);
+    private final OrderDAOImpl orderDAO = (OrderDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.ORDER_DAO);
+    private final UserDAOImpl userDAO = (UserDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.USER_DAO);
 
     /**
      * Inserts a new order made by the client.
@@ -52,7 +52,7 @@ public class BookServiceImpl extends BaseService implements BookService {
         addOrder(deluxeRoomsSelected, dateFrom, dateTo, orders);
         try {
             if (orders.size() > 1) {
-                transaction.createConnection().performTransaction(() -> {
+                executor.createConnection().executeAsTransaction(() -> {
                     int orderIdAssigned = orderDAO.insertOrderDataIntoTwoTable(userID, requestID, orders.get(0));
                     for (int i = 1; i < orders.size(); i++) {
                         orderDAO.insertOrderDataIntoSingleTable(orderIdAssigned, requestID, orders.get(i));
@@ -61,7 +61,7 @@ public class BookServiceImpl extends BaseService implements BookService {
                     return orderIdAssigned;
                 });
             } else if (orders.size() == 1) {
-                transaction.createConnection().performTransaction(() -> {
+                executor.createConnection().executeAsTransaction(() -> {
                     int count = orderDAO.insertOrderDataIntoTwoTable(userID, requestID, orders.get(0));
                     orderDAO.changeStatusOfRequest(requestID, OrderStatus.REQUEST_PROCESSED);
                     return count;
@@ -85,9 +85,10 @@ public class BookServiceImpl extends BaseService implements BookService {
     public void payInvoice(long userID, int orderID, int requestID, int roomID, double roomPrice) throws ServiceException {
         try {
             double changeValue = roomPrice * (-1);
-            transaction.createConnection().performTransaction(() -> {
+            executor.createConnection().executeAsTransaction(() -> {
                 double balance = userDAO.topUpAccount(userID, changeValue);
                 orderDAO.changeStatusOfOrder(orderID, requestID, roomID, OrderStatus.PAID_AND_BOOKED);
+                orderDAO.changeStatusOfRequest(requestID, OrderStatus.REQUEST_COMPLETED);
                 return balance;
             });
         } catch (DaoException e) {

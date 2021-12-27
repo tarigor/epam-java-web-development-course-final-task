@@ -1,7 +1,7 @@
-package com.epam.hotel.connectionmanager.transaction.impl;
+package com.epam.hotel.connectionmanager.queryexecution.impl;
 
 import com.epam.hotel.connectionmanager.connectionpool.impl.ConnectionPoolImpl;
-import com.epam.hotel.connectionmanager.transaction.Transaction;
+import com.epam.hotel.connectionmanager.queryexecution.Executor;
 import com.epam.hotel.dao.BaseDao;
 import com.epam.hotel.dao.exception.DaoException;
 
@@ -12,19 +12,19 @@ import java.util.concurrent.Callable;
 /**
  * Provides the functionality of the transaction to accessing a database.
  */
-public class TransactionImpl extends BaseDao implements Transaction {
-    private static final TransactionImpl instance = new TransactionImpl();
+public class ExecutorImpl extends BaseDao implements Executor {
+    private static final ExecutorImpl instance = new ExecutorImpl();
     private static final ConnectionPoolImpl connectionPool = ConnectionPoolImpl.getInstance();
     private static ThreadLocal<Connection> localConnectionThread;
 
-    private TransactionImpl() {
+    private ExecutorImpl() {
     }
 
-    public static TransactionImpl getInstance() {
+    public static ExecutorImpl getInstance() {
         return instance;
     }
 
-    public TransactionImpl createConnection() throws DaoException {
+    public ExecutorImpl createConnection() throws DaoException {
         setConnection();
         localConnectionThread = new ThreadLocal<>();
         return this;
@@ -38,7 +38,7 @@ public class TransactionImpl extends BaseDao implements Transaction {
      * @return result of the callable task.
      */
     @Override
-    public <T> T performTransaction(Callable<T> callableDatabaseActionTask) throws DaoException {
+    public <T> T executeAsTransaction(Callable<T> callableDatabaseActionTask) throws DaoException {
         T resultType = null;
         try {
             localConnectionThread.set(connection);
@@ -63,42 +63,20 @@ public class TransactionImpl extends BaseDao implements Transaction {
     }
 
     /**
-     * Provides overloaded version of the {@link TransactionImpl#performTransaction(Runnable)} method and gets a runnable task as an input.
+     * Provides the functionality of the accessing to the database as a single query.
      *
-     * @param runnableDatabaseActionTask runnable task to be processed as a transaction.
+     * @param callableDatabaseActionTask callable task to be processed as a transaction.
+     * @param <T>                        type of the callable task.
+     * @return result of the callable task.
      */
-    public void performTransaction(Runnable runnableDatabaseActionTask) throws DaoException {
+    @Override
+    public <T> T executeAsSingleQuery(Callable<T> callableDatabaseActionTask) throws DaoException {
+        T resultType = null;
         try {
             localConnectionThread.set(connection);
-            runnableDatabaseActionTask.run();
+            resultType = callableDatabaseActionTask.call();
             connection.commit();
-        } catch (Exception e) {
-            if (connection != null) {
-                try {
-                    connection.rollback();
-                } catch (SQLException sqlException) {
-                    throw new DaoException(sqlException);
-                }
-            }
-            throw new DaoException(e);
-        } finally {
-            if (connection != null) {
-                connectionPool.releaseConnection(connection);
-                localConnectionThread.remove();
-            }
-        }
-    }
-
-    /**
-     * Provides overloaded version of the {@link TransactionImpl#performTransaction(Runnable)} method and gets a runnable task as an input.
-     *
-     * @param runnableDatabaseActionTask runnable task to be processed as a transaction.
-     */
-    public void performTransactionTest(Runnable runnableDatabaseActionTask) throws DaoException {
-        try {
-            localConnectionThread.set(connection);
-            runnableDatabaseActionTask.run();
-            connection.commit();
+            return resultType;
         } catch (Exception e) {
             if (connection != null) {
                 try {

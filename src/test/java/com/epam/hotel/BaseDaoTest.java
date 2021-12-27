@@ -4,7 +4,7 @@ import ch.vorburger.exec.ManagedProcessException;
 import ch.vorburger.mariadb4j.DB;
 import ch.vorburger.mariadb4j.DBConfigurationBuilder;
 import com.epam.hotel.connectionmanager.connectionpool.impl.ConnectionPoolImpl;
-import com.epam.hotel.connectionmanager.transaction.impl.TransactionImpl;
+import com.epam.hotel.connectionmanager.queryexecution.impl.ExecutorImpl;
 import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.service.impl.DatabaseConnectionServiceImpl;
 import com.epam.hotel.service.impl.ReusablePoolServiceImpl;
@@ -41,7 +41,7 @@ public abstract class BaseDaoTest {
         databaseConnectionService.init(properties);
         ReusablePoolServiceImpl reusablePoolService = new ReusablePoolServiceImpl();
         ConnectionPoolImpl.getInstance().initForTest(databaseConnectionService, reusablePoolService, properties);
-        TransactionImpl.getInstance().createConnection();
+        ExecutorImpl.getInstance().createConnection();
     }
 
     private static void initDB() throws ManagedProcessException {

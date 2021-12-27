@@ -4,6 +4,9 @@ import com.epam.hotel.command.BaseCommand;
 import com.epam.hotel.command.Command;
 import com.epam.hotel.entity.User;
 import com.epam.hotel.service.exception.ServiceException;
+import com.epam.hotel.service.factory.ServiceFactory;
+import com.epam.hotel.service.factory.ServiceType;
+import com.epam.hotel.service.impl.EmailServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +19,8 @@ import java.rmi.ServerException;
 public class RequestCommand extends BaseCommand implements Command {
     private static final String LOGIN_PAGE = "login";
     private static final String CLIENT_CABINET = "clientcabinet";
+    private final EmailServiceImpl emailService =
+            (EmailServiceImpl) ServiceFactory.getInstance().getServiceObjectsMap().get(ServiceType.EMAIL_SERVICE);
 
     /**
      * Handles a GET or POST request received via HTTP from a WEB page.
@@ -31,12 +36,12 @@ public class RequestCommand extends BaseCommand implements Command {
         String roomClass = request.getParameter("roomClass");
         String[] dateRange = getDateRange(request);
         User user = (User) request.getSession().getAttribute("user");
-        System.out.println("persons->" + persons + " roomClass->" + roomClass + " dateFrom->" + dateRange[0] + " dateTo->" + dateRange[1]);
         if (user != null) {
-            clientService.insertRequest(user.getUserID(), persons, roomClass, dateRange[0], dateRange[1]);
+            int requestID = clientService.insertRequest(user.getUserID(), persons, roomClass, dateRange[0], dateRange[1]);
+            emailService.sendEmailToAdmin(user, requestID, persons, roomClass, dateRange[0], dateRange[1]);
             request.setAttribute("clientRequests", clientService.getClientRequests(user.getUserID()));
             request.setAttribute("clientOrders", clientService.getClientOrders(user));
-            doRedirect(request, response, CLIENT_CABINET);
+            response.sendRedirect(request.getContextPath() + "/command?name=client_cabinet");
         } else {
             request.setAttribute("clientRequest", clientService.createRequest(persons, roomClass, dateRange[0], dateRange[1]));
             request.setAttribute("loginAndCompleteRequest", true);

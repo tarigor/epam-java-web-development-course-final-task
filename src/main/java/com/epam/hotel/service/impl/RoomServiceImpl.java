@@ -32,9 +32,7 @@ public class RoomServiceImpl extends BaseService implements RoomService {
         Date dateFromSQL = convertStringToSqlDate(dateFrom);
         Date dateToSQL = convertStringToSqlDate(dateTo);
         try {
-            ArrayList<Room> roomsList =
-                    transaction.createConnection().performTransaction(() -> roomDAO.getFreeRooms(dateFromSQL, dateToSQL));
-            roomsList.forEach(System.out::println);
+            ArrayList<Room> roomsList = executor.createConnection().executeAsSingleQuery(() -> roomDAO.getFreeRooms(dateFromSQL, dateToSQL));
             return roomsList;
         } catch (DaoException e) {
             throw new ServiceException(e);
@@ -50,7 +48,7 @@ public class RoomServiceImpl extends BaseService implements RoomService {
     @Override
     public double getRoomPrice(int roomID) throws ServiceException {
         try {
-            return transaction.createConnection().performTransaction(() -> roomDAO.getRoomPrice(roomID));
+            return executor.createConnection().executeAsSingleQuery(() -> roomDAO.getRoomPrice(roomID));
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -65,7 +63,7 @@ public class RoomServiceImpl extends BaseService implements RoomService {
     @Override
     public ArrayList<RoomData> getRoomsData() throws ServiceException {
         try {
-            return transaction.createConnection().performTransaction(() -> roomDAO.getRoomsData());
+            return executor.createConnection().executeAsSingleQuery(() -> roomDAO.getRoomsData());
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

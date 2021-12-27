@@ -43,7 +43,6 @@ public class UserRegistrationCommand extends BaseCommand implements Command {
         boolean validateDoublePasswordResult = validator.validatePasswordTwice(request.getParameter("password"), request.getParameter("repeatedPassword"));
 
         if (validateResult && validateDoublePasswordResult) {
-//        if (true) {
             User user = buildUserFromPage(request);
             if (commonSiteActivityService.doNewUserRegistration(user)) {
                 LOGGER.info("A new user has been added");

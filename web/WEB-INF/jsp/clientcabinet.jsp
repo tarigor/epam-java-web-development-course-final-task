@@ -45,7 +45,7 @@
 			</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${clientRequests}" var="clientRequest">
+			<c:forEach items="${sessionScope.clientRequests}" var="clientRequest">
 				<tr class=" text-center u-grey-10 u-opacity-85">
 					<th scope="col" style="text-align: center">${clientRequest.getRequestID()}</th>
 					<th scope="col" style="text-align: center">${clientRequest.getPersons()}</th>
@@ -85,7 +85,7 @@
 			</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${clientOrders}" var="clientOrder">
+			<c:forEach items="${sessionScope.clientOrders}" var="clientOrder">
 				<tr class=" text-center u-grey-10 u-opacity-85">
 					<th scope="col" style="text-align: center">${clientOrder.getOrderID()}</th>
 					<th scope="col" style="text-align: center">${clientOrder.getRequestID()}</th>

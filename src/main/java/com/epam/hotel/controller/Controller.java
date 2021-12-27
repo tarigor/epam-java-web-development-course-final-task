@@ -37,8 +37,8 @@ public class Controller extends HttpServlet {
             Class commandClass = CommandFactory.getInstance().getCommand(command);
             ((Command) commandClass.newInstance()).execute(request, response);
         } catch (IOException | IllegalAccessException | InstantiationException | ServiceException e) {
-            request.setAttribute("errorMessage", "error.server.side");
-            request.getRequestDispatcher(request.getContextPath()+"/WEB-INF/jsp/error.jsp").forward(request, response);
+            request.setAttribute("errorMessage", e.getMessage());
+            request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/error.jsp").forward(request, response);
         }
     }
 }

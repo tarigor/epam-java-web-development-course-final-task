@@ -26,6 +26,7 @@ public class RequestDAOImpl extends BaseDao implements RequestDAO {
             "JOIN user u on cr.client_r_id = u.id\n" +
             "where request_id = ? and email= ?";
     private static final String INSERT_NEW_REQUEST = "call insert_new_request(?,?,?,?,?,?)";
+    private static final String CHANGE_REQUEST_STATUS = "UPDATE request t SET t.request_status = ? WHERE t.request_id = ?";
 
     /**
      * Provides the functionality of getting of all client requests from the database.
@@ -125,4 +126,16 @@ public class RequestDAOImpl extends BaseDao implements RequestDAO {
         }
     }
 
+    public int changeRequestStatus(Integer requestID) throws DaoException {
+        int count = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_REQUEST_STATUS);
+            preparedStatement.setString(1, OrderStatus.REJECTED.name());
+            preparedStatement.setInt(2, requestID);
+            count = preparedStatement.executeUpdate();
+            return count;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
 }

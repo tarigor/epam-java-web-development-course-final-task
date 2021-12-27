@@ -17,7 +17,7 @@ public class RoomDAOImpl extends BaseDao implements RoomDAO {
     private static final String GET_FREE_ROOMS = "call get_free_rooms(?,?)";
     private static final String GET_ROOM_PRICE = "select room_cost from room where id = ?";
     private static final String GET_ROOMS_DATA = "" +
-            "select distinct persons_in_room, room_class, room_cost from room\n" +
+            "select distinct persons_in_room, room_class, room_cost, room_image_link from room\n" +
             "join room_class rc on room.room_class_id = rc.id\n" +
             "order by persons_in_room;";
 
@@ -99,7 +99,8 @@ public class RoomDAOImpl extends BaseDao implements RoomDAO {
         return new RoomData(
                 resultSet.getInt(1),
                 RoomClass.valueOf(resultSet.getString(2)),
-                resultSet.getDouble(3)
+                resultSet.getDouble(3),
+                resultSet.getString(4)
         );
     }
 }

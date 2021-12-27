@@ -1,6 +1,6 @@
 package com.epam.hotel.service;
 
-import com.epam.hotel.connectionmanager.transaction.impl.TransactionImpl;
+import com.epam.hotel.connectionmanager.queryexecution.impl.ExecutorImpl;
 import com.epam.hotel.service.exception.ServiceException;
 
 import java.sql.Date;
@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public abstract class BaseService {
-    protected static final TransactionImpl transaction = TransactionImpl.getInstance();
+    protected static final ExecutorImpl executor = ExecutorImpl.getInstance();
 
     protected static Date convertStringToSqlDate(String date) throws ServiceException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

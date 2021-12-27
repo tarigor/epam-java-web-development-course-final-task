@@ -24,7 +24,7 @@ public interface ClientService {
 
     ArrayList<ClientRequest> getClientRequests(long clientID) throws ServiceException;
 
-    void insertRequest(long clientID, int persons, String roomClass, String dateFrom, String dateTo) throws ServiceException;
+    int insertRequest(long clientID, int persons, String roomClass, String dateFrom, String dateTo) throws ServiceException;
 
     void removeRequest(int requestID) throws ServiceException;
 

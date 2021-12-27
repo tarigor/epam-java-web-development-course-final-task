@@ -30,8 +30,6 @@ public class JsonFileHandler<T> {
      */
     public HashMap<String, T> getMapOfCommandFromJson() throws ServiceException {
         // for tomcat run
-        System.out.println("GET PATH -> " + Thread.currentThread().getContextClassLoader().
-                getResource("").getPath());
         String rootPath = Thread.currentThread().getContextClassLoader().
                 getResource("").getPath().
                 replace("/out/artifacts/epam_java_web_development_course_final_task_war_exploded/WEB-INF/classes/", "/src/main/resources/factory/");

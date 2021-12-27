@@ -35,16 +35,13 @@ public class RequestHandlingCommand extends BaseCommand implements Command {
             String dateFrom = request.getParameter("dateFrom");
             String dateTo = request.getParameter("dateTo");
             ClientRequest clientRequest = adminService.getRequest(requestID, email);
-            request.setAttribute("clientRequest", clientRequest);
             ArrayList<Room> roomArrayList = roomService.getFreeRooms(dateFrom, dateTo);
+            ArrayList<RoomData> roomsData = roomService.getRoomsData();
 
-            System.out.println("list");
-            roomArrayList.forEach(System.out::println);
-
+            request.setAttribute("clientRequest", clientRequest);
             request.setAttribute("roomArrayList", roomArrayList);
             request.setAttribute("dateFrom", dateFrom);
             request.setAttribute("dateTo", dateTo);
-            ArrayList<RoomData> roomsData = roomService.getRoomsData();
             request.setAttribute("roomsData", roomsData);
             doRedirect(request, response, ROOMS_LIST_PAGE);
         } catch (Exception e) {

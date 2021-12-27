@@ -12,6 +12,8 @@ import com.epam.hotel.entity.User;
 import com.epam.hotel.service.BaseService;
 import com.epam.hotel.service.ClientService;
 import com.epam.hotel.service.exception.ServiceException;
+import com.epam.hotel.service.factory.ServiceFactory;
+import com.epam.hotel.service.factory.ServiceType;
 import org.apache.log4j.Logger;
 
 import java.sql.Date;
@@ -28,6 +30,8 @@ public class ClientServiceImpl extends BaseService implements ClientService {
             (UserDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.USER_DAO);
     private final RequestDAOImpl requestDAO =
             (RequestDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.REQUEST_DAO);
+    private final EmailServiceImpl emailService =
+            (EmailServiceImpl) ServiceFactory.getInstance().getServiceObjectsMap().get(ServiceType.EMAIL_SERVICE);
 
     public ClientServiceImpl() {
     }
@@ -41,10 +45,11 @@ public class ClientServiceImpl extends BaseService implements ClientService {
     @Override
     public ArrayList<ClientOrderRoom> getClientOrders(User user) throws ServiceException {
         try {
-            return transaction.createConnection().performTransaction(() -> clientOrderDAO.get(user));
+            return executor.createConnection().executeAsSingleQuery(() -> clientOrderDAO.get(user));
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
+
     }
 
     /**
@@ -56,7 +61,7 @@ public class ClientServiceImpl extends BaseService implements ClientService {
     @Override
     public ArrayList<ClientRequest> getClientRequests(long clientID) throws ServiceException {
         try {
-            return transaction.createConnection().performTransaction(() -> clientOrderDAO.getClientRequests(clientID));
+            return executor.createConnection().executeAsSingleQuery(() -> clientOrderDAO.getClientRequests(clientID));
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -72,11 +77,11 @@ public class ClientServiceImpl extends BaseService implements ClientService {
      * @param dateTo    a date till which the room is requested.
      */
     @Override
-    public void insertRequest(long clientID, int persons, String roomClass, String dateFrom, String dateTo) throws ServiceException {
+    public int insertRequest(long clientID, int persons, String roomClass, String dateFrom, String dateTo) throws ServiceException {
         Date dateFromSQL = convertStringToSqlDate(dateFrom);
         Date dateToSQL = convertStringToSqlDate(dateTo);
         try {
-            transaction.createConnection().performTransaction(() -> requestDAO.insertRequest(clientID, persons, roomClass, dateFromSQL, dateToSQL));
+            return executor.createConnection().executeAsSingleQuery(() -> requestDAO.insertRequest(clientID, persons, roomClass, dateFromSQL, dateToSQL));
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -90,7 +95,7 @@ public class ClientServiceImpl extends BaseService implements ClientService {
     @Override
     public void removeRequest(int requestID) throws ServiceException {
         try {
-            transaction.createConnection().performTransaction(() -> clientOrderDAO.removeRequest(requestID));
+            executor.createConnection().executeAsSingleQuery(() -> clientOrderDAO.removeRequest(requestID));
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -120,7 +125,7 @@ public class ClientServiceImpl extends BaseService implements ClientService {
     @Override
     public double topUpAccount(long userID, double chargeAmount) throws ServiceException {
         try {
-            return transaction.createConnection().performTransaction(() -> userDAO.topUpAccount(userID, chargeAmount));
+            return executor.createConnection().executeAsSingleQuery(() -> userDAO.topUpAccount(userID, chargeAmount));
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -135,7 +140,7 @@ public class ClientServiceImpl extends BaseService implements ClientService {
     @Override
     public User getClient(long clientID) throws ServiceException {
         try {
-            return transaction.createConnection().performTransaction(() -> userDAO.get(clientID));
+            return executor.createConnection().executeAsSingleQuery(() -> userDAO.get(clientID));
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

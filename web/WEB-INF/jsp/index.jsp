@@ -51,10 +51,10 @@
 			<div class="u-clearfix u-custom-html u-custom-html-2">
 				<select id="roomClass" name="roomClass" class="custom-select" aria-label="Default select example">
 					<option selected="" value=""></option>
-					<option value="SINGLE">SINGLE</option>
-					<option value="DOUBLE">DOUBLE</option>
-					<option value="SUITE">SUITE</option>
-					<option value="DELUXE">DELUXE</option>
+					<option value="SINGLE"><f:message key="single" bundle="${local}"/></option>
+					<option value="DOUBLE"><f:message key="double" bundle="${local}"/></option>
+					<option value="SUITE"><f:message key="suite" bundle="${local}"/></option>
+					<option value="DELUXE"><f:message key="deluxe" bundle="${local}"/></option>
 				</select>
 			</div>
 			<p class="u-text u-text-body-alt-color u-text-default u-text-4"><f:message key="index.room.class"

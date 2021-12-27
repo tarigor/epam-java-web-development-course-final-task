@@ -6,5 +6,6 @@
   "CLIENT_SERVICE": "com.epam.hotel.service.impl.ClientServiceImpl",
   "ROOM_SERVICE": "com.epam.hotel.service.impl.RoomServiceImpl",
   "BOOK_SERVICE": "com.epam.hotel.service.impl.BookServiceImpl",
-  "ADMIN_SERVICE": "com.epam.hotel.service.impl.AdminServiceImpl"
+  "ADMIN_SERVICE": "com.epam.hotel.service.impl.AdminServiceImpl",
+  "EMAIL_SERVICE": "com.epam.hotel.service.impl.EmailServiceImpl"
 }

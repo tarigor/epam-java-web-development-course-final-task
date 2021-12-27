@@ -11,5 +11,6 @@ public enum ServiceType {
     CLIENT_SERVICE,
     ROOM_SERVICE,
     BOOK_SERVICE,
-    ADMIN_SERVICE;
+    ADMIN_SERVICE,
+    EMAIL_SERVICE;
 }

@@ -9,12 +9,15 @@ import com.epam.hotel.entity.UserLoginError;
 import com.epam.hotel.service.BaseService;
 import com.epam.hotel.service.CommonSiteActivityService;
 import com.epam.hotel.service.exception.ServiceException;
+import org.apache.log4j.Logger;
 
 /**
  * Provides the functionality of common site activities.
  */
 public class CommonSiteActivityServiceImpl extends BaseService implements CommonSiteActivityService {
-    private UserDAOImpl userDAO = (UserDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.USER_DAO);
+    private static final Logger LOGGER = Logger.getLogger(CommonSiteActivityServiceImpl.class);
+    private final UserDAOImpl userDAO =
+            (UserDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.USER_DAO);
 
     public CommonSiteActivityServiceImpl() {
 
@@ -30,22 +33,22 @@ public class CommonSiteActivityServiceImpl extends BaseService implements Common
     public User checkUserForExistingAndRightPasswordInputted(User user) throws ServiceException {
         User userFromDB;
         try {
-            userFromDB = transaction.createConnection().performTransaction(() -> userDAO.get(user.hashCode()));
+            userFromDB = executor.createConnection().executeAsSingleQuery(() -> userDAO.get(user.hashCode()));
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
         if (userFromDB != null) {
             if (user.getEmail().equals(userFromDB.getEmail()) &&
                     user.getPassword().equals(userFromDB.getPassword())) {
-                System.out.println("user are correct");
+                LOGGER.info("user are correct");
                 return userFromDB;
             } else {
-                System.out.println("the password is not correct");
+                LOGGER.info("the password is not correct");
                 UserLoginError.setType("login.wrong.password");
                 return null;
             }
         } else {
-            System.out.println("there is no such a user");
+            LOGGER.info("there is no such a user");
             UserLoginError.setType("login.no.such.user");
             return null;
         }
@@ -60,11 +63,12 @@ public class CommonSiteActivityServiceImpl extends BaseService implements Common
     @Override
     public boolean doNewUserRegistration(User user) throws ServiceException {
         try {
-            long userID = transaction.createConnection().performTransaction(() -> userDAO.checkIfUserExist(user.hashCode()));
+            long userID = executor.createConnection().executeAsSingleQuery(() -> userDAO.checkIfUserExist(user.hashCode()));
             if (userID != user.hashCode()) {
-                transaction.createConnection().performTransaction(() -> userDAO.insert(user));
+                executor.createConnection().executeAsSingleQuery(() -> userDAO.insert(user));
                 return true;
             }
+
             return false;
         } catch (DaoException e) {
             throw new ServiceException(e);

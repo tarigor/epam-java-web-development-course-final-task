@@ -8,7 +8,8 @@ public enum OrderStatus {
     WAITING_FOR_APPROVAL("client.cabinet.waiting"),
     REJECTED("client.cabinet.rejected"),
     PAID_AND_BOOKED("client.cabinet.paid"),
-    REQUEST_PROCESSED("client.cabinet.processed");
+    REQUEST_PROCESSED("client.cabinet.processed"),
+    REQUEST_COMPLETED("client.cabinet.completed");
     private String description;
 
     OrderStatus(String description) {

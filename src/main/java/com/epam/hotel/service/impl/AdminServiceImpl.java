@@ -33,7 +33,7 @@ public class AdminServiceImpl extends BaseService implements AdminService {
     @Override
     public ArrayList<ClientOrderRoom> getAllOrders() throws ServiceException {
         try {
-            return transaction.createConnection().performTransaction(() -> orderDAO.getAllOrders());
+            return executor.createConnection().executeAsSingleQuery(() -> orderDAO.getAllOrders());
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -47,7 +47,7 @@ public class AdminServiceImpl extends BaseService implements AdminService {
     @Override
     public ArrayList<ClientRequest> getAllRequests() throws ServiceException {
         try {
-            return transaction.createConnection().performTransaction(() -> requestDAO.getAllRequests());
+            return executor.createConnection().executeAsSingleQuery(() -> requestDAO.getAllRequests());
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -64,9 +64,9 @@ public class AdminServiceImpl extends BaseService implements AdminService {
     public void changeOrderStatusAdminAction(String statusType, int orderID, int roomID) throws ServiceException {
         try {
             if (statusType.contains(APPROVE)) {
-                transaction.createConnection().performTransaction(() -> orderDAO.changeOrderStatus(OrderStatus.APPROVED_WAITING_FOR_PAYMENT.name(), orderID, roomID));
+                executor.createConnection().executeAsSingleQuery(() -> orderDAO.changeOrderStatus(OrderStatus.APPROVED_WAITING_FOR_PAYMENT.name(), orderID, roomID));
             } else if (statusType.contains(REJECT)) {
-                transaction.createConnection().performTransaction(() -> orderDAO.changeOrderStatus(OrderStatus.REJECTED.name(), orderID, roomID));
+                executor.createConnection().executeAsSingleQuery(() -> orderDAO.changeOrderStatus(OrderStatus.REJECTED.name(), orderID, roomID));
             }
         } catch (DaoException e) {
             throw new ServiceException(e);
@@ -83,7 +83,15 @@ public class AdminServiceImpl extends BaseService implements AdminService {
     @Override
     public ClientRequest getRequest(long requestID, String email) throws ServiceException {
         try {
-            return transaction.createConnection().performTransaction(() -> requestDAO.getRequestByIDAndEmail(requestID, email));
+            return executor.createConnection().executeAsSingleQuery(() -> requestDAO.getRequestByIDAndEmail(requestID, email));
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public Integer rejectRequest(Integer requestID) throws ServiceException {
+        try {
+            return executor.createConnection().executeAsSingleQuery(() -> requestDAO.changeRequestStatus(requestID));
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

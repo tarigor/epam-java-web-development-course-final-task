@@ -2,6 +2,8 @@ package com.epam.hotel.command.impl.clientcommand;
 
 import com.epam.hotel.command.BaseCommand;
 import com.epam.hotel.command.Command;
+import com.epam.hotel.entity.ClientOrderRoom;
+import com.epam.hotel.entity.ClientRequest;
 import com.epam.hotel.entity.User;
 import com.epam.hotel.service.exception.ServiceException;
 
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.rmi.ServerException;
+import java.util.ArrayList;
 
 /**
  * Provides preparation for the presentation of the "client cabinet" web page.
@@ -27,8 +30,12 @@ public class ClientCabinetCommand extends BaseCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException, ServiceException {
         User user = (User) request.getSession().getAttribute("user");
-        request.getSession().setAttribute("clientOrders", clientService.getClientOrders(user));
-        request.getSession().setAttribute("clientRequests", clientService.getClientRequests(user.getUserID()));
+
+        ArrayList<ClientRequest> clientRequests = clientService.getClientRequests(user.getUserID());
+        ArrayList<ClientOrderRoom> clientOrders = clientService.getClientOrders(user);
+
+        request.getSession().setAttribute("clientOrders", clientOrders);
+        request.getSession().setAttribute("clientRequests", clientRequests);
         doRedirect(request, response, CLIENT_CABINET_PAGE);
     }
 }

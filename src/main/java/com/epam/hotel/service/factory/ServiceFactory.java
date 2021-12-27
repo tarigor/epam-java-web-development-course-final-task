@@ -71,6 +71,7 @@ public class ServiceFactory {
         serviceObjectsMap.put(ServiceType.DATABASE_CONNECTION_SERVICE, this.getService(ServiceType.DATABASE_CONNECTION_SERVICE));
         serviceObjectsMap.put(ServiceType.PROPERTIES_FILE_SERVICE, this.getService(ServiceType.PROPERTIES_FILE_SERVICE));
         serviceObjectsMap.put(ServiceType.REUSABLE_POOL_SERVICE, this.getService(ServiceType.REUSABLE_POOL_SERVICE));
+        serviceObjectsMap.put(ServiceType.EMAIL_SERVICE, this.getService(ServiceType.EMAIL_SERVICE));
         return this;
     }
 

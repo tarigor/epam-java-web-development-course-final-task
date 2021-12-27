@@ -1,8 +1,8 @@
 package com.epam.hotel.utility;
 
-
 import com.epam.hotel.entity.User;
 import com.epam.hotel.service.exception.ServiceException;
+import com.epam.hotel.service.impl.EmailServiceImpl;
 import com.epam.hotel.types.UserType;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -13,9 +13,9 @@ class PasswordHandlerTest {
 
     @Test
     void testPasswordEncryptDecrypt() throws ServiceException {
-        String initPass = "12345678";
+        String initPass = "Qwer1234!";
 
-        User user = new User(0, "Dyadya", "Stepa", UserType.ADMIN, "@tut.by", initPass);
+        User user = new User(0, "Dyadya", "Stepa", UserType.CLIENT, "pupkin@yopmail.com", initPass);
         LOGGER.info(String.format("hash -> %d", user.hashCode()));
 
         PasswordHandler passwordHandler = new PasswordHandler().setEncryptionKey(user.hashCode());
@@ -26,6 +26,14 @@ class PasswordHandlerTest {
         LOGGER.info(String.format("decrPass -> %s", decrPass));
 
         Assert.assertTrue(initPass.contentEquals(decrPass));
+    }
+
+    @Test
+    void sendSimpleMail() {
+        EmailServiceImpl emailService = new EmailServiceImpl();
+
+        User user = new User("Igor", "Taren", UserType.CLIENT, "elkn@mail.com", "");
+        emailService.sendEmailToAdmin(user, 33, 2, "SINGLE", "2021-10-22", "2021-11-22");
     }
 
 }

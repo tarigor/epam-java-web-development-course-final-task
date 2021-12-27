@@ -3,14 +3,16 @@ package com.epam.hotel.entity;
 import com.epam.hotel.types.RoomClass;
 
 public class RoomData {
-    double cost;
+    private double cost;
     private int persons;
     private RoomClass roomClass;
+    private String roomImageLink;
 
-    public RoomData(int persons, RoomClass roomClass, double cost) {
+    public RoomData(int persons, RoomClass roomClass, double cost, String roomImageLink) {
         this.persons = persons;
         this.roomClass = roomClass;
         this.cost = cost;
+        this.roomImageLink = roomImageLink;
     }
 
     public int getPersons() {
@@ -37,12 +39,21 @@ public class RoomData {
         this.cost = cost;
     }
 
+    public String getRoomImageLink() {
+        return roomImageLink;
+    }
+
+    public void setRoomImageLink(String roomImageLink) {
+        this.roomImageLink = roomImageLink;
+    }
+
     @Override
     public String toString() {
         return "RoomData{" +
-                "persons=" + persons +
+                "cost=" + cost +
+                ", persons=" + persons +
                 ", roomClass=" + roomClass +
-                ", cost=" + cost +
+                ", roomImageLink='" + roomImageLink + '\'' +
                 '}';
     }
 }
