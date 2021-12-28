@@ -1,6 +1,6 @@
 ## Java Web Development course from EPAM - final task
 
-### Task description:
+### Base Task description:
 
 System **Hotel booking**. 
 - **The client** fills in the **Application**, indicating the number of beds in the room, the class of apartments
@@ -8,6 +8,16 @@ and the time of stay.
 - **The administrator** reviews the received **Application**, selects the most suitable available
 **Room(s)**, 
 - after which the system exposes **Invoice to the Client**.
+
+### In Addition To A Base Task:
+- an admin may reject a client's request
+- a client can pay an invoice which sending by admin after the request approving
+- a client has a balance of money that can be top-up
+- after a client makes a request, an email sent to an admin
+- after request approval by an admin, an email sent to a client
+
+- the current project is deployed on AWS platform and can be accessing through a link below ("Site Link" paragraph).
+- the current project was dockerized
 
 ### Requirements:
 
