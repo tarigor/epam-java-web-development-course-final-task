@@ -16,7 +16,7 @@ and the time of stay.
 - after a client makes a request, an email sent to an admin
 - after request approval by an admin, an email sent to a client
 
-###More:
+### More:
 - the current project is deployed on AWS platform and can be accessed on the following link http://hotelgrodnoinn-env.eba-vzzi3eub.us-east-2.elasticbeanstalk.com
 - the current project can be dockerized (the docker configuration can be found in the "docker" folder)
 - the current project also implemented using SPRING framework. Can be found on the following link https://github.com/tarigor/epam-java-web-development-course-final-task-spring
