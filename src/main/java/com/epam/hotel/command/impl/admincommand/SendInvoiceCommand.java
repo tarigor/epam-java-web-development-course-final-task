@@ -2,7 +2,11 @@ package com.epam.hotel.command.impl.admincommand;
 
 import com.epam.hotel.command.BaseCommand;
 import com.epam.hotel.command.Command;
+import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.service.exception.ServiceException;
+import com.epam.hotel.service.factory.ServiceFactory;
+import com.epam.hotel.service.factory.ServiceType;
+import com.epam.hotel.service.impl.EmailServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +18,9 @@ import java.rmi.ServerException;
  */
 public class SendInvoiceCommand extends BaseCommand implements Command {
 
+    private final EmailServiceImpl emailService =
+            (EmailServiceImpl) ServiceFactory.getInstance().getServiceObjectsMap().get(ServiceType.EMAIL_SERVICE);
+
     /**
      * Handles a GET or POST request received via HTTP from a WEB page.
      *
@@ -23,7 +30,7 @@ public class SendInvoiceCommand extends BaseCommand implements Command {
      * @throws IOException     when an input or output error is detected when the servlet handles the request.
      */
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException, ServiceException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException, ServiceException, DaoException {
         String[] singleRoomsSelected = request.getParameterValues("singleRoomsSelected");
         String[] doubleRoomsSelected = request.getParameterValues("doubleRoomsSelected");
         String[] suiteRoomsSelected = request.getParameterValues("suiteRoomsSelected");
@@ -32,7 +39,8 @@ public class SendInvoiceCommand extends BaseCommand implements Command {
         String dateTo = request.getParameter("dateTo");
         long clientID = Long.parseLong(request.getParameter("clientID"));
         int requestID = Integer.parseInt(request.getParameter("requestID"));
-        bookService.insertNewOrder(clientID, requestID, singleRoomsSelected, doubleRoomsSelected, suiteRoomsSelected, deluxeRoomsSelected, dateFrom, dateTo);
+        int orderAssigned = bookService.insertNewOrder(clientID, requestID, singleRoomsSelected, doubleRoomsSelected, suiteRoomsSelected, deluxeRoomsSelected, dateFrom, dateTo);
+        emailService.sendEmailToClient(clientID, requestID, orderAssigned);
         response.sendRedirect(request.getContextPath() + "/command?name=admin_cabinet");
     }
 }

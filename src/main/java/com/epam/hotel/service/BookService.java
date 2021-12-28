@@ -10,14 +10,14 @@ import com.epam.hotel.service.exception.ServiceException;
  * @see com.epam.hotel.service.impl.BookServiceImpl#payInvoice(long, int, int, int, double)
  */
 public interface BookService {
-    void insertNewOrder(long userID,
-                        int requestID,
-                        String[] singleRoomsSelected,
-                        String[] doubleRoomsSelected,
-                        String[] suiteRoomsSelected,
-                        String[] deluxeRoomsSelected,
-                        String dateFrom,
-                        String dateTo) throws ServiceException;
+    int insertNewOrder(long userID,
+                       int requestID,
+                       String[] singleRoomsSelected,
+                       String[] doubleRoomsSelected,
+                       String[] suiteRoomsSelected,
+                       String[] deluxeRoomsSelected,
+                       String dateFrom,
+                       String dateTo) throws ServiceException;
 
     void payInvoice(long userID, int orderID, int requestID, int roomID, double roomPrice) throws ServiceException;
 }

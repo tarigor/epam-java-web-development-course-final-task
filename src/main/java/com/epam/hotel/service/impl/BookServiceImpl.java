@@ -36,23 +36,25 @@ public class BookServiceImpl extends BaseService implements BookService {
      * @param dateTo              a date till which a room booking is requested.
      */
     @Override
-    public void insertNewOrder(long userID,
-                               int requestID,
-                               String[] singleRoomsSelected,
-                               String[] doubleRoomsSelected,
-                               String[] suiteRoomsSelected,
-                               String[] deluxeRoomsSelected,
-                               String dateFrom,
-                               String dateTo) throws ServiceException {
+    public int insertNewOrder(long userID,
+                              int requestID,
+                              String[] singleRoomsSelected,
+                              String[] doubleRoomsSelected,
+                              String[] suiteRoomsSelected,
+                              String[] deluxeRoomsSelected,
+                              String dateFrom,
+                              String dateTo) throws ServiceException {
 
         ArrayList<Order> orders = new ArrayList<>();
         addOrder(singleRoomsSelected, dateFrom, dateTo, orders);
         addOrder(doubleRoomsSelected, dateFrom, dateTo, orders);
         addOrder(suiteRoomsSelected, dateFrom, dateTo, orders);
         addOrder(deluxeRoomsSelected, dateFrom, dateTo, orders);
+
+        int result = 0;
         try {
             if (orders.size() > 1) {
-                executor.createConnection().executeAsTransaction(() -> {
+                result = executor.createConnection().executeAsTransaction(() -> {
                     int orderIdAssigned = orderDAO.insertOrderDataIntoTwoTable(userID, requestID, orders.get(0));
                     for (int i = 1; i < orders.size(); i++) {
                         orderDAO.insertOrderDataIntoSingleTable(orderIdAssigned, requestID, orders.get(i));
@@ -61,7 +63,7 @@ public class BookServiceImpl extends BaseService implements BookService {
                     return orderIdAssigned;
                 });
             } else if (orders.size() == 1) {
-                executor.createConnection().executeAsTransaction(() -> {
+                result = executor.createConnection().executeAsTransaction(() -> {
                     int count = orderDAO.insertOrderDataIntoTwoTable(userID, requestID, orders.get(0));
                     orderDAO.changeStatusOfRequest(requestID, OrderStatus.REQUEST_PROCESSED);
                     return count;
@@ -70,6 +72,7 @@ public class BookServiceImpl extends BaseService implements BookService {
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
+        return result;
     }
 
     /**

@@ -2,6 +2,7 @@ package com.epam.hotel.controller;
 
 import com.epam.hotel.command.Command;
 import com.epam.hotel.command.factory.CommandFactory;
+import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.service.exception.ServiceException;
 import org.apache.log4j.Logger;
 
@@ -36,7 +37,7 @@ public class Controller extends HttpServlet {
         try {
             Class commandClass = CommandFactory.getInstance().getCommand(command);
             ((Command) commandClass.newInstance()).execute(request, response);
-        } catch (IOException | IllegalAccessException | InstantiationException | ServiceException e) {
+        } catch (IOException | IllegalAccessException | InstantiationException | ServiceException | DaoException e) {
             request.setAttribute("errorMessage", e.getMessage());
             request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/error.jsp").forward(request, response);
         }
