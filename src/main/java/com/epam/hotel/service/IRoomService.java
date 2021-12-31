@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @see com.epam.hotel.service.impl.RoomServiceImpl#getRoomPrice(int)
  * @see RoomServiceImpl#getRoomsData()
  */
-public interface RoomService {
+public interface IRoomService {
     ArrayList<Room> getFreeRooms(String dateFrom, String dateTo) throws ServiceException;
 
     double getRoomPrice(int roomID) throws ServiceException;

@@ -1,7 +1,7 @@
 package com.epam.hotel.dao.impl;
 
 import com.epam.hotel.dao.BaseDao;
-import com.epam.hotel.dao.RoomDAO;
+import com.epam.hotel.dao.IRoomDAO;
 import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.entity.Room;
 import com.epam.hotel.entity.RoomData;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Provides the functionality when working with a "room" table of the database.
  */
-public class RoomDAOImpl extends BaseDao implements RoomDAO {
+public class RoomDAOImpl extends BaseDao implements IRoomDAO {
     private static final String GET_FREE_ROOMS = "call get_free_rooms(?,?)";
     private static final String GET_ROOM_PRICE = "select room_cost from room where id = ?";
     private static final String GET_ROOMS_DATA = "" +

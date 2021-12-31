@@ -1,7 +1,7 @@
 package com.epam.hotel.service.impl;
 
 import com.epam.hotel.dao.exception.DaoException;
-import com.epam.hotel.service.DatabaseConnectionService;
+import com.epam.hotel.service.IDatabaseConnectionService;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.util.Properties;
 /**
  * Provides the functionality of connecting to a database.
  */
-public class DatabaseConnectionServiceImpl implements DatabaseConnectionService {
+public class DatabaseConnectionServiceImpl implements IDatabaseConnectionService {
     public static final String DATABASE_URL = "database.url";
     public static final String DATABASE_USER = "database.user";
     public static final String DATABASE_PASSWORD = "database.password";

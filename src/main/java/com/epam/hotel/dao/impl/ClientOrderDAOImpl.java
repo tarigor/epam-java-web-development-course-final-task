@@ -1,7 +1,7 @@
 package com.epam.hotel.dao.impl;
 
 import com.epam.hotel.dao.BaseDao;
-import com.epam.hotel.dao.ClientOrderDAO;
+import com.epam.hotel.dao.IClientOrderDAO;
 import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.entity.ClientOrderRoom;
 import com.epam.hotel.entity.ClientRequest;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Provides the functionality when working with a "client_order" table of the database.
  */
-public class ClientOrderDAOImpl extends BaseDao implements ClientOrderDAO {
+public class ClientOrderDAOImpl extends BaseDao implements IClientOrderDAO {
     private static final String GET_CLIENT_ORDERS = "" +
             "SELECT client_order_id, request_id, room_id, room_class, check_in_date, check_out_date, order_status " +
             "FROM `order` " +

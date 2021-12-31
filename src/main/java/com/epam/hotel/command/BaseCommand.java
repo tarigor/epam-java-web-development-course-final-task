@@ -1,6 +1,6 @@
 package com.epam.hotel.command;
 
-import com.epam.hotel.service.CommonSiteActivityService;
+import com.epam.hotel.service.ICommonSiteActivityService;
 import com.epam.hotel.service.factory.ServiceFactory;
 import com.epam.hotel.service.factory.ServiceType;
 import com.epam.hotel.service.impl.*;
@@ -16,8 +16,8 @@ import java.util.HashMap;
 /**
  * Provides the fields declaration which can be used by child classes.
  */
-public abstract class BaseCommand {
-    protected static final CommonSiteActivityService commonSiteActivityService =
+public class BaseCommand {
+    protected static final ICommonSiteActivityService commonSiteActivityService =
             (CommonSiteActivityServiceImpl) ServiceFactory.getInstance().getServiceObjectsMap().get(ServiceType.COMMON_SITE_ACTIVITY_SERVICE);
     protected static final ClientServiceImpl clientService =
             (ClientServiceImpl) ServiceFactory.getInstance().getServiceObjectsMap().get(ServiceType.CLIENT_SERVICE);

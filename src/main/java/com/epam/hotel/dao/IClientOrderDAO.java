@@ -1,6 +1,7 @@
 package com.epam.hotel.dao;
 
 import com.epam.hotel.dao.exception.DaoException;
+import com.epam.hotel.dao.impl.ClientOrderDAOImpl;
 import com.epam.hotel.entity.ClientOrderRoom;
 import com.epam.hotel.entity.ClientRequest;
 import com.epam.hotel.entity.User;
@@ -8,16 +9,16 @@ import com.epam.hotel.entity.User;
 import java.util.ArrayList;
 
 /**
- * Provides methods to be implemented in {@link com.epam.hotel.dao.impl.ClientOrderDAOImpl} class.
+ * Provides methods to be implemented in {@link ClientOrderDAOImpl} class.
  * See description of the methods implemented:
  * <p>
  * // * @see com.epam.hotel.dao.impl.ClientOrderDAOImpl#deleteRecord(int, int)
  *
- * @see com.epam.hotel.dao.impl.ClientOrderDAOImpl#get(User)
- * @see com.epam.hotel.dao.impl.ClientOrderDAOImpl#getClientRequests(long)
- * @see com.epam.hotel.dao.impl.ClientOrderDAOImpl#removeRequest(int)
+ * @see ClientOrderDAOImpl#get(User)
+ * @see ClientOrderDAOImpl#getClientRequests(long)
+ * @see ClientOrderDAOImpl#removeRequest(int)
  */
-public interface ClientOrderDAO {
+public interface IClientOrderDAO {
 
     ArrayList<ClientOrderRoom> get(User user) throws DaoException;
 

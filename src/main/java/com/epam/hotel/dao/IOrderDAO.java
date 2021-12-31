@@ -10,17 +10,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Provides methods to be implemented in {@link com.epam.hotel.dao.impl.OrderDAOImpl} class.
+ * Provides methods to be implemented in {@link OrderDAOImpl} class.
  * See description of the methods implemented:
  *
- * @see com.epam.hotel.dao.impl.OrderDAOImpl#insertOrderDataIntoTwoTable(long, int, Order)
- * @see com.epam.hotel.dao.impl.OrderDAOImpl#insertOrderDataIntoSingleTable(int, int, Order)
- * @see com.epam.hotel.dao.impl.OrderDAOImpl#changeStatusOfRequest(int, OrderStatus)
- * @see com.epam.hotel.dao.impl.OrderDAOImpl#changeStatusOfOrder(int, int, int, OrderStatus)
+ * @see OrderDAOImpl#insertOrderDataIntoTwoTable(long, int, Order)
+ * @see OrderDAOImpl#insertOrderDataIntoSingleTable(int, int, Order)
+ * @see OrderDAOImpl#changeStatusOfRequest(int, OrderStatus)
+ * @see OrderDAOImpl#changeStatusOfOrder(int, int, int, OrderStatus)
  * @see OrderDAOImpl#getAllOrders()
- * @see com.epam.hotel.dao.impl.OrderDAOImpl#changeOrderStatus(String, int, int)
+ * @see OrderDAOImpl#changeOrderStatus(String, int, int)
  */
-public interface OrderDAO {
+public interface IOrderDAO {
     //first insert of new order
     int insertOrderDataIntoTwoTable(long userID, int requestId, Order order) throws DaoException;
 

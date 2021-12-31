@@ -10,7 +10,7 @@ import com.epam.hotel.service.exception.ServiceException;
  * @see com.epam.hotel.service.impl.CommonSiteActivityServiceImpl#checkUserForExistingAndRightPasswordInputted(User)
  * @see com.epam.hotel.service.impl.CommonSiteActivityServiceImpl#doNewUserRegistration(User)
  */
-public interface CommonSiteActivityService {
+public interface ICommonSiteActivityService {
     User checkUserForExistingAndRightPasswordInputted(User user) throws ServiceException;
 
     boolean doNewUserRegistration(User user) throws ServiceException;

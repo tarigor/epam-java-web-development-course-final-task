@@ -9,14 +9,14 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
- * Provides methods to be implemented in {@link com.epam.hotel.dao.impl.RoomDAOImpl} class.
+ * Provides methods to be implemented in {@link RoomDAOImpl} class.
  * See description of the methods implemented:
  *
- * @see com.epam.hotel.dao.impl.RoomDAOImpl#getFreeRooms(Date, Date)
- * @see com.epam.hotel.dao.impl.RoomDAOImpl#getRoomPrice(int)
+ * @see RoomDAOImpl#getFreeRooms(Date, Date)
+ * @see RoomDAOImpl#getRoomPrice(int)
  * @see RoomDAOImpl#getRoomsData()
  */
-public interface RoomDAO {
+public interface IRoomDAO {
 
     ArrayList<Room> getFreeRooms(Date dateFrom, Date dateTo) throws DaoException;
 

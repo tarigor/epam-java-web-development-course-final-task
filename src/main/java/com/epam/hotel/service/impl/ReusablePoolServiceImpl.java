@@ -1,7 +1,7 @@
 package com.epam.hotel.service.impl;
 
 import com.epam.hotel.dao.exception.DaoException;
-import com.epam.hotel.service.ReusablePoolService;
+import com.epam.hotel.service.IReusablePoolService;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.util.Hashtable;
 /**
  * Provides the functionality to access a database using a connection pool.
  */
-public class ReusablePoolServiceImpl implements ReusablePoolService {
+public class ReusablePoolServiceImpl implements IReusablePoolService {
     private static final Logger LOGGER = Logger.getLogger(ReusablePoolServiceImpl.class);
     private final Hashtable<Connection, Long> usedConnections;
     private final Hashtable<Connection, Long> freeConnections;

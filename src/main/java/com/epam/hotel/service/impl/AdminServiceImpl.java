@@ -7,7 +7,7 @@ import com.epam.hotel.dao.impl.OrderDAOImpl;
 import com.epam.hotel.dao.impl.RequestDAOImpl;
 import com.epam.hotel.entity.ClientOrderRoom;
 import com.epam.hotel.entity.ClientRequest;
-import com.epam.hotel.service.AdminService;
+import com.epam.hotel.service.IAdminService;
 import com.epam.hotel.service.BaseService;
 import com.epam.hotel.service.exception.ServiceException;
 import com.epam.hotel.types.OrderStatus;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Provides the functionality of the admin activities.
  */
-public class AdminServiceImpl extends BaseService implements AdminService {
+public class AdminServiceImpl extends BaseService implements IAdminService {
     public static final String APPROVE = "approve";
     public static final String REJECT = "reject";
     private static final Logger LOGGER = Logger.getLogger(AdminServiceImpl.class);

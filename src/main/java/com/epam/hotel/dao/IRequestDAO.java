@@ -8,14 +8,14 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
- * Provides methods to be implemented in {@link com.epam.hotel.dao.impl.RequestDAOImpl} class.
+ * Provides methods to be implemented in {@link RequestDAOImpl} class.
  * See description of the methods implemented:
  *
  * @see RequestDAOImpl#getAllRequests()
- * @see com.epam.hotel.dao.impl.RequestDAOImpl#insertRequest(long, int, String, Date, Date)
- * @see com.epam.hotel.dao.impl.RequestDAOImpl#getRequestByIDAndEmail(long, String)
+ * @see RequestDAOImpl#insertRequest(long, int, String, Date, Date)
+ * @see RequestDAOImpl#getRequestByIDAndEmail(long, String)
  */
-public interface RequestDAO {
+public interface IRequestDAO {
 
     ArrayList<ClientRequest> getAllRequests() throws DaoException;
 

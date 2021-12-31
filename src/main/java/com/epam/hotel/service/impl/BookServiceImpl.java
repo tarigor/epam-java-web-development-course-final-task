@@ -7,7 +7,7 @@ import com.epam.hotel.dao.impl.OrderDAOImpl;
 import com.epam.hotel.dao.impl.UserDAOImpl;
 import com.epam.hotel.entity.Order;
 import com.epam.hotel.service.BaseService;
-import com.epam.hotel.service.BookService;
+import com.epam.hotel.service.IBookService;
 import com.epam.hotel.service.exception.ServiceException;
 import com.epam.hotel.types.OrderStatus;
 import org.apache.log4j.Logger;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Provides the functionality during booking of the rooms by a client.
  */
-public class BookServiceImpl extends BaseService implements BookService {
+public class BookServiceImpl extends BaseService implements IBookService {
     private static final Logger LOGGER = Logger.getLogger(BookServiceImpl.class);
     private final OrderDAOImpl orderDAO = (OrderDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.ORDER_DAO);
     private final UserDAOImpl userDAO = (UserDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.USER_DAO);

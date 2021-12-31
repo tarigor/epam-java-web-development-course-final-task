@@ -7,14 +7,14 @@ import com.epam.hotel.dao.impl.UserDAOImpl;
 import com.epam.hotel.entity.User;
 import com.epam.hotel.entity.UserLoginError;
 import com.epam.hotel.service.BaseService;
-import com.epam.hotel.service.CommonSiteActivityService;
+import com.epam.hotel.service.ICommonSiteActivityService;
 import com.epam.hotel.service.exception.ServiceException;
 import org.apache.log4j.Logger;
 
 /**
  * Provides the functionality of common site activities.
  */
-public class CommonSiteActivityServiceImpl extends BaseService implements CommonSiteActivityService {
+public class CommonSiteActivityServiceImpl extends BaseService implements ICommonSiteActivityService {
     private static final Logger LOGGER = Logger.getLogger(CommonSiteActivityServiceImpl.class);
     private final UserDAOImpl userDAO =
             (UserDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.USER_DAO);

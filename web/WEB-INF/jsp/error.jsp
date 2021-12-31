@@ -17,7 +17,7 @@
 <c:import url="common/menu.jsp"/>
 <section class="u-clearfix u-image u-section-1" id="carousel_b7ce" data-image-width="1280" data-image-height="839">
 	<div class="u-align-left u-clearfix u-sheet u-sheet-1">
-		<h4 class="u-custom-font u-font-georgia u-text u-text-body-alt-color u-text-default u-text-1">
+		<h4 class="u-custom-font u-font-georgia u-text u-text-default u-text-1" style="color: red">
 			<f:message key="${errorMessage}" bundle="${local}"/>
 		</h4>
 	</div>

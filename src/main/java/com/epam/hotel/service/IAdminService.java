@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @see com.epam.hotel.service.impl.AdminServiceImpl#getRequest(long, String)
  * @see com.epam.hotel.service.impl.AdminServiceImpl#rejectRequest(Integer)
  */
-public interface AdminService {
+public interface IAdminService {
     ArrayList<ClientOrderRoom> getAllOrders() throws ServiceException;
 
     ArrayList<ClientRequest> getAllRequests() throws ServiceException;

@@ -9,7 +9,7 @@ import com.epam.hotel.service.exception.ServiceException;
  * @see com.epam.hotel.service.impl.BookServiceImpl#insertNewOrder(long, int, String[], String[], String[], String[], String, String)
  * @see com.epam.hotel.service.impl.BookServiceImpl#payInvoice(long, int, int, int, double)
  */
-public interface BookService {
+public interface IBookService {
     int insertNewOrder(long userID,
                        int requestID,
                        String[] singleRoomsSelected,

@@ -1,7 +1,7 @@
 package com.epam.hotel.dao.impl;
 
 import com.epam.hotel.dao.BaseDao;
-import com.epam.hotel.dao.RequestDAO;
+import com.epam.hotel.dao.IRequestDAO;
 import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.entity.ClientRequest;
 import com.epam.hotel.types.OrderStatus;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Provides the functionality when working with a "request" table of the database.
  */
-public class RequestDAOImpl extends BaseDao implements RequestDAO {
+public class RequestDAOImpl extends BaseDao implements IRequestDAO {
     private static final String GET_ALL_REQUESTS = "" +
             "select request_id, client_r_id, first_name, last_name, email, persons_amount, room_class, check_in_date, check_out_date, request_status\n" +
             "FROM request\n" +

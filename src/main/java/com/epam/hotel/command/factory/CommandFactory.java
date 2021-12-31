@@ -12,6 +12,7 @@ import java.util.NoSuchElementException;
  */
 public class CommandFactory {
     private static final CommandFactory instance = new CommandFactory();
+    public static final String CLAZZ = "clazz";
     private final String COMMAND_JSON_FILE_PATH = "command.json";
     private final JsonFileHandler jsonFileHandler;
 
@@ -32,7 +33,7 @@ public class CommandFactory {
     public Class getCommand(String command) throws ServiceException {
         Class clazz = null;
         try {
-            String className = ((LinkedTreeMap) jsonFileHandler.getMapOfCommandFromJson().get(command)).get("clazz").toString();
+            String className = ((LinkedTreeMap) jsonFileHandler.getMapOfCommandFromJson().get(command)).get(CLAZZ).toString();
             clazz = Class.forName(className);
         } catch (NoSuchElementException | ClassNotFoundException | ServiceException e) {
             throw new ServiceException(e);

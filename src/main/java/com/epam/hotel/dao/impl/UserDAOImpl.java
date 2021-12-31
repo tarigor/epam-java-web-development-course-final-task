@@ -1,7 +1,7 @@
 package com.epam.hotel.dao.impl;
 
 import com.epam.hotel.dao.BaseDao;
-import com.epam.hotel.dao.UserDAO;
+import com.epam.hotel.dao.IUserDAO;
 import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.entity.User;
 import com.epam.hotel.types.UserType;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 /**
  * Provides the functionality when working with a "user" table of the database.
  */
-public class UserDAOImpl extends BaseDao implements UserDAO {
+public class UserDAOImpl extends BaseDao implements IUserDAO {
     private static final String TOP_UP_ACCOUNT = "call charge_account(?, ?)";
     private final String INSERT_NEW_USER =
             "INSERT INTO `user` (`id`,`first_name`, `last_name`, `user_type`, `email`, `password`,account) VALUES(?,?,?,?,?,?,?)";

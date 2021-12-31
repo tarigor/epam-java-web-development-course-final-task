@@ -5,7 +5,7 @@ import com.epam.hotel.dao.exception.DaoException;
 
 import java.sql.Connection;
 
-public abstract class BaseDao {
+public class BaseDao {
     protected static Connection connection;
 
     protected void setConnection() throws DaoException {

@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * @see com.epam.hotel.service.impl.ClientServiceImpl#topUpAccount(long, double)
  * @see com.epam.hotel.service.impl.ClientServiceImpl#getClient(long)
  */
-public interface ClientService {
+public interface IClientService {
     ArrayList<ClientOrderRoom> getClientOrders(User user) throws ServiceException;
 
     ArrayList<ClientRequest> getClientRequests(long clientID) throws ServiceException;

@@ -17,7 +17,6 @@ import java.io.IOException;
  */
 public class CommandFilter extends BaseCommand implements Filter {
     public static final String COMMAND_NAME = "name";
-    public static final String NOT_AUTHORIZED_ACCESS = "error.not.authorized.access";
     public static final String ERROR_SERVICE_SCOPE = "error.service.scope";
     public static final String ERROR_JSP = "/WEB-INF/jsp/error.jsp";
     private static final Logger LOGGER = Logger.getLogger(CommandFilter.class);
@@ -41,7 +40,8 @@ public class CommandFilter extends BaseCommand implements Filter {
             if (checkCommandRole(request, command)) {
                 filterChain.doFilter(request, response);
             } else {
-                showErrorPage(servletRequest, request, response, NOT_AUTHORIZED_ACCESS);
+                LOGGER.error("NOT AUTHORIZED ACCESS");
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             }
         } catch (ServiceException e) {
             showErrorPage(servletRequest, request, response, ERROR_SERVICE_SCOPE);
@@ -66,12 +66,11 @@ public class CommandFilter extends BaseCommand implements Filter {
         User user = (User) req.getSession().getAttribute("user");
         if (user != null) {
             LOGGER.info(String.format("user role detected -> %s", user.getUserType().name()));
+            return commandRole.contains(user.getUserType().name());
+        } else {
+            LOGGER.info("user role detected -> no one logged");
+            return  commandRole.contains("ANYONE");
         }
-        if (commandRole.contains("ANYONE")) {
-            return true;
-        }
-        assert user != null;
-        return commandRole.contains(user.getUserType().name());
     }
 
     @Override

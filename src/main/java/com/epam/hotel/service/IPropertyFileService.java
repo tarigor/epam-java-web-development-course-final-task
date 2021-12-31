@@ -8,6 +8,6 @@ import java.util.Properties;
  *
  * @see com.epam.hotel.service.impl.PropertiesFileServiceImpl#getProperties(String)
  */
-public interface PropertyFileService {
+public interface IPropertyFileService {
     Properties getProperties(String propertiesPath);
 }

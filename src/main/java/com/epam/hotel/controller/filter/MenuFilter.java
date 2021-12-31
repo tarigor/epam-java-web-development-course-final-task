@@ -20,7 +20,7 @@ public class MenuFilter extends BaseCommand implements Filter {
     private static final Logger LOGGER = Logger.getLogger(MenuFilter.class);
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override

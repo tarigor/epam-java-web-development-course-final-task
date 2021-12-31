@@ -7,7 +7,7 @@ import com.epam.hotel.dao.impl.RoomDAOImpl;
 import com.epam.hotel.entity.Room;
 import com.epam.hotel.entity.RoomData;
 import com.epam.hotel.service.BaseService;
-import com.epam.hotel.service.RoomService;
+import com.epam.hotel.service.IRoomService;
 import com.epam.hotel.service.exception.ServiceException;
 
 import java.sql.Date;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Provides the functionality during manipulation with a rooms data.
  */
-public class RoomServiceImpl extends BaseService implements RoomService {
+public class RoomServiceImpl extends BaseService implements IRoomService {
 
     private final RoomDAOImpl roomDAO = (RoomDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.ROOM_DAO);
 

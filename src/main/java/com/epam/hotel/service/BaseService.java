@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public abstract class BaseService {
+public class BaseService {
     protected static final ExecutorImpl executor = ExecutorImpl.getInstance();
 
     protected static Date convertStringToSqlDate(String date) throws ServiceException {

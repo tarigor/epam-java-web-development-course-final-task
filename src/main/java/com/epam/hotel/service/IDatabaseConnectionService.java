@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @see DatabaseConnectionServiceImpl#getConnection()
  * @see com.epam.hotel.service.impl.DatabaseConnectionServiceImpl#destroy(Connection)
  */
-public interface DatabaseConnectionService {
+public interface IDatabaseConnectionService {
     Connection getConnection() throws SQLException, DaoException;
 
     void destroy(Connection connection) throws DaoException;

@@ -1,7 +1,7 @@
 package com.epam.hotel.dao.impl;
 
 import com.epam.hotel.dao.BaseDao;
-import com.epam.hotel.dao.OrderDAO;
+import com.epam.hotel.dao.IOrderDAO;
 import com.epam.hotel.dao.exception.DaoException;
 import com.epam.hotel.entity.ClientOrderRoom;
 import com.epam.hotel.entity.Order;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Provides the functionality when working with a "order" table of the database.
  */
-public class OrderDAOImpl extends BaseDao implements OrderDAO {
+public class OrderDAOImpl extends BaseDao implements IOrderDAO {
     private static final String INSERT_ORDER_INTO_TWO_TABLES = "call insert_new_order(?,?,?,?,?,?,?)";
     private static final String INSERT_ORDER_INTO_SINGLE_TABLE =
             "insert into `order` (client_order_id, request_id, room_id, check_in_date, check_out_date, order_status) VALUES (?,?,?,?,?,?)";

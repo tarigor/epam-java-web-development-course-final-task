@@ -11,8 +11,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class UserDAOImplDaoTest extends BaseDaoTest {
-    private static final Logger LOGGER = Logger.getLogger(UserDAOImplDaoTest.class);
+class IUserDAOImplDaoTest extends BaseDaoTest {
+    private static final Logger LOGGER = Logger.getLogger(IUserDAOImplDaoTest.class);
     private final UserDAOImpl userDAO = new UserDAOImpl();
 
     @BeforeAll

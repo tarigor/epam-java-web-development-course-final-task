@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
 
-class RequestDAOImplDaoTest extends BaseDaoTest {
+class IRequestDAOImplDaoTest extends BaseDaoTest {
     private static final Logger LOGGER = Logger.getLogger(RequestDAOImpl.class);
     private final RequestDAOImpl requestDAO = new RequestDAOImpl();
 

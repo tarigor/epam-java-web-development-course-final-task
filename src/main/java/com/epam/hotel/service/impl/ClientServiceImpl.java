@@ -10,7 +10,7 @@ import com.epam.hotel.entity.ClientOrderRoom;
 import com.epam.hotel.entity.ClientRequest;
 import com.epam.hotel.entity.User;
 import com.epam.hotel.service.BaseService;
-import com.epam.hotel.service.ClientService;
+import com.epam.hotel.service.IClientService;
 import com.epam.hotel.service.exception.ServiceException;
 import com.epam.hotel.service.factory.ServiceFactory;
 import com.epam.hotel.service.factory.ServiceType;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * Provides the functionality during a client activity.
  */
-public class ClientServiceImpl extends BaseService implements ClientService {
+public class ClientServiceImpl extends BaseService implements IClientService {
     private static final Logger LOGGER = Logger.getLogger(ClientServiceImpl.class);
     private final ClientOrderDAOImpl clientOrderDAO =
             (ClientOrderDAOImpl) DAOServiceFactory.getInstance().getDaoObjectMap().get(DAOType.CLIENT_ORDER_DAO);

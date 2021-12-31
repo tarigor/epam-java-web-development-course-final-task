@@ -3,9 +3,9 @@
 ### Base Task description:
 
 System **Hotel booking**. 
-- **The client** fills in the **Application**, indicating the number of beds in the room, the class of apartments
+- **The client** fills in the **Application** and send **Request**, indicating the number of beds in the room, the class of apartments
 and the time of stay. 
-- **The administrator** reviews the received **Application**, selects the most suitable available
+- **The administrator** reviews the received **Request**, selects the most suitable available
 **Room(s)**, 
 - after which the system exposes **Invoice to the Client**.
 
@@ -52,7 +52,10 @@ and the time of stay.
 - Servlet API 3.1.0
 - JSP API 2.1
 - JSTL API 1.2
+- gson 2.8.9
 - commons-codec 1.11
+- javax.mail 1.6.2
+- javax.activation 1.2.0
 - log4j (logger) 1.2.17
 - junit (testing) 4.13.2
 - junit.jupiter 5.8.1

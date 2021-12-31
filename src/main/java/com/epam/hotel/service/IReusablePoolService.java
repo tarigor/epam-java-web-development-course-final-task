@@ -12,7 +12,7 @@ import java.sql.Connection;
  * @see ReusablePoolServiceImpl#getConnection()
  * @see com.epam.hotel.service.impl.ReusablePoolServiceImpl#releaseConnection(Connection)
  */
-public interface ReusablePoolService {
+public interface IReusablePoolService {
     Connection getConnection() throws DaoException;
 
     void releaseConnection(Connection connection);

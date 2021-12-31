@@ -17,5 +17,6 @@ public enum CommandType {
     CLIENT_CABINET,
     ACCOUNT,
     TOP_UP,
-    PAY;
+    PAY,
+    ERROR;
 }
