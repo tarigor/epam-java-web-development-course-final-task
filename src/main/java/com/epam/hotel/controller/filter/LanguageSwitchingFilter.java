@@ -14,10 +14,10 @@ import java.util.Map;
  * Provides the functionality of handling of the request filtering in depends on navigation command receiving
  * from the menu of the web page before servlet initialization.
  */
-public class MenuFilter extends BaseCommand implements Filter {
+public class LanguageSwitchingFilter extends BaseCommand implements Filter {
     public static final String NAME = "name";
     public static final String DEFAULT_LANGUAGE = "en_US";
-    private static final Logger LOGGER = Logger.getLogger(MenuFilter.class);
+    private static final Logger LOGGER = Logger.getLogger(LanguageSwitchingFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) {
