@@ -15,6 +15,7 @@ and the time of stay.
 - a client has a balance of money that can be top-up
 - after a client makes a request, an email sent to an admin
 - after request approval by an admin, an email sent to a client
+- admin can read on a webpage a listing of a log file created by log4j and stored on a server
 
 ### More:
 - the current project is deployed on AWS platform and can be accessed on the following link http://hotelgrodnoinn-env.eba-vzzi3eub.us-east-2.elasticbeanstalk.com

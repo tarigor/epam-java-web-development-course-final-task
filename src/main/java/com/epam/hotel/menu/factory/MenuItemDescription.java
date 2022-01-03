@@ -11,7 +11,8 @@ public enum MenuItemDescription {
     CLIENT_CABINET("menu.client.cabinet"),
     ADMIN_CABINET("menu.admin.cabinet"),
     LOGOUT("menu.logoff"),
-    ACCOUNT("menu.account");
+    ACCOUNT("menu.account"),
+    LOGS("menu.logs");
     String bundle;
 
     MenuItemDescription(String bundle) {

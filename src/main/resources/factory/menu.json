@@ -35,6 +35,12 @@
     "menuItemDescription": "ADMIN_CABINET",
     "role": "ADMIN_LOGGED"
   },
+  "LOGS": {
+    "id": "8",
+    "command": "/command?name=log",
+    "menuItemDescription": "LOGS",
+    "role": "ADMIN_LOGGED"
+  },
   "LOGOUT": {
     "id": "9",
     "command": "/command?name=logout",
