@@ -40,7 +40,8 @@ and the time of stay.
 - factory/services - contains items of the services factory
 - local/local_by_BY.properties - contains the localization texts to English language
 - local/local_en_US.properties - contains the localization texts to Belarusian language
-- sql/hotel_db.sql - contains SQL statements to create the tables and stored procedures of the database for the current project.
+- sql/1_hotel_db.sql - contains SQL statements to create the tables and stored procedures of the database for the current project.
+- sql/2_hotel_db_room_class_init_data.sql - contains SQL statements to fill initial data for the "room" and "room_class" tables
 - database.properties - contains the settings to initialize the MySQL database uses in the current project
 - log4j.properties - contains the settings to initialize the logger - Log4j 
         

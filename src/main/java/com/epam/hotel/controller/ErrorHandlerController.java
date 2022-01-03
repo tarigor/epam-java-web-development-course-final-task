@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ErrorHandlerController extends HttpServlet {
-    private static final String ERROR_COMMAND = "ERROR";
     public static final String ERROR_JSP = "/WEB-INF/jsp/error.jsp";
     public static final String ERROR_MESSAGE = "errorMessage";
+    private static final String ERROR_COMMAND = "ERROR";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

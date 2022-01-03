@@ -69,7 +69,7 @@ public class CommandFilter extends BaseCommand implements Filter {
             return commandRole.contains(user.getUserType().name());
         } else {
             LOGGER.info("user role detected -> no one logged");
-            return  commandRole.contains("ANYONE");
+            return commandRole.contains("ANYONE");
         }
     }
 

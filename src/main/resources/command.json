@@ -58,5 +58,9 @@
   "REJECT": {
     "clazz": "com.epam.hotel.command.impl.admincommand.RejectCommand",
     "role": "ADMIN"
+  },
+  "LOG": {
+    "clazz": "com.epam.hotel.command.impl.admincommand.ReadLogFileCommand",
+    "role": "ADMIN"
   }
 }

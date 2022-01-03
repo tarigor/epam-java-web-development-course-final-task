@@ -11,8 +11,8 @@ import java.util.NoSuchElementException;
  * Provides the functionality of getting a specific command class based on factory pattern.
  */
 public class CommandFactory {
-    private static final CommandFactory instance = new CommandFactory();
     public static final String CLAZZ = "clazz";
+    private static final CommandFactory instance = new CommandFactory();
     private final String COMMAND_JSON_FILE_PATH = "command.json";
     private final JsonFileHandler jsonFileHandler;
 

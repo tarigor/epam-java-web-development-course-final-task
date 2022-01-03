@@ -18,5 +18,6 @@ public enum CommandType {
     ACCOUNT,
     TOP_UP,
     PAY,
-    ERROR;
+    ERROR,
+    LOG;
 }

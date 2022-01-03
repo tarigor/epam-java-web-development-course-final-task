@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ErrorCommand extends BaseCommand implements Command {
+    public static final String ERROR_PREFIX = "ERROR_";
     private static final Logger LOGGER = Logger.getLogger(ErrorCommand.class);
     private static final String ERROR_PAGE = "error";
-    public static final String ERROR_PREFIX = "ERROR_";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {

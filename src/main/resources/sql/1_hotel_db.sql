@@ -1,14 +1,15 @@
-create table if not exists room_class
+create table room_class
 (
-    id         int auto_increment
+    id              int auto_increment
         primary key,
-    room_class varchar(20) not null,
+    room_class      varchar(20) not null,
+    room_image_link char(255)   null,
     constraint class_name_UNIQUE
         unique (room_class)
 )
     comment 'consist different class of rooms' charset = utf8;
 
-create table if not exists room
+create table room
 (
     id              int auto_increment
         primary key,
@@ -23,7 +24,7 @@ create table if not exists room
 create index room_class_id_idx
     on room (room_class_id);
 
-create table if not exists user
+create table user
 (
     id         bigint      not null
         primary key,
@@ -36,7 +37,7 @@ create table if not exists user
 )
     charset = utf8;
 
-create table if not exists client_order
+create table client_order
 (
     client_order_room_id int auto_increment,
     client_id            bigint not null,
@@ -53,7 +54,7 @@ create index client_id_fk_idx
 alter table client_order
     add primary key (client_order_room_id);
 
-create table if not exists client_request
+create table client_request
 (
     client_request_id int auto_increment
         primary key,
@@ -66,7 +67,7 @@ create table if not exists client_request
 create index client_r_id_fk_idx
     on client_request (client_r_id);
 
-create table if not exists `order`
+create table `order`
 (
     client_order_id int         not null,
     request_id      int         not null,
@@ -85,7 +86,7 @@ create table if not exists `order`
 create index client_order_fk_id_idx
     on `order` (client_order_id);
 
-create table if not exists request
+create table request
 (
     request_id     int         not null,
     persons_amount int         not null,
@@ -102,7 +103,8 @@ create table if not exists request
 create index request_id_fk_idx
     on request (request_id);
 
-create procedure charge_account(IN client_id_in mediumtext, IN charge_amount_in double)
+create
+    definer = administrator@`%` procedure charge_account(IN client_id_in mediumtext, IN charge_amount_in double)
 BEGIN
     declare acc double;
     select account
@@ -113,7 +115,8 @@ BEGIN
     select account from user where id = client_id_in;
 END;
 
-create procedure get_free_rooms(IN dateFrom date, IN dateTo date)
+create
+    definer = administrator@`%` procedure get_free_rooms(IN dateFrom date, IN dateTo date)
 BEGIN
     drop temporary table if exists temp1;
     create temporary table if not exists temp1
@@ -131,9 +134,11 @@ BEGIN
     order by id;
 END;
 
-create procedure insert_new_order(IN client_id_in bigint, IN request_id_in int, IN room_id_in int,
-                                  IN check_in_date_in date, IN check_out_date_in date, IN order_status_in char(50),
-                                  OUT id int)
+create
+    definer = administrator@`%` procedure insert_new_order(IN client_id_in bigint, IN request_id_in int,
+                                                           IN room_id_in int, IN check_in_date_in date,
+                                                           IN check_out_date_in date, IN order_status_in char(50),
+                                                           OUT id int)
 BEGIN
     insert into client_order (client_id) value (client_id_in);
     select last_insert_id()
@@ -153,8 +158,10 @@ BEGIN
     select id;
 END;
 
-create procedure insert_new_request(IN client_id_in bigint, IN persons_in int, IN room_class_in char(10),
-                                    IN check_in_date_in date, IN check_out_date_in date, IN request_status_in char(50))
+create
+    definer = administrator@`%` procedure insert_new_request(IN client_id_in bigint, IN persons_in int,
+                                                             IN room_class_in char(10), IN check_in_date_in date,
+                                                             IN check_out_date_in date, IN request_status_in char(50))
 BEGIN
     declare id int;
     insert into client_request (client_r_id) value (client_id_in);
@@ -174,4 +181,5 @@ BEGIN
             request_status_in);
     select id;
 END;
+
 
