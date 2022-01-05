@@ -80,7 +80,7 @@
 			</div>
 		</nav>
 		<a href="/page?name=${lastpage}&lang=by_BY"
-		   class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-1">WRW</a>
+		   class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-1">BY</a>
 		<a href="/page?name=${lastpage}&lang=en_US"
 		   class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-2">ENG</a>
 	</div>

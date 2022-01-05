@@ -59,6 +59,10 @@
     "clazz": "com.epam.hotel.command.impl.admincommand.RejectCommand",
     "role": "ADMIN"
   },
+  "ERROR": {
+    "clazz": "com.epam.hotel.command.impl.common.ErrorCommand",
+    "role": "ANYONE"
+  },
   "LOG": {
     "clazz": "com.epam.hotel.command.impl.admincommand.ReadLogFileCommand",
     "role": "ADMIN"

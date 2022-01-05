@@ -2,7 +2,6 @@ package com.epam.hotel.utility;
 
 import com.epam.hotel.entity.User;
 import com.epam.hotel.service.exception.ServiceException;
-import com.epam.hotel.service.impl.EmailServiceImpl;
 import com.epam.hotel.types.UserType;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -27,13 +26,4 @@ class PasswordHandlerTest {
 
         Assert.assertTrue(initPass.contentEquals(decrPass));
     }
-
-    @Test
-    void sendSimpleMail() {
-        EmailServiceImpl emailService = new EmailServiceImpl();
-
-        User user = new User("Igor", "Taren", UserType.CLIENT, "elkn@mail.com", "");
-        emailService.sendEmailToAdmin(user, 33, 2, "SINGLE", "2021-10-22", "2021-11-22");
-    }
-
 }

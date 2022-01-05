@@ -28,7 +28,7 @@ public class RequestHandlingCommand extends BaseCommand implements Command {
      * @throws IOException     when an input or output error is detected when the servlet handles the request.
      */
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException, ServiceException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         try {
             long requestID = Long.parseLong(request.getParameter("requestID"));
             String email = request.getParameter("email");

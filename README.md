@@ -56,6 +56,7 @@ and the time of stay.
 - JSTL API 1.2
 - gson 2.8.9
 - commons-codec 1.11
+- common-io 2.11.0
 - javax.mail 1.6.2
 - javax.activation 1.2.0
 - log4j (logger) 1.2.17
