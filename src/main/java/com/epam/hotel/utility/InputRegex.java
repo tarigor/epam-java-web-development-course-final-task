@@ -1,9 +1,5 @@
 package com.epam.hotel.utility;
 
-import com.epam.hotel.service.factory.ServiceFactory;
-import com.epam.hotel.service.factory.ServiceType;
-import com.epam.hotel.service.impl.PropertiesFileServiceImpl;
-
 import java.util.regex.Pattern;
 
 /**
@@ -12,18 +8,11 @@ import java.util.regex.Pattern;
 public enum InputRegex {
     /**
      * Input text requirements
-     * Only contains alphanumeric characters, underscore and dot.
-     * Underscore and dot can't be at the end or start of a username (e.g _username / username_ / .username / username.).
-     * Underscore and dot can't be next to each other (e.g user_.name).
-     * Underscore or dot can't be used multiple times in a row (e.g user__name / user..name).
-     * Number of characters must be between 8 to 20.
+     * Must contain only letters.
+     * Start with a capital letter.
+     * The number of letters is at least 2.
      */
-    NAME("^[a-zA-Z]+([._]?[a-zA-Z]+)*$",
-            ((PropertiesFileServiceImpl) ServiceFactory
-                    .getInstance()
-                    .getServiceObjectsMap().get(ServiceType.PROPERTIES_FILE_SERVICE))
-                    .getProperties(Constants.PROPERTIES)
-                    .getProperty("validator.wrong.user.name.input")),
+    NAME("^[A-Z][a-z]{1,18}$","validator.wrong.user.name.input"),
     /**
      * Secure Password requirements
      * <p>
@@ -31,26 +20,11 @@ public enum InputRegex {
      * Password must contain at least one lowercase Latin character [a-z].
      * Password must contain at least one uppercase Latin character [A-Z].
      * Password must contain at least one special character like ! @ # & ( ).
-     * Password must contain a length of at least 8 characters and a maximum of 20 characters.
+     * Password must contain a length of at least 6 characters.
      **/
-    PASSWORD("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!=])(?=\\S+$).{4,}$",
-            ((PropertiesFileServiceImpl) ServiceFactory
-                    .getInstance()
-                    .getServiceObjectsMap().get(ServiceType.PROPERTIES_FILE_SERVICE))
-                    .getProperties(Constants.PROPERTIES)
-                    .getProperty("validator.wrong.user.password.input")),
-    EMAIL("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}",
-            ((PropertiesFileServiceImpl) ServiceFactory
-                    .getInstance()
-                    .getServiceObjectsMap().get(ServiceType.PROPERTIES_FILE_SERVICE))
-                    .getProperties(Constants.PROPERTIES)
-                    .getProperty("validator.wrong.user.email.input")),
-    PASSWORD_DOUBLE_CHECK("",
-            ((PropertiesFileServiceImpl) ServiceFactory
-                    .getInstance()
-                    .getServiceObjectsMap().get(ServiceType.PROPERTIES_FILE_SERVICE))
-                    .getProperties(Constants.PROPERTIES)
-                    .getProperty("validator.wrong.user.password.double.check.input"));
+    PASSWORD("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!=])(?=\\S+$).{4,}$","validator.wrong.user.password.input"),
+    EMAIL("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}","validator.wrong.user.email.input"),
+    PASSWORD_DOUBLE_CHECK("","validator.wrong.user.password.double.check.input");
     String regexExpression;
     String description;
 

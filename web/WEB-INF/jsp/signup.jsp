@@ -33,7 +33,7 @@
 								<input type="text" class="form-control" name="firstName" oninput="validateName(this)">
 								<c:if test="${firstNameState}">
 									<label class="text-warning"
-									       style="font-size: xx-small">${firstNameDesc}</label>
+									       style="font-size: xx-small"><f:message key="${firstNameDesc}" bundle="${local}"/></label>
 								</c:if>
 							</div>
 							<div class="form-wrapper">
@@ -41,7 +41,7 @@
 								<input type="text" class="form-control" name="lastName" oninput="validateName(this)">
 								<c:if test="${lastNameState}">
 									<label class="text-warning"
-									       style="font-size: xx-small">${lastNameDesc}</label>
+									       style="font-size: xx-small"><f:message key="${lastNameDesc}" bundle="${local}"/></label>
 								</c:if>
 							</div>
 						</div>
@@ -50,7 +50,7 @@
 							<input type="text" class="form-control" name="email" oninput="validateEmail(this)">
 							<c:if test="${emailState}">
 								<label class="text-warning"
-								       style="font-size: xx-small">${emailDesc}</label>
+								       style="font-size: xx-small"><f:message key="${emailDesc}" bundle="${local}"/></label>
 							</c:if>
 						</div>
 						<div class="form-wrapper">
@@ -74,11 +74,11 @@
 						</div>
 						<c:if test="${passwordDoubleCheckState}">
 							<label class="text-warning"
-							       style="font-size: xx-small">${passwordDoubleCheckDesc}</label>
+							       style="font-size: xx-small"><f:message key="${passwordDoubleCheckDesc}" bundle="${local}"/></label>
 						</c:if>
 						<c:if test="${passwordState}">
 							<label class="text-warning"
-							       style="font-size: xx-small">${passwordDesc}</label>
+							       style="font-size: xx-small; display:inline-block" ><f:message key="${passwordDesc}" bundle="${local}"/></label>
 						</c:if>
 						<br>
 						<button type="submit">Register Now</button>
