@@ -71,4 +71,4 @@ and the time of stay.
 
 #### Site Link:
 
-http://hotelgrodnoinn-env.eba-vzzi3eub.us-east-2.elasticbeanstalk.com
+http://hotelgrodno-env.eba-heanh92r.us-east-1.elasticbeanstalk.com/
