@@ -23,7 +23,7 @@ public enum InputRegex {
      * Password must contain a length of at least 6 characters.
      **/
     PASSWORD("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!=])(?=\\S+$).{4,}$","validator.wrong.user.password.input"),
-    EMAIL("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}","validator.wrong.user.email.input"),
+    EMAIL("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,56}","validator.wrong.user.email.input"),
     PASSWORD_DOUBLE_CHECK("","validator.wrong.user.password.double.check.input");
     String regexExpression;
     String description;

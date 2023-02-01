@@ -20,11 +20,19 @@ and the time of stay.
 ### More:
 - the current project is deployed on AWS platform and can be accessed on the following link http://grodnohotel-env.eba-vf2drnii.us-east-1.elasticbeanstalk.com/
 - the current project can be run in a docker container (the docker configuration can be found in the "docker" folder)
-- the current project also implemented using SPRING framework in a monolithic pattern. Can be found on the following link https://github.com/tarigor/epam-java-web-development-course-final-task-spring
-- the current project also implemented using SPRING framework devided on microservices. Can be found on the following link https://github.com/tarigor/epam-java-web-development-course-final-task-spring-microservices
+- the current project migrated using SPRING framework in a monolithic pattern. Can be found on the following link https://github.com/tarigor/epam-java-web-development-course-final-task-spring
+- the current project migrated using SPRING framework devided on microservices. Can be found on the following link https://github.com/tarigor/epam-java-web-development-course-final-task-spring-microservices
 
 ### Site Link:
 http://grodnohotel-env.eba-vf2drnii.us-east-1.elasticbeanstalk.com/
+
+### Credentials:
+
+Administrator:
+
+login: hotel_admin@yopmail.com
+
+password: Qwe123!
 
 ### Requirements:
 
